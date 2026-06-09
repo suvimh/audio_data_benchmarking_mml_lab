@@ -1,0 +1,14 @@
+numpy
+pandas
+librosa
+matplotlib
+plotly
+seaborn
+scikit-learn
+tensorflow
+tensorflow-hub
+transformers
+torch
+soundfile
+msclap
+pyyaml

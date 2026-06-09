@@ -1,0 +1,66 @@
+# Old-style .pkl files
+name: vocalset_vggish
+data_type: features
+feature_type: vggish
+train_data_paths:
+  female: data/vggish/train_female.pkl
+  male: data/vggish/train_male.pkl
+val_data_paths:
+  female: data/vggish/val_female.pkl
+  male: data/vggish/val_male.pkl
+gender_split: mixed
+include_labels:
+  - vibrato
+  - straight
+  - belt
+  - breathy
+  - lip_trill
+  - inhaled
+  - spoken
+  - trill
+  - trillo
+  - vocal_fry
+---
+# New-style Parquet files
+name: vocalset_vggish_parquet
+data_type: features
+feature_type: vggish
+data_dir: output/parquet
+parquet_file: vggish_window_3.0s.parquet
+feature_column: embedding
+label_column: vocal_technique
+singer_column: singer
+train_singer_ids:
+  - f1
+  - f2
+  - f3
+  - f4
+  - f5
+  - f6
+  - f7
+  - f8
+  - f9
+  - m1
+  - m2
+  - m3
+  - m4
+  - m5
+  - m6
+val_singer_ids:
+  - f10
+  - f11
+  - m7
+  - m8
+  - m9
+include_labels:
+  - vibrato
+  - straight
+  - belt
+  - breathy
+  - lip_trill
+  - inhaled
+  - spoken
+  - trill
+  - trillo
+  - vocal_fry
+pad_sequences: false
