@@ -1,14 +1,15 @@
 # Vocal Technique Classification of VocalSet using Traditional Machine Learning and Transfer Learning
 
-Overview
---------
+## Overview
 
-Companion repository for the paper "A Systematic Benchmarking Across Feature-Model Pairings for Vocal Technique Classification" by Suvi Haara and Rafael Ramirez (Universitat Pompeu Fabra). Benchmarks Vocal Technique Classification (VTC) on the VocalSet dataset across multiple feature-model pairings.
+Repository with reusable model implementations for audio classification used by the MML Lab in Universitat Pompeu Fabra.
 
-The original VocalSet dataset is available at https://zenodo.org/records/1193957
+Used for various projects such as
 
-Repository Structure
---------------------
+- Benchmarking Vocal Technique Classification of VocalSet data
+-
+
+## Repository Structure
 
 ```
 scripts/                          # Main benchmarking framework
@@ -49,8 +50,7 @@ data/                             # Data directory
 
 Each model architecture (KNN, RF, MLP, CNN, ResNet, MobileNet, EfficientNet, Whisper, CLAP) has its own script under `scripts/models/` with a consistent interface (MODEL_METADATA + run() function).
 
-Usage
------
+## Usage
 
 ```bash
 # List available models and their supported data types
@@ -63,43 +63,41 @@ python -m scripts validate -d configs/dataset.py -b configs/benchmark.py
 python -m scripts run -d configs/dataset.py -b configs/benchmark.py
 ```
 
-Configuration
--------------
+## Configuration
 
 Experiments are defined by two config files:
 
 **Dataset config** describes the data source:
+
 - `data_type`: "features" (pre-extracted feature vectors), "raw_audio" (audio files), or "images" (spectrogram images)
 - Classification setup: `include_labels`, `label_map`, `gender_split`
 - Data paths for train/val splits
 
 **Benchmark config** describes the experiment:
+
 - `models`: which models to run
 - `model_params`: per-model parameter overrides
 - Training hyperparameters and output directory
 
 Classification tasks (label subsets) are defined in the dataset config via `include_labels` or `label_map`, making the system dataset-agnostic.
 
-Models and Data Type Compatibility
-----------------------------------
+## Models and Data Type Compatibility
 
-| Model         | Features | Raw Audio | Images |
-|---------------|----------|-----------|--------|
-| KNN           | yes      |           |        |
-| RF            | yes      |           |        |
-| MLP           | yes      |           |        |
-| CNN-VGGish    | yes      |           |        |
-| ImageNet      |          |           | yes    |
-| Whisper       |          | yes       |        |
-| CLAP          |          | yes       |        |
+| Model      | Features | Raw Audio | Images |
+| ---------- | -------- | --------- | ------ |
+| KNN        | yes      |           |        |
+| RF         | yes      |           |        |
+| MLP        | yes      |           |        |
+| CNN-VGGish | yes      |           |        |
+| ImageNet   |          |           | yes    |
+| Whisper    |          | yes       |        |
+| CLAP       |          | yes       |        |
 
-Data
-----
+## Data
 
 Pre-generated data for VocalSet experiments (MFCC .pkl, VGGish .pkl, mel-spectrogram .png, Whisper .pt, CLAP .npz) is available at:
 https://drive.google.com/drive/folders/1o9jL03t5q60fptKuO95Gaw18gPoM1sun
 
-Authors
--------
+## Authors
 
 Suvi Haara (https://github.com/suvimh)

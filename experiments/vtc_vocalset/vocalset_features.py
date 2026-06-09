@@ -64,12 +64,12 @@ dataset_parquet = make_vocalset_features_parquet_config(VOCALSET_10, "vocalset_1
 
 benchmark = BenchmarkConfig(
     name="vocalset_features_full",
-    models=["knn", "rf", "mlp", "cnn_vggish"],
+    models=["knn", "rf", "mlp", "cnn"],
     model_params={
         "knn": {"n_neighbors": 5},
         "rf": {"n_estimators": 100, "random_state": 42},
         "mlp": {"hidden_layer_sizes": (12,), "max_iter": 500, "random_state": 42},
-        "cnn_vggish": {"filters": [32, 64, 128], "epochs": 100, "patience": 10},
+        "cnn": {"filters": [32, 64, 128], "epochs": 100, "patience": 10},
     },
     output_dir="./results/vocalset_features",
     seed=42,

@@ -2,12 +2,12 @@ from scripts.config.benchmark_config import BenchmarkConfig
 
 features_benchmark = BenchmarkConfig(
     name="vtc_features",
-    models=["knn", "rf", "mlp", "cnn_vggish"],
+    models=["knn", "rf", "mlp", "cnn"],
     model_params={
         "knn": {"n_neighbors": 5},
         "rf": {"n_estimators": 100, "random_state": 42},
         "mlp": {"hidden_layer_sizes": (12,), "max_iter": 500},
-        "cnn_vggish": {"epochs": 100, "patience": 10},
+        "cnn": {"epochs": 100, "patience": 10},
     },
     output_dir="./results",
     seed=42,
@@ -36,12 +36,12 @@ image_benchmark = BenchmarkConfig(
 
 full_benchmark = BenchmarkConfig(
     name="vtc_full",
-    models=["knn", "rf", "mlp", "cnn_vggish", "imagenet", "whisper", "clap"],
+    models=["knn", "rf", "mlp", "cnn", "imagenet", "whisper", "clap"],
     model_params={
         "knn": {"n_neighbors": 5},
         "rf": {"n_estimators": 100},
         "mlp": {"hidden_layer_sizes": (12,)},
-        "cnn_vggish": {"epochs": 100, "patience": 10},
+        "cnn": {"epochs": 100, "patience": 10},
         "imagenet": {"backbone": "efficientnet"},
         "whisper": {"model_name": "openai/whisper-base"},
         "clap": {"epochs": 100},

@@ -61,8 +61,8 @@ def _auto_register():
     except ImportError:
         pass
     try:
-        from scripts.models import cnn_vggish
-        _register_model_from_module("cnn_vggish", cnn_vggish)
+        from scripts.models import cnn
+        _register_model_from_module("cnn", cnn)
     except ImportError:
         pass
     try:
@@ -78,6 +78,11 @@ def _auto_register():
     try:
         from scripts.models import clap
         _register_model_from_module("clap", clap)
+    except ImportError:
+        pass
+    try:
+        from scripts.models import svm
+        _register_model_from_module("svm", svm)
     except ImportError:
         pass
 
