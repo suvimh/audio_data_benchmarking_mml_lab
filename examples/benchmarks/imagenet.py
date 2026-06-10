@@ -1,15 +1,7 @@
-from scripts.config.dataset_config import DatasetConfig
 from scripts.config.benchmark_config import BenchmarkConfig
 
-dataset = DatasetConfig(
-    name="vocalset_melspectrograms",
-    data_type="images",
-    image_dir="path/to/melspectrogram/images",
-    image_size=(224, 224),
-)
-
 benchmark = BenchmarkConfig(
-    name="vocalset_images_full",
+    name="imagenet",
     models=["imagenet"],
     model_params={
         "imagenet": {
@@ -21,6 +13,9 @@ benchmark = BenchmarkConfig(
             "patience": 15,
         },
     },
-    output_dir="./results/vocalset_images",
+    output_dir="./results/imagenet",
     seed=42,
+    batch_size=32,
+    epochs=100,
+    early_stopping_patience=15,
 )

@@ -1,0 +1,14 @@
+Model,Train Accuracy,Train Balanced Accuracy,Val Accuracy,Val Balanced Accuracy,Val F1,Val Top-2,Val Top-3
+vocalset_10_3_0_VTC_audio_mixed,0.981,0.9795,0.8018,0.8087,0.7711,0.9335,0.9665
+vocalset_10_3_0_VTC_audio_female,0.9282,0.9203,0.9282,0.9203,0.9357,0.9796,0.9961
+vocalset_10_3_0_VTC_audio_male,0.95,0.9608,0.709,0.715,0.7046,0.8624,0.9401
+pitch_3_0_VTC_audio_mixed,0.9978,0.9938,0.893,0.835,0.8542,0.9745,0.9908
+pitch_3_0_VTC_audio_female,0.9892,0.9771,0.941,0.8575,0.864,1.0,1.0
+pitch_3_0_VTC_audio_male,0.9678,0.967,0.8463,0.8295,0.8207,0.9815,0.9944
+timbre_3_0_VTC_audio_mixed,0.9967,0.9977,0.8843,0.9071,0.8861,0.9482,0.9845
+timbre_3_0_VTC_audio_female,0.9928,0.9951,0.9393,0.9643,0.9481,0.9919,1.0
+timbre_3_0_VTC_audio_male,0.9821,0.9884,0.8554,0.9001,0.8649,0.9548,0.9849
+pitch_0_5_VTC_audio_female,0.9399,0.9145,0.8136,0.6568,0.6823,0.935,0.9765
+pitch_0_5_VTC_audio_male,0.958,0.9317,0.6954,0.598,0.6239,0.8974,0.9608
+timbre_0_5_VTC_audio_female,0.9687,0.9568,0.8213,0.7748,0.7867,0.9296,0.9693
+timbre_0_5_VTC_audio_male,0.9219,0.9024,0.6936,0.7333,0.7043,0.8178,0.929

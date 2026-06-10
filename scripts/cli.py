@@ -13,13 +13,15 @@ def build_parser() -> argparse.ArgumentParser:
 
     run_parser = subparsers.add_parser("run", help="Run a benchmark experiment")
     run_parser.add_argument(
+        "--experiment", "-e",
+        help="Path to experiment config file (.py)",
+    )
+    run_parser.add_argument(
         "--dataset-config", "-d",
-        required=True,
         help="Path to dataset config file (.py, .yml, .yaml, .json)",
     )
     run_parser.add_argument(
         "--benchmark-config", "-b",
-        required=True,
         help="Path to benchmark config file (.py, .yml, .yaml, .json)",
     )
 
@@ -33,13 +35,15 @@ def build_parser() -> argparse.ArgumentParser:
     validate_parser = subparsers.add_parser("validate", help="Validate config files without running")
     validate_parser.add_argument(
         "--dataset-config", "-d",
-        required=True,
         help="Path to dataset config file",
     )
     validate_parser.add_argument(
         "--benchmark-config", "-b",
-        required=True,
         help="Path to benchmark config file",
+    )
+    validate_parser.add_argument(
+        "--experiment", "-e",
+        help="Path to experiment config file (.py)",
     )
 
     return parser
@@ -58,11 +62,18 @@ def main(argv: list = None):
 
 
 def _run_command(args):
-    from scripts.run_benchmark import run_benchmark
-    run_benchmark(
-        dataset_config_path=args.dataset_config,
-        benchmark_config_path=args.benchmark_config,
-    )
+    if args.experiment:
+        from scripts.run_benchmark import run_experiment
+        run_experiment(args.experiment)
+    elif args.dataset_config and args.benchmark_config:
+        from scripts.run_benchmark import run_benchmark
+        run_benchmark(
+            dataset_config_path=args.dataset_config,
+            benchmark_config_path=args.benchmark_config,
+        )
+    else:
+        print("Error: specify --experiment OR --dataset-config + --benchmark-config")
+        sys.exit(1)
 
 
 def _list_models_command(args):
@@ -84,6 +95,25 @@ def _list_models_command(args):
 
 
 def _validate_command(args):
+    if args.experiment:
+        from scripts.run_benchmark import load_experiment_config
+        try:
+            exp = load_experiment_config(args.experiment)
+            print(f"Experiment '{exp.name}' loaded successfully.")
+            print(f"  Blocks: {len(exp.blocks)}")
+            for i, block in enumerate(exp.blocks):
+                print(f"  Block {i+1}: {block.model_type} | "
+                      f"models={block.benchmark_config.models} | "
+                      f"datasets={[d.name for d in block.datasets]}")
+        except Exception as e:
+            print(f"Error loading experiment config: {e}")
+            sys.exit(1)
+        return
+
+    if not (args.dataset_config and args.benchmark_config):
+        print("Error: specify --experiment OR --dataset-config + --benchmark-config")
+        sys.exit(1)
+
     from scripts.run_benchmark import load_dataset_config, load_benchmark_config
     from scripts.validate_config import validate
 

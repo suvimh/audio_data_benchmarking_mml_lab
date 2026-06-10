@@ -1,3 +1,6 @@
+'''
+    Each benchmark type (audio input, feature set input, image input) will need to be instantianted with its own benchmark config.
+'''
 from __future__ import annotations
 
 import json

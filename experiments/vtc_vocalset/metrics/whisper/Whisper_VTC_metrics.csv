@@ -1,2 +1,0 @@
-Model,Train Accuracy,Train Balanced Accuracy,Val Accuracy,Val Balanced Accuracy,Val F1,Val Top-2,Val Top-3
-vocalset_10_3_0_VTC_audio_mixed,0.981,0.9795,0.8018,0.8087,0.7711,0.9335,0.9665

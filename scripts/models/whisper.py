@@ -160,6 +160,9 @@ def run(
     params = MODEL_METADATA["default_params"].copy()
     params.update(bench_config.get_model_params("whisper"))
 
+    params["frame_duration"] = dataset_config.frame_duration
+    params["overlap"] = dataset_config.overlap
+
     freeze_encoder = params.get("freeze_encoder", True)
 
     from scripts.data.raw_audio import scan_audio_files
@@ -273,8 +276,14 @@ def run(
     print_metrics_summary(val_metrics, "Whisper (validation)")
 
     metrics_path = output_dir / "metrics.csv"
-    save_metrics_csv(val_metrics, metrics_path, "whisper", {"split": "validation"})
-    save_metrics_csv(train_metrics, metrics_path, "whisper", {"split": "train"})
+    save_metrics_csv(val_metrics, metrics_path, "whisper",
+                     {"split": "validation",
+                      "frame_duration": dataset_config.frame_duration,
+                      "overlap": dataset_config.overlap})
+    save_metrics_csv(train_metrics, metrics_path, "whisper",
+                     {"split": "train",
+                      "frame_duration": dataset_config.frame_duration,
+                      "overlap": dataset_config.overlap})
 
     return {
         "model_name": "whisper",

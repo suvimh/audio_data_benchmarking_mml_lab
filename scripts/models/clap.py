@@ -283,8 +283,14 @@ def _run_head_only(
     print_metrics_summary(val_metrics, "CLAP head_only (validation)")
 
     metrics_path = output_dir / "metrics.csv"
-    save_metrics_csv(val_metrics, metrics_path, "clap_head_only", {"split": "validation"})
-    save_metrics_csv(train_metrics, metrics_path, "clap_head_only", {"split": "train"})
+    save_metrics_csv(val_metrics, metrics_path, "clap_head_only",
+                     {"split": "validation",
+                      "frame_duration": dataset_config.frame_duration,
+                      "overlap": dataset_config.overlap})
+    save_metrics_csv(train_metrics, metrics_path, "clap_head_only",
+                     {"split": "train",
+                      "frame_duration": dataset_config.frame_duration,
+                      "overlap": dataset_config.overlap})
 
     return {
         "model_name": "clap_head_only",
@@ -504,8 +510,14 @@ def _run_full_finetune(
     print_metrics_summary(val_metrics, "CLAP full_finetune (validation)")
 
     metrics_path = output_dir / "metrics.csv"
-    save_metrics_csv(val_metrics, metrics_path, "clap_full", {"split": "validation"})
-    save_metrics_csv(train_metrics, metrics_path, "clap_full", {"split": "train"})
+    save_metrics_csv(val_metrics, metrics_path, "clap_full",
+                     {"split": "validation",
+                      "frame_duration": dataset_config.frame_duration,
+                      "overlap": dataset_config.overlap})
+    save_metrics_csv(train_metrics, metrics_path, "clap_full",
+                     {"split": "train",
+                      "frame_duration": dataset_config.frame_duration,
+                      "overlap": dataset_config.overlap})
 
     return {
         "model_name": "clap_full",
@@ -529,6 +541,9 @@ def run(
 
     params = MODEL_METADATA["default_params"].copy()
     params.update(bench_config.get_model_params("clap"))
+
+    params["frame_duration"] = dataset_config.frame_duration
+    params["overlap"] = dataset_config.overlap
 
     finetune_mode = params.get("finetune_mode", "head_only")
 

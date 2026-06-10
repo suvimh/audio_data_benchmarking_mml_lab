@@ -1,3 +1,7 @@
+'''
+    Each dataset type will need to be instantianted with its own dataset config.
+'''
+
 from __future__ import annotations
 
 import json

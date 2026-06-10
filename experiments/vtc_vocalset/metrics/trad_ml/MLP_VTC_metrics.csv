@@ -1,3 +1,0 @@
-Model,Train Accuracy,Train Balanced Accuracy,Val Accuracy,Val Balanced Accuracy,Val F1,Val Top-2,Val Top-3
-vocalset_10_3sec_MFCCs_mixed,0.9526,0.9414,0.5083,0.4908,0.5093,0.6211,0.7082
-vocalset_10_3sec_VGGish_dataframes_mixed,0.9996,0.9999,0.6245,0.5971,0.5954,0.7405,0.8245
