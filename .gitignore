@@ -18,3 +18,4 @@ data/
 *.swo
 
 .DS_Store
+experiments/tuni_emotion/tuni_data_config.py
