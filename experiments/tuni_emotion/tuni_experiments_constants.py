@@ -46,6 +46,6 @@ TRAIN_SINGERS = [
 VAL_SINGERS = ["Saga_Ohlsson_1", "Tero_Ikävalko"]
 TEST_SINGERS = ["Veera_Tapanainen", "Tommi_Grönberg"]
 
-RAW_AUDIO_DATA_DIR = str(REPO_ROOT / "wav")
+RAW_AUDIO_DATA_DIR = "/Users/pubert/Downloads/SkyNote/OTHER_DATASETS/TUNI_emotion_dataset"
 TUNI_EMBEDDINGS_DATA_DIR = str(REPO_ROOT / "embeddings" / "tuni_emotion")
 TUNI_OPENSMILE_PARQUET_PREFIX = "tuni_emotion_dataset"

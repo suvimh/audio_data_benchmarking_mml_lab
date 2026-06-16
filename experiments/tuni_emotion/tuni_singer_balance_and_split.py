@@ -9,15 +9,30 @@ from typing import Dict, List
 from experiments.tuni_emotion.tuni_experiments_constants import (
     RAW_AUDIO_DATA_DIR,
     SINGER_GENDER_MAP,
+    TUNI_SINGERS,
     TEST_SINGERS,
     TRAIN_SINGERS,
     VAL_SINGERS,
 )
 
 
-def _count_files_per_singer(audio_root: Path) -> Dict[str, int]:
+def _resolve_singer_root(audio_root: Path) -> Path:
+    direct_children = [p.name for p in audio_root.iterdir() if p.is_dir()]
+    if any(name in TUNI_SINGERS for name in direct_children):
+        return audio_root
+
+    wav_root = audio_root / "wav"
+    if wav_root.exists() and wav_root.is_dir():
+        wav_children = [p.name for p in wav_root.iterdir() if p.is_dir()]
+        if any(name in TUNI_SINGERS for name in wav_children):
+            return wav_root
+
+    return audio_root
+
+
+def _count_files_per_singer(singer_root: Path) -> Dict[str, int]:
     counts: Dict[str, int] = {}
-    for singer_dir in sorted(p for p in audio_root.iterdir() if p.is_dir()):
+    for singer_dir in sorted(p for p in singer_root.iterdir() if p.is_dir()):
         counts[singer_dir.name] = sum(
             1 for wav in singer_dir.rglob("*") if wav.is_file() and wav.suffix.lower() == ".wav"
         )
@@ -57,7 +72,8 @@ def _validate_gender_coverage(split_name: str, singers: List[str]) -> str:
 
 
 def _build_summary(audio_root: Path) -> dict:
-    per_singer_counts = _count_files_per_singer(audio_root)
+    singer_root = _resolve_singer_root(audio_root)
+    per_singer_counts = _count_files_per_singer(singer_root)
 
     split_issues = _validate_disjoint_splits(TRAIN_SINGERS, VAL_SINGERS, TEST_SINGERS)
     val_gender_msg = _validate_gender_coverage("val", VAL_SINGERS)
@@ -65,6 +81,7 @@ def _build_summary(audio_root: Path) -> dict:
 
     return {
         "audio_root": str(audio_root),
+        "singer_root": str(singer_root),
         "per_singer_counts": per_singer_counts,
         "split_validation": {
             "disjoint_issues": split_issues,
