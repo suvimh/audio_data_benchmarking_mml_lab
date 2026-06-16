@@ -1,0 +1,57 @@
+{
+  "audio_root": "/Users/pubert/Downloads/SkyNote/OTHER_DATASETS/TUNI_emotion_dataset",
+  "singer_root": "/Users/pubert/Downloads/SkyNote/OTHER_DATASETS/TUNI_emotion_dataset/wav",
+  "per_singer_counts": {
+    "Anniina_Honkala": 45,
+    "Anu_Mattila": 90,
+    "Bianca_Hösli": 90,
+    "Elina_Lahtinen": 90,
+    "Liisi_Petterson": 90,
+    "Maarit_Aura": 90,
+    "Marja_Erdogan": 90,
+    "Saga_Ohlsson_1": 45,
+    "Sanna_Vähälä": 90,
+    "Tero_Ikävalko": 45,
+    "Tommi_Grönberg": 45,
+    "Tua_Hakanpää": 45,
+    "Veera_Tapanainen": 45
+  },
+  "splits": {
+    "train": {
+      "singers": 9,
+      "files": 720,
+      "per_singer": {
+        "Anu_Mattila": 90,
+        "Bianca_Hösli": 90,
+        "Elina_Lahtinen": 90,
+        "Liisi_Petterson": 90,
+        "Maarit_Aura": 90,
+        "Marja_Erdogan": 90,
+        "Sanna_Vähälä": 90,
+        "Tua_Hakanpää": 45,
+        "Tero_Ikävalko": 45
+      }
+    },
+    "val": {
+      "singers": 4,
+      "files": 180,
+      "per_singer": {
+        "Saga_Ohlsson_1": 45,
+        "Tommi_Grönberg": 45,
+        "Anniina_Honkala": 45,
+        "Veera_Tapanainen": 45
+      }
+    },
+    "train_file_pct": 80.0,
+    "val_file_pct": 20.0
+  },
+  "split_validation": {
+    "disjoint_issues": [],
+    "coverage_issues": [],
+    "train_gender_coverage": "train: OK (female=8, male=1)",
+    "val_gender_coverage": "val: OK (female=3, male=1)",
+    "val_has_pop_only_female": true,
+    "val_has_classical_only_female": true,
+    "all_files_accounted_for": true
+  }
+}

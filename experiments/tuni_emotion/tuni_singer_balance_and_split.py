@@ -2,29 +2,44 @@ from __future__ import annotations
 
 import argparse
 import json
+import unicodedata
 from collections import Counter
 from pathlib import Path
 from typing import Dict, List
 
 from experiments.tuni_emotion.tuni_experiments_constants import (
+    CLASSICAL_ONLY_SINGERS,
+    POP_ONLY_SINGERS,
     RAW_AUDIO_DATA_DIR,
     SINGER_GENDER_MAP,
     TUNI_SINGERS,
-    TEST_SINGERS,
     TRAIN_SINGERS,
     VAL_SINGERS,
 )
 
 
+def _normalize_name(name: str) -> str:
+    return unicodedata.normalize("NFC", name)
+
+
+def _normalize_counts(per_singer_counts: Dict[str, int]) -> Dict[str, int]:
+    return {_normalize_name(name): count for name, count in per_singer_counts.items()}
+
+
+def _lookup_count(per_singer_counts: Dict[str, int], singer: str) -> int:
+    return per_singer_counts.get(_normalize_name(singer), 0)
+
+
 def _resolve_singer_root(audio_root: Path) -> Path:
-    direct_children = [p.name for p in audio_root.iterdir() if p.is_dir()]
-    if any(name in TUNI_SINGERS for name in direct_children):
+    normalized_singers = {_normalize_name(s) for s in TUNI_SINGERS}
+    direct_children = [_normalize_name(p.name) for p in audio_root.iterdir() if p.is_dir()]
+    if any(name in normalized_singers for name in direct_children):
         return audio_root
 
     wav_root = audio_root / "wav"
     if wav_root.exists() and wav_root.is_dir():
-        wav_children = [p.name for p in wav_root.iterdir() if p.is_dir()]
-        if any(name in TUNI_SINGERS for name in wav_children):
+        wav_children = [_normalize_name(p.name) for p in wav_root.iterdir() if p.is_dir()]
+        if any(name in normalized_singers for name in wav_children):
             return wav_root
 
     return audio_root
@@ -39,22 +54,27 @@ def _count_files_per_singer(singer_root: Path) -> Dict[str, int]:
     return counts
 
 
-def _validate_disjoint_splits(train: List[str], val: List[str], test: List[str]) -> List[str]:
+def _validate_disjoint_splits(train: List[str], val: List[str]) -> List[str]:
     issues: List[str] = []
-    sets = {
-        "train": set(train),
-        "val": set(val),
-        "test": set(test),
-    }
-    overlaps = [
-        ("train", "val"),
-        ("train", "test"),
-        ("val", "test"),
-    ]
-    for left, right in overlaps:
-        overlap = sorted(sets[left].intersection(sets[right]))
-        if overlap:
-            issues.append(f"{left} and {right} overlap: {overlap}")
+    overlap = sorted(set(train).intersection(val))
+    if overlap:
+        issues.append(f"train and val overlap: {overlap}")
+    return issues
+
+
+def _validate_complete_coverage(train: List[str], val: List[str]) -> List[str]:
+    issues: List[str] = []
+    assigned = set(train) | set(val)
+    missing = sorted(set(TUNI_SINGERS) - assigned)
+    extra = sorted(assigned - set(TUNI_SINGERS))
+    if missing:
+        issues.append(f"singers not assigned to train or val: {missing}")
+    if extra:
+        issues.append(f"unknown singers in split: {extra}")
+    if len(train) + len(val) != len(TUNI_SINGERS):
+        issues.append(
+            f"expected {len(TUNI_SINGERS)} singers total, got {len(train)} train + {len(val)} val"
+        )
     return issues
 
 
@@ -71,29 +91,65 @@ def _validate_gender_coverage(split_name: str, singers: List[str]) -> str:
     )
 
 
+def _split_file_totals(
+    per_singer_counts: Dict[str, int],
+    singers: List[str],
+) -> dict:
+    normalized_counts = _normalize_counts(per_singer_counts)
+    total = sum(_lookup_count(normalized_counts, s) for s in singers)
+    return {
+        "singers": len(singers),
+        "files": total,
+        "per_singer": {s: _lookup_count(normalized_counts, s) for s in singers},
+    }
+
+
 def _build_summary(audio_root: Path) -> dict:
     singer_root = _resolve_singer_root(audio_root)
-    per_singer_counts = _count_files_per_singer(singer_root)
+    per_singer_counts = _normalize_counts(_count_files_per_singer(singer_root))
 
-    split_issues = _validate_disjoint_splits(TRAIN_SINGERS, VAL_SINGERS, TEST_SINGERS)
-    val_gender_msg = _validate_gender_coverage("val", VAL_SINGERS)
-    test_gender_msg = _validate_gender_coverage("test", TEST_SINGERS)
+    disjoint_issues = _validate_disjoint_splits(TRAIN_SINGERS, VAL_SINGERS)
+    coverage_issues = _validate_complete_coverage(TRAIN_SINGERS, VAL_SINGERS)
+
+    train_totals = _split_file_totals(per_singer_counts, TRAIN_SINGERS)
+    val_totals = _split_file_totals(per_singer_counts, VAL_SINGERS)
+    all_files = sum(per_singer_counts.values())
+    used_files = train_totals["files"] + val_totals["files"]
+
+    val_has_pop_only_female = any(
+        s in POP_ONLY_SINGERS and SINGER_GENDER_MAP.get(s) == "female"
+        for s in VAL_SINGERS
+    )
+    val_has_classical_only_female = any(
+        s in CLASSICAL_ONLY_SINGERS and SINGER_GENDER_MAP.get(s) == "female"
+        for s in VAL_SINGERS
+    )
 
     return {
         "audio_root": str(audio_root),
         "singer_root": str(singer_root),
         "per_singer_counts": per_singer_counts,
+        "splits": {
+            "train": train_totals,
+            "val": val_totals,
+            "train_file_pct": round(100 * train_totals["files"] / all_files, 1) if all_files else 0,
+            "val_file_pct": round(100 * val_totals["files"] / all_files, 1) if all_files else 0,
+        },
         "split_validation": {
-            "disjoint_issues": split_issues,
-            "val_gender_coverage": val_gender_msg,
-            "test_gender_coverage": test_gender_msg,
+            "disjoint_issues": disjoint_issues,
+            "coverage_issues": coverage_issues,
+            "train_gender_coverage": _validate_gender_coverage("train", TRAIN_SINGERS),
+            "val_gender_coverage": _validate_gender_coverage("val", VAL_SINGERS),
+            "val_has_pop_only_female": val_has_pop_only_female,
+            "val_has_classical_only_female": val_has_classical_only_female,
+            "all_files_accounted_for": used_files == all_files,
         },
     }
 
 
 def main() -> None:
     parser = argparse.ArgumentParser(
-        description="Inspect Tuni singer balance and validate singer-independent splits."
+        description="Inspect Tuni singer balance and validate singer-independent train/val splits."
     )
     parser.add_argument(
         "--audio-root",
@@ -119,15 +175,28 @@ def main() -> None:
     for singer, count in sorted(summary["per_singer_counts"].items()):
         print(f"{singer}: {count}")
 
+    splits = summary["splits"]
+    print("\n=== Train / Val Split ===")
+    print(f"Train: {splits['train']['singers']} singers, {splits['train']['files']} files ({splits['train_file_pct']}%)")
+    print(f"Val:   {splits['val']['singers']} singers, {splits['val']['files']} files ({splits['val_file_pct']}%)")
+
     print("\n=== Split Validation ===")
     split_validation = summary["split_validation"]
-    if split_validation["disjoint_issues"]:
-        for issue in split_validation["disjoint_issues"]:
-            print(f"DISJOINT FAIL: {issue}")
+    all_issues = split_validation["disjoint_issues"] + split_validation["coverage_issues"]
+    if all_issues:
+        for issue in all_issues:
+            print(f"FAIL: {issue}")
     else:
         print("DISJOINT OK")
+        print("COVERAGE OK (all singers assigned to train or val)")
+    print(split_validation["train_gender_coverage"])
     print(split_validation["val_gender_coverage"])
-    print(split_validation["test_gender_coverage"])
+    pop_only_female = "OK" if split_validation["val_has_pop_only_female"] else "FAIL"
+    print(f"val pop-only female: {pop_only_female}")
+    classical_only_female = "OK" if split_validation["val_has_classical_only_female"] else "FAIL"
+    print(f"val classical-only female: {classical_only_female}")
+    files_accounted = "OK" if split_validation["all_files_accounted_for"] else "FAIL"
+    print(f"all files accounted for: {files_accounted}")
 
     if args.out_json is not None:
         out_path = args.out_json.expanduser().resolve()

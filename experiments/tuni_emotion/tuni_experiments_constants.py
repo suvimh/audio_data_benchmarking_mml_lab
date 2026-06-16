@@ -32,9 +32,23 @@ SINGER_GENDER_MAP = {s: "female" for s in FEMALE_SINGERS} | {
     s: "male" for s in MALE_SINGERS
 }
 
+POP_ONLY_SINGERS = [
+    "Saga_Ohlsson_1",
+    "Tero_Ikävalko",
+    "Tua_Hakanpää",
+    "Veera_Tapanainen",
+]
+CLASSICAL_ONLY_SINGERS = [
+    "Anniina_Honkala",
+    "Tommi_Grönberg",
+]
+
+# Singer-independent train/val split (9 train / 4 val):
+# - 1 male in train (Tero, pop), 1 male in val (Tommi, classical)
+# - val: pop-only females (Saga, Veera), classical-only female (Anniina), classical male (Tommi)
+# - train includes dual-genre singers since the dataset is pop-heavy
 TRAIN_SINGERS = [
     "Anu_Mattila",
-    "Anniina_Honkala",
     "Bianca_Hösli",
     "Elina_Lahtinen",
     "Liisi_Petterson",
@@ -42,9 +56,14 @@ TRAIN_SINGERS = [
     "Marja_Erdogan",
     "Sanna_Vähälä",
     "Tua_Hakanpää",
+    "Tero_Ikävalko",
 ]
-VAL_SINGERS = ["Saga_Ohlsson_1", "Tero_Ikävalko"]
-TEST_SINGERS = ["Veera_Tapanainen", "Tommi_Grönberg"]
+VAL_SINGERS = [
+    "Saga_Ohlsson_1",
+    "Tommi_Grönberg",
+    "Anniina_Honkala",
+    "Veera_Tapanainen",
+]
 
 RAW_AUDIO_DATA_DIR = "/Users/pubert/Downloads/SkyNote/OTHER_DATASETS/TUNI_emotion_dataset"
 TUNI_EMBEDDINGS_DATA_DIR = str(REPO_ROOT / "embeddings" / "tuni_emotion")
