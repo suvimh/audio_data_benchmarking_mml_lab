@@ -37,7 +37,7 @@ def run(
     from scripts.data.features import load_features_data
 
     output_dir = ensure_dir(output_dir)
-    data = load_features_data(dataset_config)
+    data = load_features_data(dataset_config, bench_config)
 
     params = bench_config.get_model_params("knn")
     default_params = MODEL_METADATA["default_params"].copy()

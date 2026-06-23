@@ -1,0 +1,57 @@
+{"sessionId": "4b4427", "hypothesisId": "A", "location": "cnn.py:on_train_begin", "message": "fit started", "data": {}, "timestamp": 1782140835700}
+{"sessionId": "4b4427", "hypothesisId": "C", "location": "cnn.py:on_epoch_begin", "message": "epoch begin", "data": {"epoch": 0}, "timestamp": 1782140835701}
+{"sessionId": "4b4427", "hypothesisId": "A", "location": "cnn.py:on_train_begin", "message": "fit started", "data": {}, "timestamp": 1782140943674}
+{"sessionId": "4b4427", "hypothesisId": "C", "location": "cnn.py:on_epoch_begin", "message": "epoch begin", "data": {"epoch": 0}, "timestamp": 1782140943675}
+{"sessionId": "4b4427", "hypothesisId": "A", "location": "cnn.py:on_train_begin", "message": "fit started", "data": {}, "timestamp": 1782141032859}
+{"sessionId": "4b4427", "hypothesisId": "C", "location": "cnn.py:on_epoch_begin", "message": "epoch begin", "data": {"epoch": 0}, "timestamp": 1782141032860}
+{"sessionId": "4b4427", "hypothesisId": "A/B", "location": "cnn.py:on_train_batch_end", "message": "train batch end", "data": {"batch": 0, "dt_s": 1.124}, "timestamp": 1782141033985}
+{"sessionId": "4b4427", "hypothesisId": "A/B", "location": "cnn.py:on_train_batch_end", "message": "train batch end", "data": {"batch": 1, "dt_s": 0.024}, "timestamp": 1782141034008}
+{"sessionId": "4b4427", "hypothesisId": "A/B", "location": "cnn.py:on_train_batch_end", "message": "train batch end", "data": {"batch": 2, "dt_s": 0.02}, "timestamp": 1782141034029}
+{"sessionId": "4b4427", "hypothesisId": "A/B", "location": "cnn.py:on_train_batch_end", "message": "train batch end", "data": {"batch": 10, "dt_s": 0.022}, "timestamp": 1782141034196}
+{"sessionId": "4b4427", "hypothesisId": "D", "location": "cnn.py:on_test_begin", "message": "validation begin", "data": {}, "timestamp": 1782141034232}
+{"sessionId": "4b4427", "hypothesisId": "D", "location": "cnn.py:on_test_end", "message": "validation end", "data": {"dt_s": 0.13}, "timestamp": 1782141034362}
+{"sessionId": "4b4427", "hypothesisId": "C/E", "location": "cnn.py:on_epoch_end", "message": "epoch end", "data": {"epoch": 0, "epoch_s": 1.502, "logs": {"accuracy": 0.22833561897277832, "loss": 1.593430757522583, "val_accuracy": 0.2150537669658661, "val_loss": 1.5953617095947266}}, "timestamp": 1782141034363}
+{"sessionId": "4b4427", "hypothesisId": "C", "location": "cnn.py:on_epoch_begin", "message": "epoch begin", "data": {"epoch": 1}, "timestamp": 1782141034363}
+{"sessionId": "4b4427", "hypothesisId": "A/B", "location": "cnn.py:on_train_batch_end", "message": "train batch end", "data": {"batch": 0, "dt_s": 0.03}, "timestamp": 1782141034393}
+{"sessionId": "4b4427", "hypothesisId": "A/B", "location": "cnn.py:on_train_batch_end", "message": "train batch end", "data": {"batch": 1, "dt_s": 0.022}, "timestamp": 1782141034415}
+{"sessionId": "4b4427", "hypothesisId": "A/B", "location": "cnn.py:on_train_batch_end", "message": "train batch end", "data": {"batch": 2, "dt_s": 0.019}, "timestamp": 1782141034434}
+{"sessionId": "4b4427", "hypothesisId": "A/B", "location": "cnn.py:on_train_batch_end", "message": "train batch end", "data": {"batch": 10, "dt_s": 0.022}, "timestamp": 1782141034604}
+{"sessionId": "4b4427", "hypothesisId": "D", "location": "cnn.py:on_test_begin", "message": "validation begin", "data": {}, "timestamp": 1782141034625}
+{"sessionId": "4b4427", "hypothesisId": "D", "location": "cnn.py:on_test_end", "message": "validation end", "data": {"dt_s": 0.032}, "timestamp": 1782141034657}
+{"sessionId": "4b4427", "hypothesisId": "C/E", "location": "cnn.py:on_epoch_end", "message": "epoch end", "data": {"epoch": 1, "epoch_s": 0.294, "logs": {"accuracy": 0.290233850479126, "loss": 1.532386064529419, "val_accuracy": 0.2634408473968506, "val_loss": 1.5965825319290161}}, "timestamp": 1782141034658}
+{"sessionId": "4b4427", "hypothesisId": "C", "location": "cnn.py:on_epoch_begin", "message": "epoch begin", "data": {"epoch": 2}, "timestamp": 1782141034658}
+{"sessionId": "4b4427", "hypothesisId": "A/B", "location": "cnn.py:on_train_batch_end", "message": "train batch end", "data": {"batch": 0, "dt_s": 0.027}, "timestamp": 1782141034686}
+{"sessionId": "4b4427", "hypothesisId": "A/B", "location": "cnn.py:on_train_batch_end", "message": "train batch end", "data": {"batch": 1, "dt_s": 0.021}, "timestamp": 1782141034707}
+{"sessionId": "4b4427", "hypothesisId": "A/B", "location": "cnn.py:on_train_batch_end", "message": "train batch end", "data": {"batch": 2, "dt_s": 0.02}, "timestamp": 1782141034727}
+{"sessionId": "4b4427", "hypothesisId": "A/B", "location": "cnn.py:on_train_batch_end", "message": "train batch end", "data": {"batch": 10, "dt_s": 0.021}, "timestamp": 1782141034901}
+{"sessionId": "4b4427", "hypothesisId": "D", "location": "cnn.py:on_test_begin", "message": "validation begin", "data": {}, "timestamp": 1782141034921}
+{"sessionId": "4b4427", "hypothesisId": "D", "location": "cnn.py:on_test_end", "message": "validation end", "data": {"dt_s": 0.032}, "timestamp": 1782141034952}
+{"sessionId": "4b4427", "hypothesisId": "C/E", "location": "cnn.py:on_epoch_end", "message": "epoch end", "data": {"epoch": 2, "epoch_s": 0.295, "logs": {"accuracy": 0.3026134669780731, "loss": 1.5364110469818115, "val_accuracy": 0.22580644488334656, "val_loss": 1.5945448875427246}}, "timestamp": 1782141034953}
+{"sessionId": "4b4427", "hypothesisId": "C", "location": "cnn.py:on_epoch_begin", "message": "epoch begin", "data": {"epoch": 3}, "timestamp": 1782141034954}
+{"sessionId": "4b4427", "hypothesisId": "A/B", "location": "cnn.py:on_train_batch_end", "message": "train batch end", "data": {"batch": 0, "dt_s": 0.029}, "timestamp": 1782141034983}
+{"sessionId": "4b4427", "hypothesisId": "A/B", "location": "cnn.py:on_train_batch_end", "message": "train batch end", "data": {"batch": 1, "dt_s": 0.02}, "timestamp": 1782141035003}
+{"sessionId": "4b4427", "hypothesisId": "A/B", "location": "cnn.py:on_train_batch_end", "message": "train batch end", "data": {"batch": 2, "dt_s": 0.02}, "timestamp": 1782141035023}
+{"sessionId": "4b4427", "hypothesisId": "A/B", "location": "cnn.py:on_train_batch_end", "message": "train batch end", "data": {"batch": 10, "dt_s": 0.027}, "timestamp": 1782141035205}
+{"sessionId": "4b4427", "hypothesisId": "D", "location": "cnn.py:on_test_begin", "message": "validation begin", "data": {}, "timestamp": 1782141035227}
+{"sessionId": "4b4427", "hypothesisId": "D", "location": "cnn.py:on_test_end", "message": "validation end", "data": {"dt_s": 0.033}, "timestamp": 1782141035260}
+{"sessionId": "4b4427", "hypothesisId": "C/E", "location": "cnn.py:on_epoch_end", "message": "epoch end", "data": {"epoch": 3, "epoch_s": 0.307, "logs": {"accuracy": 0.3053645193576813, "loss": 1.5257433652877808, "val_accuracy": 0.22580644488334656, "val_loss": 1.5937427282333374}}, "timestamp": 1782141035261}
+{"sessionId": "4b4427", "hypothesisId": "C", "location": "cnn.py:on_epoch_begin", "message": "epoch begin", "data": {"epoch": 4}, "timestamp": 1782141035262}
+{"sessionId": "4b4427", "hypothesisId": "A/B", "location": "cnn.py:on_train_batch_end", "message": "train batch end", "data": {"batch": 0, "dt_s": 0.032}, "timestamp": 1782141035293}
+{"sessionId": "4b4427", "hypothesisId": "A/B", "location": "cnn.py:on_train_batch_end", "message": "train batch end", "data": {"batch": 1, "dt_s": 0.023}, "timestamp": 1782141035317}
+{"sessionId": "4b4427", "hypothesisId": "A/B", "location": "cnn.py:on_train_batch_end", "message": "train batch end", "data": {"batch": 2, "dt_s": 0.022}, "timestamp": 1782141035338}
+{"sessionId": "4b4427", "hypothesisId": "A/B", "location": "cnn.py:on_train_batch_end", "message": "train batch end", "data": {"batch": 10, "dt_s": 0.022}, "timestamp": 1782141035610}
+{"sessionId": "4b4427", "hypothesisId": "D", "location": "cnn.py:on_test_begin", "message": "validation begin", "data": {}, "timestamp": 1782141035631}
+{"sessionId": "4b4427", "hypothesisId": "D", "location": "cnn.py:on_test_end", "message": "validation end", "data": {"dt_s": 0.03}, "timestamp": 1782141035661}
+{"sessionId": "4b4427", "hypothesisId": "C/E", "location": "cnn.py:on_epoch_end", "message": "epoch end", "data": {"epoch": 4, "epoch_s": 0.4, "logs": {"accuracy": 0.3204951882362366, "loss": 1.5135148763656616, "val_accuracy": 0.24731183052062988, "val_loss": 1.594167947769165}}, "timestamp": 1782141035662}
+{"sessionId": "4b4427", "hypothesisId": "A", "location": "cnn.py:on_train_begin", "message": "fit started", "data": {}, "timestamp": 1782141058572}
+{"sessionId": "4b4427", "hypothesisId": "C", "location": "cnn.py:on_epoch_begin", "message": "epoch begin", "data": {"epoch": 0}, "timestamp": 1782141058574}
+{"sessionId": "4b4427", "hypothesisId": "A", "location": "cnn.py:on_train_begin", "message": "fit started", "data": {}, "timestamp": 1782141145899}
+{"sessionId": "4b4427", "hypothesisId": "C", "location": "cnn.py:on_epoch_begin", "message": "epoch begin", "data": {"epoch": 0}, "timestamp": 1782141145900}
+{"sessionId": "4b4427", "hypothesisId": "A", "location": "cnn.py:on_train_begin", "message": "fit started", "data": {}, "timestamp": 1782141201445}
+{"sessionId": "4b4427", "hypothesisId": "C", "location": "cnn.py:on_epoch_begin", "message": "epoch begin", "data": {"epoch": 0}, "timestamp": 1782141201447}
+{"sessionId": "4b4427", "hypothesisId": "A", "location": "cnn.py:on_train_begin", "message": "fit started", "data": {}, "timestamp": 1782141285569}
+{"sessionId": "4b4427", "hypothesisId": "C", "location": "cnn.py:on_epoch_begin", "message": "epoch begin", "data": {"epoch": 0}, "timestamp": 1782141285570}
+{"sessionId": "4b4427", "hypothesisId": "A", "location": "cnn.py:on_train_begin", "message": "fit started", "data": {}, "timestamp": 1782141367430}
+{"sessionId": "4b4427", "hypothesisId": "C", "location": "cnn.py:on_epoch_begin", "message": "epoch begin", "data": {"epoch": 0}, "timestamp": 1782141367432}
+{"sessionId": "4b4427", "hypothesisId": "A", "location": "cnn.py:on_train_begin", "message": "fit started", "data": {}, "timestamp": 1782141436105}
+{"sessionId": "4b4427", "hypothesisId": "C", "location": "cnn.py:on_epoch_begin", "message": "epoch begin", "data": {"epoch": 0}, "timestamp": 1782141436105}

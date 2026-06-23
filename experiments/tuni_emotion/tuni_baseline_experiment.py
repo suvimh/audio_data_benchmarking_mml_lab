@@ -12,11 +12,7 @@ from experiments.tuni_emotion.tuni_experiments_constants import (
 from experiments.tuni_emotion.tuni_data_featureset_embedding_configs import (
     make_opensmile_embedding_config,
 )
-from experiments.tuni_emotion.tuni_benchmark_configs import (
-    trad_ml_benchmark,
-)
-
-# --- Singer-independent partition (shared across all blocks) ---
+from experiments.tuni_emotion.tuni_benchmark_configs import trad_ml_benchmark
 
 partition = PartitionConfig(
     name="tuni_singer_independent",
@@ -25,21 +21,16 @@ partition = PartitionConfig(
     singer_column="singer",
 )
 
-# --- Datasets ---
-
-opensmile = make_opensmile_embedding_config()
-feature_datasets = [opensmile]
-
-# --- Experiment ---
+opensmile = make_opensmile_embedding_config(frame_duration=3.0)
 
 experiment = ExperimentConfig(
-    name="tuni_emotion_full",
+    name="tuni_emotion_baseline",
     output_dir="./results",
     blocks=[
         ExperimentBlock(
             model_type="features",
             benchmark_config=trad_ml_benchmark,
-            datasets=feature_datasets,
+            datasets=[opensmile],
             partition=partition,
             frame_duration=3.0,
             overlap=0.25,

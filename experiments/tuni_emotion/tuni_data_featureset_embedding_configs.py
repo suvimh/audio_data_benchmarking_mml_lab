@@ -1,7 +1,9 @@
 from scripts.config.dataset_config import DatasetConfig
 from experiments.tuni_emotion.tuni_experiments_constants import (
-    TUNI_EMBEDDINGS_DATA_DIR,
+    TUNI_CLAP_DIR,
+    TUNI_OPENSMILE_DIR,
     TUNI_OPENSMILE_PARQUET_PREFIX,
+    TUNI_WHISPER_DIR,
 )
 
 
@@ -12,7 +14,7 @@ def _duration_to_suffix(frame_duration: float) -> str:
 def make_data_config_for_tuni_embeddings(
     name: str = "opensmile",
     feature_type: str = "opensmile-compare-2016",
-    data_dir: str = TUNI_EMBEDDINGS_DATA_DIR,
+    data_dir: str = TUNI_OPENSMILE_DIR,
     parquet_file: str = "tuni_emotion_dataset_opensmile-compare-2016_3.0s.parquet",
 ):
     return DatasetConfig(
@@ -37,5 +39,32 @@ def make_opensmile_embedding_config(
     return make_data_config_for_tuni_embeddings(
         name="opensmile",
         feature_type=feature_type,
+        data_dir=TUNI_OPENSMILE_DIR,
+        parquet_file=parquet_file,
+    )
+
+
+def make_whisper_embedding_config(frame_duration: float = 3.0) -> DatasetConfig:
+    duration = _duration_to_suffix(frame_duration)
+    feature_type = "whisper_whisper-base"
+    parquet_file = f"{TUNI_OPENSMILE_PARQUET_PREFIX}_{feature_type}_{duration}.parquet"
+
+    return make_data_config_for_tuni_embeddings(
+        name="whisper",
+        feature_type=feature_type,
+        data_dir=TUNI_WHISPER_DIR,
+        parquet_file=parquet_file,
+    )
+
+
+def make_clap_embedding_config(frame_duration: float = 3.0) -> DatasetConfig:
+    duration = _duration_to_suffix(frame_duration)
+    feature_type = "clap-2023"
+    parquet_file = f"{TUNI_OPENSMILE_PARQUET_PREFIX}_{feature_type}_{duration}.parquet"
+
+    return make_data_config_for_tuni_embeddings(
+        name="clap",
+        feature_type=feature_type,
+        data_dir=TUNI_CLAP_DIR,
         parquet_file=parquet_file,
     )

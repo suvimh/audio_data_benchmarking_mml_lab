@@ -31,10 +31,11 @@ MODEL_METADATA = {
 
 def train(data: FeaturesData, params: Dict[str, Any]) -> Pipeline:
     mlp_params = params.copy()
-    pipeline = Pipeline([
-        ("scaler", StandardScaler()),
-        ("mlp", MLPClassifier(**mlp_params)),
-    ])
+    steps = []
+    if not data.preprocessed:
+        steps.append(("scaler", StandardScaler()))
+    steps.append(("mlp", MLPClassifier(**mlp_params)))
+    pipeline = Pipeline(steps)
     pipeline.fit(data.X_train, data.y_train)
     return pipeline
 
@@ -47,7 +48,7 @@ def run(
     from scripts.data.features import load_features_data
 
     output_dir = ensure_dir(output_dir)
-    data = load_features_data(dataset_config)
+    data = load_features_data(dataset_config, bench_config)
 
     params = bench_config.get_model_params("mlp")
     default_params = MODEL_METADATA["default_params"].copy()

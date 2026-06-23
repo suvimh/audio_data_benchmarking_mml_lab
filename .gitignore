@@ -6,6 +6,7 @@ dist/
 build/
 
 data/
+embeddings/
 *.pt
 *.pkl
 *.npz

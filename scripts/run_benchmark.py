@@ -93,7 +93,8 @@ def resolve_dataset(
     }
     _override_if_set(merged, "train_singer_ids", partition.train_singer_ids)
     _override_if_set(merged, "val_singer_ids", partition.test_singer_ids)
-    _override_if_set(merged, "singer_column", partition.singer_column, "singer")
+    if partition.singer_column is not None:
+        merged["singer_column"] = partition.singer_column
     _override_if_set(merged, "gender_split", filters.gender)
     _override_if_set(merged, "include_labels", filters.include_labels)
     _override_if_set(merged, "exclude_labels", filters.exclude_labels)
@@ -109,6 +110,44 @@ def _override_if_set(target: dict, key: str, value, skip_value=None):
     if value is not None and value != skip_value:
         target[key] = value
 
+
+def _model_already_completed(model_out: Path) -> bool:
+    metrics_path = model_out / "metrics.csv"
+    if not metrics_path.exists():
+        return False
+    import pandas as pd
+
+    df = pd.read_csv(metrics_path)
+    if "split" not in df.columns:
+        return not df.empty
+    return (df["split"] == "validation").any()
+
+
+def _load_completed_result(model_out: Path, model_name: str) -> Dict[str, Any]:
+    import pandas as pd
+
+    df = pd.read_csv(model_out / "metrics.csv")
+    if "split" in df.columns:
+        val_row = df[df["split"] == "validation"].iloc[-1]
+        train_row = df[df["split"] == "train"].iloc[-1] if (df["split"] == "train").any() else None
+    else:
+        val_row = df.iloc[-1]
+        train_row = None
+
+    def _row_to_metrics(row) -> Dict[str, Any]:
+        return {
+            "accuracy": float(row["accuracy"]),
+            "balanced_accuracy": float(row["balanced_accuracy"]),
+            "n_samples": int(row["n_samples"]) if pd.notna(row.get("n_samples")) else None,
+        }
+
+    result: Dict[str, Any] = {
+        "model_name": model_name,
+        "val_metrics": _row_to_metrics(val_row),
+    }
+    if train_row is not None:
+        result["train_metrics"] = _row_to_metrics(train_row)
+    return result
 
 # ---------------------------------------------------------------------------
 # Old-style run: single dataset + single benchmark
@@ -151,6 +190,11 @@ def run_benchmark(
         model_output_dir = ensure_dir(
             output_dir / f"{benchmark_config.name}_{model_name}"
         )
+
+        if _model_already_completed(model_output_dir):
+            print(f"Skipping {model_name} (metrics already exist)")
+            results[model_name] = _load_completed_result(model_output_dir, model_name)
+            continue
 
         model_info = get_model(model_name)
         result = model_info["run"](dataset_config, benchmark_config, str(model_output_dir))
@@ -238,6 +282,14 @@ def run_experiment(experiment_config_path: str | Path) -> Dict[str, Any]:
                 print(f"  {'=' * 50}")
 
                 model_out = ensure_dir(block_out / model_name)
+
+                if _model_already_completed(model_out):
+                    print(f"  Skipping {model_name} (metrics already exist)")
+                    key = f"{block.benchmark_config.name}/{dataset.name}/{model_name}"
+                    all_results[key] = _load_completed_result(model_out, model_name)
+                    print(f"  Completed: {key}")
+                    continue
+
                 model_info = get_model(model_name)
                 result = model_info["run"](
                     resolved, block.benchmark_config, str(model_out)

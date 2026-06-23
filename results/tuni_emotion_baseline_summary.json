@@ -1,0 +1,21 @@
+{
+  "experiment": "tuni_emotion_baseline",
+  "results": {
+    "trad_ml/opensmile/knn": {
+      "val_balanced_accuracy": 0.1984747905800537,
+      "val_accuracy": 0.1989247311827957
+    },
+    "trad_ml/opensmile/rf": {
+      "val_balanced_accuracy": 0.3458195037142405,
+      "val_accuracy": 0.3440860215053763
+    },
+    "trad_ml/opensmile/mlp": {
+      "val_balanced_accuracy": 0.339078552236447,
+      "val_accuracy": 0.3387096774193548
+    },
+    "trad_ml/opensmile/svm": {
+      "val_balanced_accuracy": 0.354417575470207,
+      "val_accuracy": 0.3548387096774194
+    }
+  }
+}

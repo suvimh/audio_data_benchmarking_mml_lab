@@ -34,10 +34,11 @@ MODEL_METADATA = {
 
 def train(data: FeaturesData, params: Dict[str, Any]) -> Pipeline:
     svm_params = {k: v for k, v in params.items()}
-    pipeline = Pipeline([
-        ("scaler", StandardScaler()),
-        ("svm", SVC(**svm_params)),
-    ])
+    steps = []
+    if not data.preprocessed:
+        steps.append(("scaler", StandardScaler()))
+    steps.append(("svm", SVC(**svm_params)))
+    pipeline = Pipeline(steps)
     pipeline.fit(data.X_train, data.y_train)
     return pipeline
 
@@ -50,7 +51,7 @@ def run(
     from scripts.data.features import load_features_data
 
     output_dir = ensure_dir(output_dir)
-    data = load_features_data(dataset_config)
+    data = load_features_data(dataset_config, bench_config)
 
     params = bench_config.get_model_params("svm")
     default_params = MODEL_METADATA["default_params"].copy()

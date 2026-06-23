@@ -12,3 +12,4 @@ torch
 soundfile
 msclap
 pyyaml
+pyarrow

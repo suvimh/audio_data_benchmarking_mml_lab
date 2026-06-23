@@ -18,6 +18,6 @@ VAL_SINGERS = ["f10", "f11", "m7", "m8", "m9"]
 
 GENDERS = ["female", "male"]
 
-RAW_AUDIO_DATA_DIR = "/home/suvihaara/Documents/PhD/DATA/VocalSet/VocalSet_fixed/FULL"
+RAW_AUDIO_DATA_DIR = "/Users/pubert/Downloads/SkyNote/OTHER_DATASETS/VOCALSET_data_versions/original_split/VocalSet_fixed/FULL"
 EMBEDDINGS_DATA_DIR = "/home/suvihaara/Documents/PhD/DATA/VocalSet/VocalSet_fixed/embeddings/"
 IMAGENET_DATA_DIR = "/home/suvihaara/Documents/PhD/DATA/VocalSet/VocalSet_fixed/FM_split_mel_spectrograms"

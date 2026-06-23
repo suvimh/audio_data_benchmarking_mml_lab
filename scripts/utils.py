@@ -20,6 +20,8 @@ def load_pickle(path: str | Path) -> Any:
 
 
 def save_json(obj: Any, path: str | Path) -> None:
+    path = Path(path)
+    path.parent.mkdir(parents=True, exist_ok=True)
     with open(path, "w") as f:
         json.dump(obj, f, indent=2)
 

@@ -15,7 +15,7 @@ def plot_confusion_matrix(
     save_path: Optional[str | Path] = None,
     figsize=(10, 8),
 ) -> None:
-    plt.figure(figsize=figsize)
+    fig = plt.figure(figsize=figsize)
     sns.heatmap(
         cm,
         annot=True,
@@ -31,7 +31,9 @@ def plot_confusion_matrix(
     if save_path:
         Path(save_path).parent.mkdir(parents=True, exist_ok=True)
         plt.savefig(save_path, dpi=150)
-    plt.show()
+        plt.close(fig)
+    else:
+        plt.show()
 
 
 def plot_training_history(
@@ -60,4 +62,6 @@ def plot_training_history(
     if save_path:
         Path(save_path).parent.mkdir(parents=True, exist_ok=True)
         plt.savefig(save_path, dpi=150)
-    plt.show()
+        plt.close(fig)
+    else:
+        plt.show()

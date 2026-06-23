@@ -1,0 +1,42 @@
+{
+  "extractor": "opensmile",
+  "baseline": {
+    "knn": {
+      "val_macro_f1": 0.1972629779628719,
+      "val_accuracy": 0.1989247311827957
+    },
+    "rf": {
+      "val_macro_f1": 0.3285620932272516,
+      "val_accuracy": 0.34408602150537637
+    },
+    "mlp": {
+      "val_macro_f1": 0.34395359282072224,
+      "val_accuracy": 0.3387096774193548
+    },
+    "svm": {
+      "val_macro_f1": 0.3529256483713749,
+      "val_accuracy": 0.3548387096774194
+    },
+    "_mean_val_macro_f1": 0.3056760780955552
+  },
+  "filter": {
+    "knn": {
+      "val_macro_f1": 0.3025648599419091,
+      "val_accuracy": 0.3010752688172043
+    },
+    "rf": {
+      "val_macro_f1": 0.28753111393632136,
+      "val_accuracy": 0.2849462365591398
+    },
+    "mlp": {
+      "val_macro_f1": 0.26305529494988833,
+      "val_accuracy": 0.25268817204301075
+    },
+    "svm": {
+      "val_macro_f1": 0.3154529550051938,
+      "val_accuracy": 0.3225806451612903
+    },
+    "_mean_val_macro_f1": 0.29215105595832813
+  },
+  "improvement_mean_macro_f1": -0.01352502213722706
+}

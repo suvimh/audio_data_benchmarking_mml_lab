@@ -67,4 +67,7 @@ VAL_SINGERS = [
 
 RAW_AUDIO_DATA_DIR = "/Users/pubert/Downloads/SkyNote/OTHER_DATASETS/TUNI_emotion_dataset"
 TUNI_EMBEDDINGS_DATA_DIR = str(REPO_ROOT / "embeddings" / "tuni_emotion")
+TUNI_OPENSMILE_DIR = str(REPO_ROOT / "embeddings" / "tuni_emotion" / "opensmile")
+TUNI_WHISPER_DIR = str(REPO_ROOT / "embeddings" / "tuni_emotion" / "whisper")
+TUNI_CLAP_DIR = str(REPO_ROOT / "embeddings" / "tuni_emotion" / "clap")
 TUNI_OPENSMILE_PARQUET_PREFIX = "tuni_emotion_dataset"

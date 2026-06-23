@@ -52,10 +52,16 @@ def save_metrics_csv(
     model_name: str,
     extra: Optional[Dict] = None,
 ) -> None:
+    report = metrics.get("classification_report", {})
+    macro = report.get("macro avg", {})
+
     row = {
         "model": model_name,
         "accuracy": metrics.get("accuracy", ""),
         "balanced_accuracy": metrics.get("balanced_accuracy", ""),
+        "macro_precision": macro.get("precision", ""),
+        "macro_recall": macro.get("recall", ""),
+        "macro_f1": macro.get("f1-score", ""),
         "top2_accuracy": metrics.get("top2_accuracy", ""),
         "top3_accuracy": metrics.get("top3_accuracy", ""),
         "n_samples": metrics.get("n_samples", ""),

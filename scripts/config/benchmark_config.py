@@ -8,6 +8,8 @@ from dataclasses import dataclass, field, asdict
 from pathlib import Path
 from typing import Optional, Dict, List, Any
 
+from scripts.feature_selection.base import FeatureSelectionConfig
+
 
 @dataclass
 class BenchmarkConfig:
@@ -25,11 +27,16 @@ class BenchmarkConfig:
     train_split: float = 1.0
     val_split: float = 1.0
 
+    feature_selection: Optional[FeatureSelectionConfig] = None
+
     def to_dict(self) -> dict:
         return asdict(self)
 
     @classmethod
     def from_dict(cls, d: dict) -> BenchmarkConfig:
+        d = dict(d)
+        if "feature_selection" in d and d["feature_selection"] is not None:
+            d["feature_selection"] = FeatureSelectionConfig.from_dict(d["feature_selection"])
         return cls(**{k: v for k, v in d.items() if k in cls.__dataclass_fields__})
 
     def save_yaml(self, path: str | Path) -> None:

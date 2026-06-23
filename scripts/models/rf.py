@@ -27,10 +27,11 @@ MODEL_METADATA = {
 
 def train(data: FeaturesData, params: Dict[str, Any]) -> Pipeline:
     rf_params = params.copy()
-    pipeline = Pipeline([
-        ("scaler", StandardScaler()),
-        ("rf", RandomForestClassifier(**rf_params)),
-    ])
+    steps = []
+    if not data.preprocessed:
+        steps.append(("scaler", StandardScaler()))
+    steps.append(("rf", RandomForestClassifier(**rf_params)))
+    pipeline = Pipeline(steps)
     pipeline.fit(data.X_train, data.y_train)
     return pipeline
 
@@ -43,7 +44,7 @@ def run(
     from scripts.data.features import load_features_data
 
     output_dir = ensure_dir(output_dir)
-    data = load_features_data(dataset_config)
+    data = load_features_data(dataset_config, bench_config)
 
     params = bench_config.get_model_params("rf")
     default_params = MODEL_METADATA["default_params"].copy()

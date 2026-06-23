@@ -1,0 +1,21 @@
+{
+  "experiment": "tuni_emotion_fs",
+  "results": {
+    "trad_ml_fs_filter/opensmile/knn": {
+      "val_balanced_accuracy": 0.30109056424845904,
+      "val_accuracy": 0.3010752688172043
+    },
+    "trad_ml_fs_filter/opensmile/rf": {
+      "val_balanced_accuracy": 0.2845582424529793,
+      "val_accuracy": 0.2849462365591398
+    },
+    "trad_ml_fs_filter/opensmile/mlp": {
+      "val_balanced_accuracy": 0.25356409040619565,
+      "val_accuracy": 0.25268817204301075
+    },
+    "trad_ml_fs_filter/opensmile/svm": {
+      "val_balanced_accuracy": 0.3251857120278173,
+      "val_accuracy": 0.3225806451612903
+    }
+  }
+}
