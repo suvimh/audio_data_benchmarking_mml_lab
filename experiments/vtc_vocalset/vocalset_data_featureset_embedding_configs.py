@@ -1,4 +1,5 @@
 from scripts.config.dataset_config import DatasetConfig
+from scripts.feature_selection.base import OPENSMILE_TOP_K_FEATURES
 from experiments.vtc_vocalset.vocalset_experiments_constants import EMBEDDINGS_DATA_DIR
 
 
@@ -20,11 +21,15 @@ def make_data_config_for_vtc_embeddings(
 
 
 def make_opensmile_embedding_config():
+    """OpenSMILE embeddings are reduced to top-k features during loading."""
     return make_data_config_for_vtc_embeddings(
         name="opensmile",
         feature_type="opensmile-compare-2016",
         parquet_file="vocalset_dataset_opensmile-compare-2016_3.0s.parquet",
     )
+
+
+OPENSMILE_FEATURE_COUNT = OPENSMILE_TOP_K_FEATURES
 
 
 def make_vggish_embedding_config():

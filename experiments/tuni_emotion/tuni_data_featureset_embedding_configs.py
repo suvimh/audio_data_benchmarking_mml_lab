@@ -1,4 +1,5 @@
 from scripts.config.dataset_config import DatasetConfig
+from scripts.feature_selection.base import OPENSMILE_TOP_K_FEATURES
 from experiments.tuni_emotion.tuni_experiments_constants import (
     TUNI_CLAP_DIR,
     TUNI_OPENSMILE_DIR,
@@ -32,6 +33,7 @@ def make_opensmile_embedding_config(
     frame_duration: float = 3.0,
     opensmile_variant: str = "compare-2016",
 ) -> DatasetConfig:
+    """OpenSMILE embeddings are reduced to top-k features during loading."""
     duration = _duration_to_suffix(frame_duration)
     feature_type = f"opensmile-{opensmile_variant}"
     parquet_file = f"{TUNI_OPENSMILE_PARQUET_PREFIX}_{feature_type}_{duration}.parquet"
@@ -42,6 +44,9 @@ def make_opensmile_embedding_config(
         data_dir=TUNI_OPENSMILE_DIR,
         parquet_file=parquet_file,
     )
+
+
+OPENSMILE_FEATURE_COUNT = OPENSMILE_TOP_K_FEATURES
 
 
 def make_whisper_embedding_config(frame_duration: float = 3.0) -> DatasetConfig:

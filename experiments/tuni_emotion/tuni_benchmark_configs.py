@@ -27,7 +27,7 @@ trad_ml_benchmark_filter = BenchmarkConfig(
     feature_selection=FeatureSelectionConfig(
         enabled=True,
         method="filter",
-        params={"variance_threshold": 0.0, "k": 500},
+        params={"variance_threshold": 0.0, "k": 100},
     ),
     output_dir="./metrics/trad_ml_fs_filter",
     seed=42,
