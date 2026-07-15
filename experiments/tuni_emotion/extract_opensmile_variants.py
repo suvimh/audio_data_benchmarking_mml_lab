@@ -1,8 +1,7 @@
 """
 Extract additional OpenSMILE feature sets for TUNI emotion (phase 3).
 
-Requires the external extraction repo:
-  /Users/pubert/Downloads/SkyNote/audio_repo/audio_embeddings_and_feature_extraction_from_audio_dataset
+Requires the external extraction repo (override with TUNI_EXTRACTION_REPO or --extraction-repo).
 
 Usage:
     python -m experiments.tuni_emotion.extract_opensmile_variants --variants emobase is09 egemaps
@@ -10,6 +9,7 @@ Usage:
 from __future__ import annotations
 
 import argparse
+import os
 import subprocess
 import sys
 from pathlib import Path
@@ -20,11 +20,20 @@ from experiments.tuni_emotion.tuni_experiments_constants import (
 )
 from experiments.tuni_emotion.tuni_data_featureset_embedding_configs import OPENSMILE_VARIANTS
 
-EXTRACTION_REPO = Path(
-    "/Users/pubert/Downloads/SkyNote/audio_repo/"
-    "audio_embeddings_and_feature_extraction_from_audio_dataset"
-)
-OPENSMILE_OUTPUT = EXTRACTION_REPO / "TUNI_emotion_data_extraction" / "embeddings" / "OpenSmile"
+def _resolve_extraction_repo(extraction_repo: str | None = None) -> Path:
+    repo = extraction_repo or os.environ.get("TUNI_EXTRACTION_REPO")
+    if not repo:
+        raise ValueError(
+            "Set TUNI_EXTRACTION_REPO or pass --extraction-repo to the external "
+            "audio_embeddings_and_feature_extraction_from_audio_dataset checkout."
+        )
+    return Path(repo).expanduser().resolve()
+
+
+def _opensmile_output(extraction_repo: Path) -> Path:
+    return extraction_repo / "TUNI_emotion_data_extraction" / "embeddings" / "OpenSmile"
+
+
 LOCAL_OPENSMILE_DIR = Path(TUNI_OPENSMILE_DIR)
 
 
@@ -32,15 +41,25 @@ def _duration_suffix(frame_duration: float) -> str:
     return f"{frame_duration:.1f}s"
 
 
-def _expected_parquet(variant: str, frame_duration: float) -> Path:
+def _expected_parquet(
+    variant: str,
+    frame_duration: float,
+    *,
+    extraction_repo: Path,
+) -> Path:
     feature_type = OPENSMILE_VARIANTS[variant]
-    return OPENSMILE_OUTPUT / (
+    return _opensmile_output(extraction_repo) / (
         f"{TUNI_OPENSMILE_PARQUET_PREFIX}_{feature_type}_{_duration_suffix(frame_duration)}.parquet"
     )
 
 
-def _link_parquet(variant: str, frame_duration: float) -> Path:
-    source = _expected_parquet(variant, frame_duration)
+def _link_parquet(
+    variant: str,
+    frame_duration: float,
+    *,
+    extraction_repo: Path,
+) -> Path:
+    source = _expected_parquet(variant, frame_duration, extraction_repo=extraction_repo)
     if not source.exists():
         raise FileNotFoundError(f"Missing extracted parquet: {source}")
 
@@ -55,11 +74,14 @@ def _link_parquet(variant: str, frame_duration: float) -> Path:
 def extract_variants(
     variants: list[str],
     frame_durations: list[float] | None = None,
+    *,
+    extraction_repo: str | None = None,
 ) -> dict:
     frame_durations = frame_durations or [3.0]
-    results = {"extracted": [], "linked": [], "missing": []}
+    repo_path = _resolve_extraction_repo(extraction_repo)
+    results = {"linked": [], "missing": []}
 
-    extract_script = EXTRACTION_REPO / "scripts" / "extract.py"
+    extract_script = repo_path / "scripts" / "extract.py"
     if not extract_script.exists():
         results["note"] = (
             "Extraction script not found. Run TUNI_emotion_data_extraction notebook "
@@ -70,7 +92,7 @@ def extract_variants(
         if variant not in OPENSMILE_VARIANTS:
             raise ValueError(f"Unknown variant {variant}. Choose from {OPENSMILE_VARIANTS}")
         for duration in frame_durations:
-            parquet = _expected_parquet(variant, duration)
+            parquet = _expected_parquet(variant, duration, extraction_repo=repo_path)
             if not parquet.exists() and extract_script.exists():
                 cmd = [
                     sys.executable,
@@ -84,9 +106,9 @@ def extract_variants(
                     "--window-length",
                     str(duration),
                 ]
-                subprocess.run(cmd, check=False, cwd=str(EXTRACTION_REPO))
+                subprocess.run(cmd, check=False, cwd=str(repo_path))
             if parquet.exists():
-                linked = _link_parquet(variant, duration)
+                linked = _link_parquet(variant, duration, extraction_repo=repo_path)
                 results["linked"].append(str(linked))
             else:
                 results["missing"].append(str(parquet))
@@ -103,9 +125,19 @@ def main() -> None:
         choices=list(OPENSMILE_VARIANTS.keys()),
     )
     parser.add_argument("--frame-durations", nargs="+", type=float, default=[3.0])
+    parser.add_argument(
+        "--extraction-repo",
+        default=None,
+        help="Path to audio_embeddings_and_feature_extraction_from_audio_dataset "
+        "(default: TUNI_EXTRACTION_REPO env var)",
+    )
     args = parser.parse_args()
 
-    results = extract_variants(args.variants, args.frame_durations)
+    results = extract_variants(
+        args.variants,
+        args.frame_durations,
+        extraction_repo=args.extraction_repo,
+    )
     print(results)
     if results.get("missing"):
         print(

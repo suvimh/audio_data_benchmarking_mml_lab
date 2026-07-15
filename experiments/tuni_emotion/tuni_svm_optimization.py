@@ -33,7 +33,6 @@ from scripts.run_benchmark import resolve_dataset
 from scripts.utils import ensure_dir, save_json, set_seed
 
 from experiments.tuni_emotion.tuni_data_featureset_embedding_configs import (
-    OPENSMILE_VARIANTS,
     make_clap_embedding_config,
     make_opensmile_cleaned_embedding_config,
     make_opensmile_embedding_config,
@@ -212,7 +211,6 @@ def _member_dataset(member: str, frame_duration: float) -> DatasetConfig:
 def _run_late_fusion(spec: ComboSpec, benchmark: BenchmarkConfig) -> dict:
     from scripts.data.features import load_features_data
 
-    models = []
     member_metrics = {}
     member_probs = []
     y_val = None
@@ -227,7 +225,6 @@ def _run_late_fusion(spec: ComboSpec, benchmark: BenchmarkConfig) -> dict:
             member_benchmark.feature_selection = FeatureSelectionConfig(enabled=False)
         data = load_features_data(dataset, member_benchmark)
         result = svm_model.run_on_features_data(data, member_benchmark)
-        models.append(result["model"])
         member_probs.append(result["model"].predict_proba(data.X_val))
         member_metrics[member] = {
             "val_macro_f1": _macro_f1(result["val_metrics"]),
