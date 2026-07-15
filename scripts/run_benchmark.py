@@ -147,7 +147,19 @@ def _load_completed_result(model_out: Path, model_name: str) -> Dict[str, Any]:
     }
     if train_row is not None:
         result["train_metrics"] = _row_to_metrics(train_row)
+    fs_info_path = model_out / "feature_selection_info.json"
+    if fs_info_path.exists():
+        from scripts.utils import load_json
+
+        result["feature_selection_info"] = load_json(fs_info_path)
     return result
+
+
+def _persist_feature_selection_info(model_out: Path, result: Dict[str, Any]) -> None:
+    fs_info = result.get("feature_selection_info")
+    if not fs_info:
+        return
+    save_json(fs_info, model_out / "feature_selection_info.json")
 
 # ---------------------------------------------------------------------------
 # Old-style run: single dataset + single benchmark
@@ -194,11 +206,13 @@ def run_benchmark(
         if _model_already_completed(model_output_dir):
             print(f"Skipping {model_name} (metrics already exist)")
             results[model_name] = _load_completed_result(model_output_dir, model_name)
+            _persist_feature_selection_info(model_output_dir, results[model_name])
             continue
 
         model_info = get_model(model_name)
         result = model_info["run"](dataset_config, benchmark_config, str(model_output_dir))
         results[model_name] = result
+        _persist_feature_selection_info(model_output_dir, result)
 
         print(f"Completed: {model_name}")
 
@@ -287,6 +301,7 @@ def run_experiment(experiment_config_path: str | Path) -> Dict[str, Any]:
                     print(f"  Skipping {model_name} (metrics already exist)")
                     key = f"{block.benchmark_config.name}/{dataset.name}/{model_name}"
                     all_results[key] = _load_completed_result(model_out, model_name)
+                    _persist_feature_selection_info(model_out, all_results[key])
                     print(f"  Completed: {key}")
                     continue
 
@@ -297,6 +312,7 @@ def run_experiment(experiment_config_path: str | Path) -> Dict[str, Any]:
 
                 key = f"{block.benchmark_config.name}/{dataset.name}/{model_name}"
                 all_results[key] = result
+                _persist_feature_selection_info(model_out, result)
 
                 print(f"  Completed: {key}")
 

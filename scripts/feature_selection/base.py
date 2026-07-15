@@ -8,6 +8,14 @@ OPENSMILE_DEFAULT_FILTER_PARAMS: Dict[str, Any] = {
     "variance_threshold": 0.0,
     "k": OPENSMILE_TOP_K_FEATURES,
 }
+GENERALIZED_FISHER_DEFAULT_PARAMS: Dict[str, Any] = {
+    "k": OPENSMILE_TOP_K_FEATURES,
+    "gamma": 1e-6,
+    "redundancy_weight": 0.1,
+    "max_iter": 100,
+    "tol": 1e-6,
+    "random_state": 42,
+}
 
 
 @dataclass
@@ -44,10 +52,31 @@ def resolve_feature_selection(
 ) -> Optional[Tuple[str, Dict[str, Any]]]:
     if benchmark_feature_selection is not None:
         if benchmark_feature_selection.enabled:
-            return benchmark_feature_selection.method, benchmark_feature_selection.params
+            return (
+                benchmark_feature_selection.method,
+                normalize_feature_selection_params(
+                    benchmark_feature_selection.method,
+                    benchmark_feature_selection.params,
+                ),
+            )
         return None
 
     if is_opensmile_dataset(feature_type, name):
-        return "filter", dict(OPENSMILE_DEFAULT_FILTER_PARAMS)
+        return "filter", normalize_feature_selection_params("filter", {})
 
     return None
+
+
+def normalize_feature_selection_params(method: str, params: Optional[Dict[str, Any]]) -> Dict[str, Any]:
+    params = dict(params or {})
+    if method == "filter":
+        merged = dict(OPENSMILE_DEFAULT_FILTER_PARAMS)
+        merged.update(params)
+        return merged
+
+    if method == "generalized_fisher":
+        merged = dict(GENERALIZED_FISHER_DEFAULT_PARAMS)
+        merged.update(params)
+        return merged
+
+    return params

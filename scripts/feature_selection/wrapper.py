@@ -3,6 +3,7 @@ from __future__ import annotations
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.feature_selection import RFE
 from sklearn.linear_model import LogisticRegression
+from sklearn.svm import LinearSVC
 
 
 def build_wrapper_selector(params: dict) -> RFE:
@@ -15,6 +16,15 @@ def build_wrapper_selector(params: dict) -> RFE:
             n_estimators=params.get("n_estimators", 50),
             random_state=random_state,
             n_jobs=-1,
+        )
+    elif estimator_name == "svm":
+        estimator = LinearSVC(
+            C=params.get("C", 1.0),
+            penalty="l2",
+            dual="auto",
+            class_weight="balanced",
+            random_state=random_state,
+            max_iter=params.get("max_iter", 10000),
         )
     else:
         estimator = LogisticRegression(

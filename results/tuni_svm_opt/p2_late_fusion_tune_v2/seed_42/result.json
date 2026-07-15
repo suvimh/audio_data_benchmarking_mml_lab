@@ -1,0 +1,50 @@
+{
+  "combo_id": "p2_late_fusion_tune_v2",
+  "spec": {
+    "combo_id": "p2_late_fusion_tune_v2",
+    "phase": 2,
+    "extractor": "late_fusion",
+    "frame_duration": 3.0,
+    "dataset_name": "opensmile",
+    "parquet_file": null,
+    "data_dir": null,
+    "feature_type": null,
+    "fs_method": "none",
+    "fs_k": 0,
+    "fs_extra": {},
+    "tune_svm": true,
+    "imbalance_strategy": null,
+    "late_fusion_members": [
+      "opensmile",
+      "whisper",
+      "clap"
+    ],
+    "concat_members": [],
+    "seed": 42
+  },
+  "val_macro_f1": 0.4309974915762515,
+  "val_accuracy": 0.42473118279569894,
+  "val_balanced_accuracy": 0.42354986565512887,
+  "primary_metric": 0.4309974915762515,
+  "runtime_seconds": 105.7085,
+  "feature_selection_info": null,
+  "svm_tuning_info": null,
+  "member_metrics": {
+    "opensmile": {
+      "val_macro_f1": 0.37059876220820814,
+      "val_accuracy": 0.3548387096774194,
+      "val_balanced_accuracy": 0.35529476845266317
+    },
+    "whisper": {
+      "val_macro_f1": 0.42108610887988096,
+      "val_accuracy": 0.41397849462365593,
+      "val_balanced_accuracy": 0.4138849375691481
+    },
+    "clap": {
+      "val_macro_f1": 0.39320154306080296,
+      "val_accuracy": 0.3924731182795699,
+      "val_balanced_accuracy": 0.3928481112691639
+    }
+  },
+  "cached": false
+}

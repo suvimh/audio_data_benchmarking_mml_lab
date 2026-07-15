@@ -1,0 +1,37 @@
+{
+  "combo_id": "p2_clap_smote_tune",
+  "spec": {
+    "combo_id": "p2_clap_smote_tune",
+    "phase": 2,
+    "extractor": "clap",
+    "frame_duration": 3.0,
+    "dataset_name": "opensmile",
+    "parquet_file": null,
+    "data_dir": null,
+    "feature_type": null,
+    "fs_method": "none",
+    "fs_k": 0,
+    "fs_extra": {},
+    "tune_svm": true,
+    "imbalance_strategy": "smote",
+    "late_fusion_members": [],
+    "concat_members": [],
+    "seed": 42
+  },
+  "val_macro_f1": 0.39320154306080296,
+  "val_accuracy": 0.3924731182795699,
+  "val_balanced_accuracy": 0.3928481112691639,
+  "primary_metric": 0.39320154306080296,
+  "runtime_seconds": 12.3511,
+  "feature_selection_info": null,
+  "svm_tuning_info": {
+    "best_params": {
+      "C": 0.1,
+      "gamma": "scale",
+      "kernel": "linear"
+    },
+    "val_macro_f1": 0.39320154306080296
+  },
+  "member_metrics": null,
+  "cached": false
+}

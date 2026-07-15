@@ -1,0 +1,30 @@
+{
+  "combo_id": "p1__opensmile__none__6373__{}__261b9345f3__seed42__a175d5d1b2",
+  "spec": {
+    "combo_id": "p1__opensmile__none__6373__{}__261b9345f3__seed42__a175d5d1b2",
+    "phase": 1,
+    "extractor": "opensmile",
+    "frame_duration": 3.0,
+    "dataset_name": "opensmile",
+    "parquet_file": null,
+    "data_dir": null,
+    "feature_type": null,
+    "fs_method": "none",
+    "fs_k": 6373,
+    "fs_extra": {},
+    "tune_svm": false,
+    "imbalance_strategy": null,
+    "late_fusion_members": [],
+    "concat_members": [],
+    "seed": 42
+  },
+  "val_macro_f1": 0.3529256483713749,
+  "val_accuracy": 0.3548387096774194,
+  "val_balanced_accuracy": 0.354417575470207,
+  "primary_metric": 0.3548387096774194,
+  "runtime_seconds": 10.2342,
+  "feature_selection_info": null,
+  "svm_tuning_info": null,
+  "member_metrics": null,
+  "cached": false
+}

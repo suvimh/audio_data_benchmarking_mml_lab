@@ -1,0 +1,39 @@
+{
+  "combo_id": "p2_tune_opensmile_none_6373",
+  "spec": {
+    "combo_id": "p2_tune_opensmile_none_6373",
+    "phase": 2,
+    "extractor": "opensmile",
+    "frame_duration": 3.0,
+    "dataset_name": "opensmile",
+    "parquet_file": null,
+    "data_dir": null,
+    "feature_type": null,
+    "fs_method": "none",
+    "fs_k": 6373,
+    "fs_extra": {
+      "redundancy_weight": 0.1
+    },
+    "tune_svm": true,
+    "imbalance_strategy": null,
+    "late_fusion_members": [],
+    "concat_members": [],
+    "seed": 42
+  },
+  "val_macro_f1": 0.37059876220820814,
+  "val_accuracy": 0.3548387096774194,
+  "val_balanced_accuracy": 0.35529476845266317,
+  "primary_metric": 0.37059876220820814,
+  "runtime_seconds": 85.7922,
+  "feature_selection_info": null,
+  "svm_tuning_info": {
+    "best_params": {
+      "C": 0.1,
+      "gamma": "scale",
+      "kernel": "linear"
+    },
+    "val_macro_f1": 0.37059876220820814
+  },
+  "member_metrics": null,
+  "cached": false
+}

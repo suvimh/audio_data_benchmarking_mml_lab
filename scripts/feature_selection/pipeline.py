@@ -7,12 +7,16 @@ from sklearn.preprocessing import StandardScaler
 
 from scripts.feature_selection.embedded import build_embedded_selector
 from scripts.feature_selection.filter import build_filter_selector
+from scripts.feature_selection.generalized_fisher import (
+    build_generalized_fisher_selector,
+)
 from scripts.feature_selection.wrapper import build_wrapper_selector
 
 _BUILDERS = {
     "filter": build_filter_selector,
     "wrapper": build_wrapper_selector,
     "embedded": build_embedded_selector,
+    "generalized_fisher": build_generalized_fisher_selector,
 }
 
 
@@ -50,6 +54,9 @@ def apply_feature_selection(
         "n_features_after": X_train_sel.shape[1],
         "selected_feature_indices": selected_indices,
     }
+    diagnostics = _extract_selector_diagnostics(selector)
+    if diagnostics:
+        info["diagnostics"] = diagnostics
     return X_train_sel.astype(np.float32), X_val_sel.astype(np.float32), info
 
 
@@ -70,3 +77,24 @@ def _extract_selected_indices(selector, n_features: int) -> list[int]:
                 return step.get_support(indices=True).tolist()
 
     return list(range(n_features))
+
+
+def _extract_selector_diagnostics(selector) -> Dict[str, Any]:
+    diagnostics: Dict[str, Any] = {}
+    for attr in (
+        "n_iter_",
+        "converged_",
+        "final_objective_",
+        "runtime_seconds_",
+    ):
+        if hasattr(selector, attr):
+            value = getattr(selector, attr)
+            if isinstance(value, (np.floating, np.integer)):
+                value = value.item()
+            diagnostics[attr.rstrip("_")] = value
+
+    if hasattr(selector, "objective_history_"):
+        values = getattr(selector, "objective_history_")
+        diagnostics["objective_history"] = [float(v) for v in values]
+
+    return diagnostics

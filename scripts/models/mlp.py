@@ -84,4 +84,5 @@ def run(
         "train_metrics": train_metrics,
         "val_metrics": val_metrics,
         "model_path": str(model_path),
+        "feature_selection_info": data.feature_selection_info,
     }

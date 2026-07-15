@@ -32,3 +32,23 @@ trad_ml_benchmark_filter = BenchmarkConfig(
     output_dir="./metrics/trad_ml_fs_filter",
     seed=42,
 )
+
+trad_ml_benchmark_generalized_fisher = BenchmarkConfig(
+    name="trad_ml_fs_generalized_fisher",
+    models=["knn", "rf", "mlp", "svm"],
+    model_params=_MODEL_PARAMS,
+    feature_selection=FeatureSelectionConfig(
+        enabled=True,
+        method="generalized_fisher",
+        params={
+            "k": 100,
+            "gamma": 1e-6,
+            "redundancy_weight": 0.1,
+            "max_iter": 100,
+            "tol": 1e-6,
+            "random_state": 42,
+        },
+    ),
+    output_dir="./metrics/trad_ml_fs_generalized_fisher",
+    seed=42,
+)

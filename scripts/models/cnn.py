@@ -310,4 +310,5 @@ def run(
         "train_metrics": train_metrics,
         "val_metrics": val_metrics,
         "history": {k: [float(v) for v in vals] for k, vals in hist_dict.items()},
+        "feature_selection_info": data.feature_selection_info,
     }

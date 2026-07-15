@@ -29,6 +29,10 @@ class BenchmarkConfig:
 
     feature_selection: Optional[FeatureSelectionConfig] = None
 
+    tune_svm: bool = False
+    svm_param_grid: Optional[Dict[str, List[Any]]] = None
+    imbalance_strategy: Optional[str] = None
+
     def to_dict(self) -> dict:
         return asdict(self)
 

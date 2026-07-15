@@ -1,0 +1,2962 @@
+{
+  "combos": {
+    "p1__opensmile__generalized_fisher__50__{'redundancy_weight':_0.0}__f2c8bc39c0__s__3611ccf165": {
+      "n_runs": 1,
+      "primary_metric": {
+        "mean": 0.32167694009799275,
+        "std": 0.0
+      },
+      "val_macro_f1": {
+        "mean": 0.28966250435625235,
+        "std": 0.0
+      },
+      "val_accuracy": {
+        "mean": 0.3172043010752688,
+        "std": 0.0
+      },
+      "val_balanced_accuracy": {
+        "mean": 0.32167694009799275,
+        "std": 0.0
+      },
+      "spec": {
+        "combo_id": "p1__opensmile__generalized_fisher__50__{'redundancy_weight':_0.0}__f2c8bc39c0__s__3611ccf165",
+        "phase": 1,
+        "extractor": "opensmile",
+        "frame_duration": 3.0,
+        "dataset_name": "opensmile",
+        "parquet_file": null,
+        "data_dir": null,
+        "feature_type": null,
+        "fs_method": "generalized_fisher",
+        "fs_k": 50,
+        "fs_extra": {
+          "redundancy_weight": 0.0
+        },
+        "tune_svm": false,
+        "imbalance_strategy": null,
+        "late_fusion_members": [],
+        "concat_members": [],
+        "seed": 42
+      }
+    },
+    "p1__opensmile__generalized_fisher__200__{'redundancy_weight':_0.0}__1badc834c4____b525ce3ba2": {
+      "n_runs": 1,
+      "primary_metric": {
+        "mean": 0.28718982140034777,
+        "std": 0.0
+      },
+      "val_macro_f1": {
+        "mean": 0.2789833168033907,
+        "std": 0.0
+      },
+      "val_accuracy": {
+        "mean": 0.2849462365591398,
+        "std": 0.0
+      },
+      "val_balanced_accuracy": {
+        "mean": 0.28718982140034777,
+        "std": 0.0
+      },
+      "spec": {
+        "combo_id": "p1__opensmile__generalized_fisher__200__{'redundancy_weight':_0.0}__1badc834c4____b525ce3ba2",
+        "phase": 1,
+        "extractor": "opensmile",
+        "frame_duration": 3.0,
+        "dataset_name": "opensmile",
+        "parquet_file": null,
+        "data_dir": null,
+        "feature_type": null,
+        "fs_method": "generalized_fisher",
+        "fs_k": 200,
+        "fs_extra": {
+          "redundancy_weight": 0.0
+        },
+        "tune_svm": false,
+        "imbalance_strategy": null,
+        "late_fusion_members": [],
+        "concat_members": [],
+        "seed": 42
+      }
+    },
+    "p1__opensmile__generalized_fisher__100__{'redundancy_weight':_0.0}__62b48b6e41____d30412b05f": {
+      "n_runs": 1,
+      "primary_metric": {
+        "mean": 0.28718982140034777,
+        "std": 0.0
+      },
+      "val_macro_f1": {
+        "mean": 0.2789833168033907,
+        "std": 0.0
+      },
+      "val_accuracy": {
+        "mean": 0.2849462365591398,
+        "std": 0.0
+      },
+      "val_balanced_accuracy": {
+        "mean": 0.28718982140034777,
+        "std": 0.0
+      },
+      "spec": {
+        "combo_id": "p1__opensmile__generalized_fisher__100__{'redundancy_weight':_0.0}__62b48b6e41____d30412b05f",
+        "phase": 1,
+        "extractor": "opensmile",
+        "frame_duration": 3.0,
+        "dataset_name": "opensmile",
+        "parquet_file": null,
+        "data_dir": null,
+        "feature_type": null,
+        "fs_method": "generalized_fisher",
+        "fs_k": 100,
+        "fs_extra": {
+          "redundancy_weight": 0.0
+        },
+        "tune_svm": false,
+        "imbalance_strategy": null,
+        "late_fusion_members": [],
+        "concat_members": [],
+        "seed": 42
+      }
+    },
+    "p1__opensmile__generalized_fisher__200__{'redundancy_weight':_0.1}__5d86599845____3c8e02353b": {
+      "n_runs": 1,
+      "primary_metric": {
+        "mean": 0.29771613718982143,
+        "std": 0.0
+      },
+      "val_macro_f1": {
+        "mean": 0.28855621949900756,
+        "std": 0.0
+      },
+      "val_accuracy": {
+        "mean": 0.2956989247311828,
+        "std": 0.0
+      },
+      "val_balanced_accuracy": {
+        "mean": 0.29771613718982143,
+        "std": 0.0
+      },
+      "spec": {
+        "combo_id": "p1__opensmile__generalized_fisher__200__{'redundancy_weight':_0.1}__5d86599845____3c8e02353b",
+        "phase": 1,
+        "extractor": "opensmile",
+        "frame_duration": 3.0,
+        "dataset_name": "opensmile",
+        "parquet_file": null,
+        "data_dir": null,
+        "feature_type": null,
+        "fs_method": "generalized_fisher",
+        "fs_k": 200,
+        "fs_extra": {
+          "redundancy_weight": 0.1
+        },
+        "tune_svm": false,
+        "imbalance_strategy": null,
+        "late_fusion_members": [],
+        "concat_members": [],
+        "seed": 42
+      }
+    },
+    "p1__opensmile__generalized_fisher__500__{'redundancy_weight':_0.05}__ed8d47cafa___2a3e92e32a": {
+      "n_runs": 1,
+      "primary_metric": {
+        "mean": 0.28704757388967916,
+        "std": 0.0
+      },
+      "val_macro_f1": {
+        "mean": 0.27812178589398606,
+        "std": 0.0
+      },
+      "val_accuracy": {
+        "mean": 0.2849462365591398,
+        "std": 0.0
+      },
+      "val_balanced_accuracy": {
+        "mean": 0.28704757388967916,
+        "std": 0.0
+      },
+      "spec": {
+        "combo_id": "p1__opensmile__generalized_fisher__500__{'redundancy_weight':_0.05}__ed8d47cafa___2a3e92e32a",
+        "phase": 1,
+        "extractor": "opensmile",
+        "frame_duration": 3.0,
+        "dataset_name": "opensmile",
+        "parquet_file": null,
+        "data_dir": null,
+        "feature_type": null,
+        "fs_method": "generalized_fisher",
+        "fs_k": 500,
+        "fs_extra": {
+          "redundancy_weight": 0.05
+        },
+        "tune_svm": false,
+        "imbalance_strategy": null,
+        "late_fusion_members": [],
+        "concat_members": [],
+        "seed": 42
+      }
+    },
+    "p1__opensmile__filter__100__{}__48e34721d0__seed42__d5b2ed6d5c": {
+      "n_runs": 1,
+      "primary_metric": {
+        "mean": 0.28718982140034777,
+        "std": 0.0
+      },
+      "val_macro_f1": {
+        "mean": 0.2789833168033907,
+        "std": 0.0
+      },
+      "val_accuracy": {
+        "mean": 0.2849462365591398,
+        "std": 0.0
+      },
+      "val_balanced_accuracy": {
+        "mean": 0.28718982140034777,
+        "std": 0.0
+      },
+      "spec": {
+        "combo_id": "p1__opensmile__filter__100__{}__48e34721d0__seed42__d5b2ed6d5c",
+        "phase": 1,
+        "extractor": "opensmile",
+        "frame_duration": 3.0,
+        "dataset_name": "opensmile",
+        "parquet_file": null,
+        "data_dir": null,
+        "feature_type": null,
+        "fs_method": "filter",
+        "fs_k": 100,
+        "fs_extra": {},
+        "tune_svm": false,
+        "imbalance_strategy": null,
+        "late_fusion_members": [],
+        "concat_members": [],
+        "seed": 42
+      }
+    },
+    "p1__opensmile__filter__50__{}__9773acd66c__seed42__42d612d37f": {
+      "n_runs": 1,
+      "primary_metric": {
+        "mean": 0.32167694009799275,
+        "std": 0.0
+      },
+      "val_macro_f1": {
+        "mean": 0.28966250435625235,
+        "std": 0.0
+      },
+      "val_accuracy": {
+        "mean": 0.3172043010752688,
+        "std": 0.0
+      },
+      "val_balanced_accuracy": {
+        "mean": 0.32167694009799275,
+        "std": 0.0
+      },
+      "spec": {
+        "combo_id": "p1__opensmile__filter__50__{}__9773acd66c__seed42__42d612d37f",
+        "phase": 1,
+        "extractor": "opensmile",
+        "frame_duration": 3.0,
+        "dataset_name": "opensmile",
+        "parquet_file": null,
+        "data_dir": null,
+        "feature_type": null,
+        "fs_method": "filter",
+        "fs_k": 50,
+        "fs_extra": {},
+        "tune_svm": false,
+        "imbalance_strategy": null,
+        "late_fusion_members": [],
+        "concat_members": [],
+        "seed": 42
+      }
+    },
+    "p1__opensmile__generalized_fisher__50__{'redundancy_weight':_0.2}__21eede4705__s__89e2682fa8": {
+      "n_runs": 1,
+      "primary_metric": {
+        "mean": 0.298585427532796,
+        "std": 0.0
+      },
+      "val_macro_f1": {
+        "mean": 0.2865195416898203,
+        "std": 0.0
+      },
+      "val_accuracy": {
+        "mean": 0.2956989247311828,
+        "std": 0.0
+      },
+      "val_balanced_accuracy": {
+        "mean": 0.298585427532796,
+        "std": 0.0
+      },
+      "spec": {
+        "combo_id": "p1__opensmile__generalized_fisher__50__{'redundancy_weight':_0.2}__21eede4705__s__89e2682fa8",
+        "phase": 1,
+        "extractor": "opensmile",
+        "frame_duration": 3.0,
+        "dataset_name": "opensmile",
+        "parquet_file": null,
+        "data_dir": null,
+        "feature_type": null,
+        "fs_method": "generalized_fisher",
+        "fs_k": 50,
+        "fs_extra": {
+          "redundancy_weight": 0.2
+        },
+        "tune_svm": false,
+        "imbalance_strategy": null,
+        "late_fusion_members": [],
+        "concat_members": [],
+        "seed": 42
+      }
+    },
+    "p1__opensmile__none__6373__{'redundancy_weight':_0.1}__b53e8ca4ed__seed42__93f0d7bb4b": {
+      "n_runs": 1,
+      "primary_metric": {
+        "mean": 0.3548387096774194,
+        "std": 0.0
+      },
+      "val_macro_f1": {
+        "mean": 0.3529256483713749,
+        "std": 0.0
+      },
+      "val_accuracy": {
+        "mean": 0.3548387096774194,
+        "std": 0.0
+      },
+      "val_balanced_accuracy": {
+        "mean": 0.354417575470207,
+        "std": 0.0
+      },
+      "spec": {
+        "combo_id": "p1__opensmile__none__6373__{'redundancy_weight':_0.1}__b53e8ca4ed__seed42__93f0d7bb4b",
+        "phase": 1,
+        "extractor": "opensmile",
+        "frame_duration": 3.0,
+        "dataset_name": "opensmile",
+        "parquet_file": null,
+        "data_dir": null,
+        "feature_type": null,
+        "fs_method": "none",
+        "fs_k": 6373,
+        "fs_extra": {
+          "redundancy_weight": 0.1
+        },
+        "tune_svm": false,
+        "imbalance_strategy": null,
+        "late_fusion_members": [],
+        "concat_members": [],
+        "seed": 42
+      }
+    },
+    "p1__opensmile__generalized_fisher__500__{'redundancy_weight':_0.0}__95573716d4____b52986c48d": {
+      "n_runs": 1,
+      "primary_metric": {
+        "mean": 0.28718982140034777,
+        "std": 0.0
+      },
+      "val_macro_f1": {
+        "mean": 0.2789833168033907,
+        "std": 0.0
+      },
+      "val_accuracy": {
+        "mean": 0.2849462365591398,
+        "std": 0.0
+      },
+      "val_balanced_accuracy": {
+        "mean": 0.28718982140034777,
+        "std": 0.0
+      },
+      "spec": {
+        "combo_id": "p1__opensmile__generalized_fisher__500__{'redundancy_weight':_0.0}__95573716d4____b52986c48d",
+        "phase": 1,
+        "extractor": "opensmile",
+        "frame_duration": 3.0,
+        "dataset_name": "opensmile",
+        "parquet_file": null,
+        "data_dir": null,
+        "feature_type": null,
+        "fs_method": "generalized_fisher",
+        "fs_k": 500,
+        "fs_extra": {
+          "redundancy_weight": 0.0
+        },
+        "tune_svm": false,
+        "imbalance_strategy": null,
+        "late_fusion_members": [],
+        "concat_members": [],
+        "seed": 42
+      }
+    },
+    "p1__opensmile__generalized_fisher__50__{'redundancy_weight':_0.05}__4b7642c9f7____94054ce556": {
+      "n_runs": 1,
+      "primary_metric": {
+        "mean": 0.3368816184605658,
+        "std": 0.0
+      },
+      "val_macro_f1": {
+        "mean": 0.32148956840093323,
+        "std": 0.0
+      },
+      "val_accuracy": {
+        "mean": 0.3333333333333333,
+        "std": 0.0
+      },
+      "val_balanced_accuracy": {
+        "mean": 0.3368816184605658,
+        "std": 0.0
+      },
+      "spec": {
+        "combo_id": "p1__opensmile__generalized_fisher__50__{'redundancy_weight':_0.05}__4b7642c9f7____94054ce556",
+        "phase": 1,
+        "extractor": "opensmile",
+        "frame_duration": 3.0,
+        "dataset_name": "opensmile",
+        "parquet_file": null,
+        "data_dir": null,
+        "feature_type": null,
+        "fs_method": "generalized_fisher",
+        "fs_k": 50,
+        "fs_extra": {
+          "redundancy_weight": 0.05
+        },
+        "tune_svm": false,
+        "imbalance_strategy": null,
+        "late_fusion_members": [],
+        "concat_members": [],
+        "seed": 42
+      }
+    },
+    "p1__opensmile__none__6373__{}__261b9345f3__seed42__a175d5d1b2": {
+      "n_runs": 1,
+      "primary_metric": {
+        "mean": 0.3548387096774194,
+        "std": 0.0
+      },
+      "val_macro_f1": {
+        "mean": 0.3529256483713749,
+        "std": 0.0
+      },
+      "val_accuracy": {
+        "mean": 0.3548387096774194,
+        "std": 0.0
+      },
+      "val_balanced_accuracy": {
+        "mean": 0.354417575470207,
+        "std": 0.0
+      },
+      "spec": {
+        "combo_id": "p1__opensmile__none__6373__{}__261b9345f3__seed42__a175d5d1b2",
+        "phase": 1,
+        "extractor": "opensmile",
+        "frame_duration": 3.0,
+        "dataset_name": "opensmile",
+        "parquet_file": null,
+        "data_dir": null,
+        "feature_type": null,
+        "fs_method": "none",
+        "fs_k": 6373,
+        "fs_extra": {},
+        "tune_svm": false,
+        "imbalance_strategy": null,
+        "late_fusion_members": [],
+        "concat_members": [],
+        "seed": 42
+      }
+    },
+    "p1__opensmile__generalized_fisher__50__{'redundancy_weight':_0.1}__c6b847376d__s__3aa99688aa": {
+      "n_runs": 1,
+      "primary_metric": {
+        "mean": 0.3368816184605658,
+        "std": 0.0
+      },
+      "val_macro_f1": {
+        "mean": 0.32148956840093323,
+        "std": 0.0
+      },
+      "val_accuracy": {
+        "mean": 0.3333333333333333,
+        "std": 0.0
+      },
+      "val_balanced_accuracy": {
+        "mean": 0.3368816184605658,
+        "std": 0.0
+      },
+      "spec": {
+        "combo_id": "p1__opensmile__generalized_fisher__50__{'redundancy_weight':_0.1}__c6b847376d__s__3aa99688aa",
+        "phase": 1,
+        "extractor": "opensmile",
+        "frame_duration": 3.0,
+        "dataset_name": "opensmile",
+        "parquet_file": null,
+        "data_dir": null,
+        "feature_type": null,
+        "fs_method": "generalized_fisher",
+        "fs_k": 50,
+        "fs_extra": {
+          "redundancy_weight": 0.1
+        },
+        "tune_svm": false,
+        "imbalance_strategy": null,
+        "late_fusion_members": [],
+        "concat_members": [],
+        "seed": 42
+      }
+    },
+    "p1__opensmile__filter__500__{}__f9b96432d2__seed42__0f7602d86a": {
+      "n_runs": 1,
+      "primary_metric": {
+        "mean": 0.3251857120278173,
+        "std": 0.0
+      },
+      "val_macro_f1": {
+        "mean": 0.3154529550051938,
+        "std": 0.0
+      },
+      "val_accuracy": {
+        "mean": 0.3225806451612903,
+        "std": 0.0
+      },
+      "val_balanced_accuracy": {
+        "mean": 0.3251857120278173,
+        "std": 0.0
+      },
+      "spec": {
+        "combo_id": "p1__opensmile__filter__500__{}__f9b96432d2__seed42__0f7602d86a",
+        "phase": 1,
+        "extractor": "opensmile",
+        "frame_duration": 3.0,
+        "dataset_name": "opensmile",
+        "parquet_file": null,
+        "data_dir": null,
+        "feature_type": null,
+        "fs_method": "filter",
+        "fs_k": 500,
+        "fs_extra": {},
+        "tune_svm": false,
+        "imbalance_strategy": null,
+        "late_fusion_members": [],
+        "concat_members": [],
+        "seed": 42
+      }
+    },
+    "p1__opensmile__generalized_fisher__200__{'redundancy_weight':_0.2}__1d655dd363____ae784498a9": {
+      "n_runs": 1,
+      "primary_metric": {
+        "mean": 0.3183341235972815,
+        "std": 0.0
+      },
+      "val_macro_f1": {
+        "mean": 0.31718802353477277,
+        "std": 0.0
+      },
+      "val_accuracy": {
+        "mean": 0.3172043010752688,
+        "std": 0.0
+      },
+      "val_balanced_accuracy": {
+        "mean": 0.3183341235972815,
+        "std": 0.0
+      },
+      "spec": {
+        "combo_id": "p1__opensmile__generalized_fisher__200__{'redundancy_weight':_0.2}__1d655dd363____ae784498a9",
+        "phase": 1,
+        "extractor": "opensmile",
+        "frame_duration": 3.0,
+        "dataset_name": "opensmile",
+        "parquet_file": null,
+        "data_dir": null,
+        "feature_type": null,
+        "fs_method": "generalized_fisher",
+        "fs_k": 200,
+        "fs_extra": {
+          "redundancy_weight": 0.2
+        },
+        "tune_svm": false,
+        "imbalance_strategy": null,
+        "late_fusion_members": [],
+        "concat_members": [],
+        "seed": 42
+      }
+    },
+    "p1__opensmile__generalized_fisher__200__{'redundancy_weight':_0.05}__c57252be4e___9d707bde61": {
+      "n_runs": 1,
+      "primary_metric": {
+        "mean": 0.28704757388967916,
+        "std": 0.0
+      },
+      "val_macro_f1": {
+        "mean": 0.27812178589398606,
+        "std": 0.0
+      },
+      "val_accuracy": {
+        "mean": 0.2849462365591398,
+        "std": 0.0
+      },
+      "val_balanced_accuracy": {
+        "mean": 0.28704757388967916,
+        "std": 0.0
+      },
+      "spec": {
+        "combo_id": "p1__opensmile__generalized_fisher__200__{'redundancy_weight':_0.05}__c57252be4e___9d707bde61",
+        "phase": 1,
+        "extractor": "opensmile",
+        "frame_duration": 3.0,
+        "dataset_name": "opensmile",
+        "parquet_file": null,
+        "data_dir": null,
+        "feature_type": null,
+        "fs_method": "generalized_fisher",
+        "fs_k": 200,
+        "fs_extra": {
+          "redundancy_weight": 0.05
+        },
+        "tune_svm": false,
+        "imbalance_strategy": null,
+        "late_fusion_members": [],
+        "concat_members": [],
+        "seed": 42
+      }
+    },
+    "p1__opensmile__none__6373__{'redundancy_weight':_0.05}__afda094f29__seed42__b47842a1d6": {
+      "n_runs": 1,
+      "primary_metric": {
+        "mean": 0.3548387096774194,
+        "std": 0.0
+      },
+      "val_macro_f1": {
+        "mean": 0.3529256483713749,
+        "std": 0.0
+      },
+      "val_accuracy": {
+        "mean": 0.3548387096774194,
+        "std": 0.0
+      },
+      "val_balanced_accuracy": {
+        "mean": 0.354417575470207,
+        "std": 0.0
+      },
+      "spec": {
+        "combo_id": "p1__opensmile__none__6373__{'redundancy_weight':_0.05}__afda094f29__seed42__b47842a1d6",
+        "phase": 1,
+        "extractor": "opensmile",
+        "frame_duration": 3.0,
+        "dataset_name": "opensmile",
+        "parquet_file": null,
+        "data_dir": null,
+        "feature_type": null,
+        "fs_method": "none",
+        "fs_k": 6373,
+        "fs_extra": {
+          "redundancy_weight": 0.05
+        },
+        "tune_svm": false,
+        "imbalance_strategy": null,
+        "late_fusion_members": [],
+        "concat_members": [],
+        "seed": 42
+      }
+    },
+    "p1__opensmile__generalized_fisher__100__{'redundancy_weight':_0.2}__93f4a0695b____55341dd34f": {
+      "n_runs": 1,
+      "primary_metric": {
+        "mean": 0.3183341235972815,
+        "std": 0.0
+      },
+      "val_macro_f1": {
+        "mean": 0.31718802353477277,
+        "std": 0.0
+      },
+      "val_accuracy": {
+        "mean": 0.3172043010752688,
+        "std": 0.0
+      },
+      "val_balanced_accuracy": {
+        "mean": 0.3183341235972815,
+        "std": 0.0
+      },
+      "spec": {
+        "combo_id": "p1__opensmile__generalized_fisher__100__{'redundancy_weight':_0.2}__93f4a0695b____55341dd34f",
+        "phase": 1,
+        "extractor": "opensmile",
+        "frame_duration": 3.0,
+        "dataset_name": "opensmile",
+        "parquet_file": null,
+        "data_dir": null,
+        "feature_type": null,
+        "fs_method": "generalized_fisher",
+        "fs_k": 100,
+        "fs_extra": {
+          "redundancy_weight": 0.2
+        },
+        "tune_svm": false,
+        "imbalance_strategy": null,
+        "late_fusion_members": [],
+        "concat_members": [],
+        "seed": 42
+      }
+    },
+    "p1__opensmile__generalized_fisher__100__{'redundancy_weight':_0.1}__9b522a220f____9235b0a8f0": {
+      "n_runs": 1,
+      "primary_metric": {
+        "mean": 0.29771613718982143,
+        "std": 0.0
+      },
+      "val_macro_f1": {
+        "mean": 0.28855621949900756,
+        "std": 0.0
+      },
+      "val_accuracy": {
+        "mean": 0.2956989247311828,
+        "std": 0.0
+      },
+      "val_balanced_accuracy": {
+        "mean": 0.29771613718982143,
+        "std": 0.0
+      },
+      "spec": {
+        "combo_id": "p1__opensmile__generalized_fisher__100__{'redundancy_weight':_0.1}__9b522a220f____9235b0a8f0",
+        "phase": 1,
+        "extractor": "opensmile",
+        "frame_duration": 3.0,
+        "dataset_name": "opensmile",
+        "parquet_file": null,
+        "data_dir": null,
+        "feature_type": null,
+        "fs_method": "generalized_fisher",
+        "fs_k": 100,
+        "fs_extra": {
+          "redundancy_weight": 0.1
+        },
+        "tune_svm": false,
+        "imbalance_strategy": null,
+        "late_fusion_members": [],
+        "concat_members": [],
+        "seed": 42
+      }
+    },
+    "p1__opensmile__generalized_fisher__500__{'redundancy_weight':_0.2}__258e23e72a____d84d8c5b02": {
+      "n_runs": 1,
+      "primary_metric": {
+        "mean": 0.3183341235972815,
+        "std": 0.0
+      },
+      "val_macro_f1": {
+        "mean": 0.31718802353477277,
+        "std": 0.0
+      },
+      "val_accuracy": {
+        "mean": 0.3172043010752688,
+        "std": 0.0
+      },
+      "val_balanced_accuracy": {
+        "mean": 0.3183341235972815,
+        "std": 0.0
+      },
+      "spec": {
+        "combo_id": "p1__opensmile__generalized_fisher__500__{'redundancy_weight':_0.2}__258e23e72a____d84d8c5b02",
+        "phase": 1,
+        "extractor": "opensmile",
+        "frame_duration": 3.0,
+        "dataset_name": "opensmile",
+        "parquet_file": null,
+        "data_dir": null,
+        "feature_type": null,
+        "fs_method": "generalized_fisher",
+        "fs_k": 500,
+        "fs_extra": {
+          "redundancy_weight": 0.2
+        },
+        "tune_svm": false,
+        "imbalance_strategy": null,
+        "late_fusion_members": [],
+        "concat_members": [],
+        "seed": 42
+      }
+    },
+    "p1__opensmile__none__6373__{'redundancy_weight':_0.2}__57847a819e__seed42__8ab0bd0adb": {
+      "n_runs": 1,
+      "primary_metric": {
+        "mean": 0.3548387096774194,
+        "std": 0.0
+      },
+      "val_macro_f1": {
+        "mean": 0.3529256483713749,
+        "std": 0.0
+      },
+      "val_accuracy": {
+        "mean": 0.3548387096774194,
+        "std": 0.0
+      },
+      "val_balanced_accuracy": {
+        "mean": 0.354417575470207,
+        "std": 0.0
+      },
+      "spec": {
+        "combo_id": "p1__opensmile__none__6373__{'redundancy_weight':_0.2}__57847a819e__seed42__8ab0bd0adb",
+        "phase": 1,
+        "extractor": "opensmile",
+        "frame_duration": 3.0,
+        "dataset_name": "opensmile",
+        "parquet_file": null,
+        "data_dir": null,
+        "feature_type": null,
+        "fs_method": "none",
+        "fs_k": 6373,
+        "fs_extra": {
+          "redundancy_weight": 0.2
+        },
+        "tune_svm": false,
+        "imbalance_strategy": null,
+        "late_fusion_members": [],
+        "concat_members": [],
+        "seed": 42
+      }
+    },
+    "p1__opensmile__generalized_fisher__100__{'redundancy_weight':_0.05}__37d4598986___a7cef45238": {
+      "n_runs": 1,
+      "primary_metric": {
+        "mean": 0.28704757388967916,
+        "std": 0.0
+      },
+      "val_macro_f1": {
+        "mean": 0.27812178589398606,
+        "std": 0.0
+      },
+      "val_accuracy": {
+        "mean": 0.2849462365591398,
+        "std": 0.0
+      },
+      "val_balanced_accuracy": {
+        "mean": 0.28704757388967916,
+        "std": 0.0
+      },
+      "spec": {
+        "combo_id": "p1__opensmile__generalized_fisher__100__{'redundancy_weight':_0.05}__37d4598986___a7cef45238",
+        "phase": 1,
+        "extractor": "opensmile",
+        "frame_duration": 3.0,
+        "dataset_name": "opensmile",
+        "parquet_file": null,
+        "data_dir": null,
+        "feature_type": null,
+        "fs_method": "generalized_fisher",
+        "fs_k": 100,
+        "fs_extra": {
+          "redundancy_weight": 0.05
+        },
+        "tune_svm": false,
+        "imbalance_strategy": null,
+        "late_fusion_members": [],
+        "concat_members": [],
+        "seed": 42
+      }
+    },
+    "p1__opensmile__none__6373__{'redundancy_weight':_0.0}__a5dafa9406__seed42__dbe9d1a328": {
+      "n_runs": 1,
+      "primary_metric": {
+        "mean": 0.3548387096774194,
+        "std": 0.0
+      },
+      "val_macro_f1": {
+        "mean": 0.3529256483713749,
+        "std": 0.0
+      },
+      "val_accuracy": {
+        "mean": 0.3548387096774194,
+        "std": 0.0
+      },
+      "val_balanced_accuracy": {
+        "mean": 0.354417575470207,
+        "std": 0.0
+      },
+      "spec": {
+        "combo_id": "p1__opensmile__none__6373__{'redundancy_weight':_0.0}__a5dafa9406__seed42__dbe9d1a328",
+        "phase": 1,
+        "extractor": "opensmile",
+        "frame_duration": 3.0,
+        "dataset_name": "opensmile",
+        "parquet_file": null,
+        "data_dir": null,
+        "feature_type": null,
+        "fs_method": "none",
+        "fs_k": 6373,
+        "fs_extra": {
+          "redundancy_weight": 0.0
+        },
+        "tune_svm": false,
+        "imbalance_strategy": null,
+        "late_fusion_members": [],
+        "concat_members": [],
+        "seed": 42
+      }
+    },
+    "p1__opensmile__filter__200__{}__f0fac13813__seed42__1c3d08643d": {
+      "n_runs": 1,
+      "primary_metric": {
+        "mean": 0.3194879089615932,
+        "std": 0.0
+      },
+      "val_macro_f1": {
+        "mean": 0.31018261766949345,
+        "std": 0.0
+      },
+      "val_accuracy": {
+        "mean": 0.3172043010752688,
+        "std": 0.0
+      },
+      "val_balanced_accuracy": {
+        "mean": 0.3194879089615932,
+        "std": 0.0
+      },
+      "spec": {
+        "combo_id": "p1__opensmile__filter__200__{}__f0fac13813__seed42__1c3d08643d",
+        "phase": 1,
+        "extractor": "opensmile",
+        "frame_duration": 3.0,
+        "dataset_name": "opensmile",
+        "parquet_file": null,
+        "data_dir": null,
+        "feature_type": null,
+        "fs_method": "filter",
+        "fs_k": 200,
+        "fs_extra": {},
+        "tune_svm": false,
+        "imbalance_strategy": null,
+        "late_fusion_members": [],
+        "concat_members": [],
+        "seed": 42
+      }
+    },
+    "p1__opensmile__generalized_fisher__500__{'redundancy_weight':_0.1}__9738e8a6a5____11877cef80": {
+      "n_runs": 1,
+      "primary_metric": {
+        "mean": 0.29771613718982143,
+        "std": 0.0
+      },
+      "val_macro_f1": {
+        "mean": 0.28855621949900756,
+        "std": 0.0
+      },
+      "val_accuracy": {
+        "mean": 0.2956989247311828,
+        "std": 0.0
+      },
+      "val_balanced_accuracy": {
+        "mean": 0.29771613718982143,
+        "std": 0.0
+      },
+      "spec": {
+        "combo_id": "p1__opensmile__generalized_fisher__500__{'redundancy_weight':_0.1}__9738e8a6a5____11877cef80",
+        "phase": 1,
+        "extractor": "opensmile",
+        "frame_duration": 3.0,
+        "dataset_name": "opensmile",
+        "parquet_file": null,
+        "data_dir": null,
+        "feature_type": null,
+        "fs_method": "generalized_fisher",
+        "fs_k": 500,
+        "fs_extra": {
+          "redundancy_weight": 0.1
+        },
+        "tune_svm": false,
+        "imbalance_strategy": null,
+        "late_fusion_members": [],
+        "concat_members": [],
+        "seed": 42
+      }
+    },
+    "solo_cleaned_agg_gfs200": {
+      "n_runs": 1,
+      "primary_metric": {
+        "mean": 0.35294117647058826,
+        "std": 0.0
+      },
+      "val_macro_f1": {
+        "mean": 0.35256687497581835,
+        "std": 0.0
+      },
+      "val_accuracy": {
+        "mean": 0.35294117647058826,
+        "std": 0.0
+      },
+      "val_balanced_accuracy": {
+        "mean": 0.34978345280764633,
+        "std": 0.0
+      },
+      "spec": {
+        "combo_id": "solo_cleaned_agg_gfs200",
+        "phase": 1,
+        "extractor": "opensmile_cleaned_aggressive",
+        "frame_duration": 3.0,
+        "dataset_name": "opensmile",
+        "parquet_file": null,
+        "data_dir": null,
+        "feature_type": null,
+        "fs_method": "generalized_fisher",
+        "fs_k": 200,
+        "fs_extra": {},
+        "tune_svm": false,
+        "imbalance_strategy": null,
+        "late_fusion_members": [],
+        "concat_members": [],
+        "seed": 42
+      }
+    },
+    "solo_cleaned_gfs200": {
+      "n_runs": 1,
+      "primary_metric": {
+        "mean": 0.29771613718982143,
+        "std": 0.0
+      },
+      "val_macro_f1": {
+        "mean": 0.28875825362155105,
+        "std": 0.0
+      },
+      "val_accuracy": {
+        "mean": 0.2956989247311828,
+        "std": 0.0
+      },
+      "val_balanced_accuracy": {
+        "mean": 0.29771613718982143,
+        "std": 0.0
+      },
+      "spec": {
+        "combo_id": "solo_cleaned_gfs200",
+        "phase": 1,
+        "extractor": "opensmile_cleaned",
+        "frame_duration": 3.0,
+        "dataset_name": "opensmile",
+        "parquet_file": null,
+        "data_dir": null,
+        "feature_type": null,
+        "fs_method": "generalized_fisher",
+        "fs_k": 200,
+        "fs_extra": {},
+        "tune_svm": false,
+        "imbalance_strategy": null,
+        "late_fusion_members": [],
+        "concat_members": [],
+        "seed": 42
+      }
+    },
+    "solo_whisper": {
+      "n_runs": 1,
+      "primary_metric": {
+        "mean": 0.3412769180181062,
+        "std": 0.0
+      },
+      "val_macro_f1": {
+        "mean": 0.3412769180181062,
+        "std": 0.0
+      },
+      "val_accuracy": {
+        "mean": 0.3387096774193548,
+        "std": 0.0
+      },
+      "val_balanced_accuracy": {
+        "mean": 0.34023233760075866,
+        "std": 0.0
+      },
+      "spec": {
+        "combo_id": "solo_whisper",
+        "phase": 1,
+        "extractor": "whisper",
+        "frame_duration": 3.0,
+        "dataset_name": "opensmile",
+        "parquet_file": null,
+        "data_dir": null,
+        "feature_type": null,
+        "fs_method": "none",
+        "fs_k": 0,
+        "fs_extra": {},
+        "tune_svm": false,
+        "imbalance_strategy": null,
+        "late_fusion_members": [],
+        "concat_members": [],
+        "seed": 42
+      }
+    },
+    "solo_clap": {
+      "n_runs": 1,
+      "primary_metric": {
+        "mean": 0.3817204301075269,
+        "std": 0.0
+      },
+      "val_macro_f1": {
+        "mean": 0.36141549426146413,
+        "std": 0.0
+      },
+      "val_accuracy": {
+        "mean": 0.3817204301075269,
+        "std": 0.0
+      },
+      "val_balanced_accuracy": {
+        "mean": 0.3801090564248459,
+        "std": 0.0
+      },
+      "spec": {
+        "combo_id": "solo_clap",
+        "phase": 1,
+        "extractor": "clap",
+        "frame_duration": 3.0,
+        "dataset_name": "opensmile",
+        "parquet_file": null,
+        "data_dir": null,
+        "feature_type": null,
+        "fs_method": "none",
+        "fs_k": 0,
+        "fs_extra": {},
+        "tune_svm": false,
+        "imbalance_strategy": null,
+        "late_fusion_members": [],
+        "concat_members": [],
+        "seed": 42
+      }
+    },
+    "p2_tune_opensmile_none_6373": {
+      "n_runs": 1,
+      "primary_metric": {
+        "mean": 0.37059876220820814,
+        "std": 0.0
+      },
+      "val_macro_f1": {
+        "mean": 0.37059876220820814,
+        "std": 0.0
+      },
+      "val_accuracy": {
+        "mean": 0.3548387096774194,
+        "std": 0.0
+      },
+      "val_balanced_accuracy": {
+        "mean": 0.35529476845266317,
+        "std": 0.0
+      },
+      "spec": {
+        "combo_id": "p2_tune_opensmile_none_6373",
+        "phase": 2,
+        "extractor": "opensmile",
+        "frame_duration": 3.0,
+        "dataset_name": "opensmile",
+        "parquet_file": null,
+        "data_dir": null,
+        "feature_type": null,
+        "fs_method": "none",
+        "fs_k": 6373,
+        "fs_extra": {
+          "redundancy_weight": 0.1
+        },
+        "tune_svm": true,
+        "imbalance_strategy": null,
+        "late_fusion_members": [],
+        "concat_members": [],
+        "seed": 42
+      }
+    },
+    "p2_clap_smote_tune": {
+      "n_runs": 1,
+      "primary_metric": {
+        "mean": 0.39320154306080296,
+        "std": 0.0
+      },
+      "val_macro_f1": {
+        "mean": 0.39320154306080296,
+        "std": 0.0
+      },
+      "val_accuracy": {
+        "mean": 0.3924731182795699,
+        "std": 0.0
+      },
+      "val_balanced_accuracy": {
+        "mean": 0.3928481112691639,
+        "std": 0.0
+      },
+      "spec": {
+        "combo_id": "p2_clap_smote_tune",
+        "phase": 2,
+        "extractor": "clap",
+        "frame_duration": 3.0,
+        "dataset_name": "opensmile",
+        "parquet_file": null,
+        "data_dir": null,
+        "feature_type": null,
+        "fs_method": "none",
+        "fs_k": 0,
+        "fs_extra": {},
+        "tune_svm": true,
+        "imbalance_strategy": "smote",
+        "late_fusion_members": [],
+        "concat_members": [],
+        "seed": 42
+      }
+    },
+    "p2_concat_tune": {
+      "n_runs": 1,
+      "primary_metric": {
+        "mean": 0.43217458808543013,
+        "std": 0.0
+      },
+      "val_macro_f1": {
+        "mean": 0.43217458808543013,
+        "std": 0.0
+      },
+      "val_accuracy": {
+        "mean": 0.43010752688172044,
+        "std": 0.0
+      },
+      "val_balanced_accuracy": {
+        "mean": 0.43113639955745225,
+        "std": 0.0
+      },
+      "spec": {
+        "combo_id": "p2_concat_tune",
+        "phase": 2,
+        "extractor": "concat",
+        "frame_duration": 3.0,
+        "dataset_name": "opensmile",
+        "parquet_file": null,
+        "data_dir": null,
+        "feature_type": null,
+        "fs_method": "filter",
+        "fs_k": 200,
+        "fs_extra": {},
+        "tune_svm": true,
+        "imbalance_strategy": null,
+        "late_fusion_members": [],
+        "concat_members": [
+          "opensmile",
+          "whisper",
+          "clap"
+        ],
+        "seed": 42
+      }
+    },
+    "p2_late_fusion_tune": {
+      "n_runs": 0,
+      "primary_metric": {
+        "mean": 0.0,
+        "std": 0.0
+      }
+    },
+    "p2_tune_clap_none_0": {
+      "n_runs": 1,
+      "primary_metric": {
+        "mean": 0.39320154306080296,
+        "std": 0.0
+      },
+      "val_macro_f1": {
+        "mean": 0.39320154306080296,
+        "std": 0.0
+      },
+      "val_accuracy": {
+        "mean": 0.3924731182795699,
+        "std": 0.0
+      },
+      "val_balanced_accuracy": {
+        "mean": 0.3928481112691639,
+        "std": 0.0
+      },
+      "spec": {
+        "combo_id": "p2_tune_clap_none_0",
+        "phase": 2,
+        "extractor": "clap",
+        "frame_duration": 3.0,
+        "dataset_name": "opensmile",
+        "parquet_file": null,
+        "data_dir": null,
+        "feature_type": null,
+        "fs_method": "none",
+        "fs_k": 0,
+        "fs_extra": {},
+        "tune_svm": true,
+        "imbalance_strategy": null,
+        "late_fusion_members": [],
+        "concat_members": [],
+        "seed": 42
+      }
+    },
+    "p2_concat_tune_seed42": {
+      "n_runs": 1,
+      "primary_metric": {
+        "mean": 0.43217458808543013,
+        "std": 0.0
+      },
+      "val_macro_f1": {
+        "mean": 0.43217458808543013,
+        "std": 0.0
+      },
+      "val_accuracy": {
+        "mean": 0.43010752688172044,
+        "std": 0.0
+      },
+      "val_balanced_accuracy": {
+        "mean": 0.43113639955745225,
+        "std": 0.0
+      },
+      "spec": {
+        "combo_id": "p2_concat_tune_seed42",
+        "phase": 2,
+        "extractor": "concat",
+        "frame_duration": 3.0,
+        "dataset_name": "opensmile",
+        "parquet_file": null,
+        "data_dir": null,
+        "feature_type": null,
+        "fs_method": "filter",
+        "fs_k": 200,
+        "fs_extra": {},
+        "tune_svm": true,
+        "imbalance_strategy": null,
+        "late_fusion_members": [],
+        "concat_members": [
+          "opensmile",
+          "whisper",
+          "clap"
+        ],
+        "seed": 42
+      }
+    },
+    "p2_concat_tune_seed52": {
+      "n_runs": 1,
+      "primary_metric": {
+        "mean": 0.43217458808543013,
+        "std": 0.0
+      },
+      "val_macro_f1": {
+        "mean": 0.43217458808543013,
+        "std": 0.0
+      },
+      "val_accuracy": {
+        "mean": 0.43010752688172044,
+        "std": 0.0
+      },
+      "val_balanced_accuracy": {
+        "mean": 0.43113639955745225,
+        "std": 0.0
+      },
+      "spec": {
+        "combo_id": "p2_concat_tune_seed52",
+        "phase": 2,
+        "extractor": "concat",
+        "frame_duration": 3.0,
+        "dataset_name": "opensmile",
+        "parquet_file": null,
+        "data_dir": null,
+        "feature_type": null,
+        "fs_method": "filter",
+        "fs_k": 200,
+        "fs_extra": {},
+        "tune_svm": true,
+        "imbalance_strategy": null,
+        "late_fusion_members": [],
+        "concat_members": [
+          "opensmile",
+          "whisper",
+          "clap"
+        ],
+        "seed": 52
+      }
+    },
+    "p2_concat_tune_seed62": {
+      "n_runs": 1,
+      "primary_metric": {
+        "mean": 0.43217458808543013,
+        "std": 0.0
+      },
+      "val_macro_f1": {
+        "mean": 0.43217458808543013,
+        "std": 0.0
+      },
+      "val_accuracy": {
+        "mean": 0.43010752688172044,
+        "std": 0.0
+      },
+      "val_balanced_accuracy": {
+        "mean": 0.43113639955745225,
+        "std": 0.0
+      },
+      "spec": {
+        "combo_id": "p2_concat_tune_seed62",
+        "phase": 2,
+        "extractor": "concat",
+        "frame_duration": 3.0,
+        "dataset_name": "opensmile",
+        "parquet_file": null,
+        "data_dir": null,
+        "feature_type": null,
+        "fs_method": "filter",
+        "fs_k": 200,
+        "fs_extra": {},
+        "tune_svm": true,
+        "imbalance_strategy": null,
+        "late_fusion_members": [],
+        "concat_members": [
+          "opensmile",
+          "whisper",
+          "clap"
+        ],
+        "seed": 62
+      }
+    },
+    "p2_late_fusion_tune_v2": {
+      "n_runs": 1,
+      "primary_metric": {
+        "mean": 0.4309974915762515,
+        "std": 0.0
+      },
+      "val_macro_f1": {
+        "mean": 0.4309974915762515,
+        "std": 0.0
+      },
+      "val_accuracy": {
+        "mean": 0.42473118279569894,
+        "std": 0.0
+      },
+      "val_balanced_accuracy": {
+        "mean": 0.42354986565512887,
+        "std": 0.0
+      },
+      "spec": {
+        "combo_id": "p2_late_fusion_tune_v2",
+        "phase": 2,
+        "extractor": "late_fusion",
+        "frame_duration": 3.0,
+        "dataset_name": "opensmile",
+        "parquet_file": null,
+        "data_dir": null,
+        "feature_type": null,
+        "fs_method": "none",
+        "fs_k": 0,
+        "fs_extra": {},
+        "tune_svm": true,
+        "imbalance_strategy": null,
+        "late_fusion_members": [
+          "opensmile",
+          "whisper",
+          "clap"
+        ],
+        "concat_members": [],
+        "seed": 42
+      }
+    }
+  },
+  "ranked": [
+    {
+      "combo_id": "p2_concat_tune",
+      "n_runs": 1,
+      "primary_metric": {
+        "mean": 0.43217458808543013,
+        "std": 0.0
+      },
+      "val_macro_f1": {
+        "mean": 0.43217458808543013,
+        "std": 0.0
+      },
+      "val_accuracy": {
+        "mean": 0.43010752688172044,
+        "std": 0.0
+      },
+      "val_balanced_accuracy": {
+        "mean": 0.43113639955745225,
+        "std": 0.0
+      },
+      "spec": {
+        "combo_id": "p2_concat_tune",
+        "phase": 2,
+        "extractor": "concat",
+        "frame_duration": 3.0,
+        "dataset_name": "opensmile",
+        "parquet_file": null,
+        "data_dir": null,
+        "feature_type": null,
+        "fs_method": "filter",
+        "fs_k": 200,
+        "fs_extra": {},
+        "tune_svm": true,
+        "imbalance_strategy": null,
+        "late_fusion_members": [],
+        "concat_members": [
+          "opensmile",
+          "whisper",
+          "clap"
+        ],
+        "seed": 42
+      }
+    },
+    {
+      "combo_id": "p2_concat_tune_seed42",
+      "n_runs": 1,
+      "primary_metric": {
+        "mean": 0.43217458808543013,
+        "std": 0.0
+      },
+      "val_macro_f1": {
+        "mean": 0.43217458808543013,
+        "std": 0.0
+      },
+      "val_accuracy": {
+        "mean": 0.43010752688172044,
+        "std": 0.0
+      },
+      "val_balanced_accuracy": {
+        "mean": 0.43113639955745225,
+        "std": 0.0
+      },
+      "spec": {
+        "combo_id": "p2_concat_tune_seed42",
+        "phase": 2,
+        "extractor": "concat",
+        "frame_duration": 3.0,
+        "dataset_name": "opensmile",
+        "parquet_file": null,
+        "data_dir": null,
+        "feature_type": null,
+        "fs_method": "filter",
+        "fs_k": 200,
+        "fs_extra": {},
+        "tune_svm": true,
+        "imbalance_strategy": null,
+        "late_fusion_members": [],
+        "concat_members": [
+          "opensmile",
+          "whisper",
+          "clap"
+        ],
+        "seed": 42
+      }
+    },
+    {
+      "combo_id": "p2_concat_tune_seed52",
+      "n_runs": 1,
+      "primary_metric": {
+        "mean": 0.43217458808543013,
+        "std": 0.0
+      },
+      "val_macro_f1": {
+        "mean": 0.43217458808543013,
+        "std": 0.0
+      },
+      "val_accuracy": {
+        "mean": 0.43010752688172044,
+        "std": 0.0
+      },
+      "val_balanced_accuracy": {
+        "mean": 0.43113639955745225,
+        "std": 0.0
+      },
+      "spec": {
+        "combo_id": "p2_concat_tune_seed52",
+        "phase": 2,
+        "extractor": "concat",
+        "frame_duration": 3.0,
+        "dataset_name": "opensmile",
+        "parquet_file": null,
+        "data_dir": null,
+        "feature_type": null,
+        "fs_method": "filter",
+        "fs_k": 200,
+        "fs_extra": {},
+        "tune_svm": true,
+        "imbalance_strategy": null,
+        "late_fusion_members": [],
+        "concat_members": [
+          "opensmile",
+          "whisper",
+          "clap"
+        ],
+        "seed": 52
+      }
+    },
+    {
+      "combo_id": "p2_concat_tune_seed62",
+      "n_runs": 1,
+      "primary_metric": {
+        "mean": 0.43217458808543013,
+        "std": 0.0
+      },
+      "val_macro_f1": {
+        "mean": 0.43217458808543013,
+        "std": 0.0
+      },
+      "val_accuracy": {
+        "mean": 0.43010752688172044,
+        "std": 0.0
+      },
+      "val_balanced_accuracy": {
+        "mean": 0.43113639955745225,
+        "std": 0.0
+      },
+      "spec": {
+        "combo_id": "p2_concat_tune_seed62",
+        "phase": 2,
+        "extractor": "concat",
+        "frame_duration": 3.0,
+        "dataset_name": "opensmile",
+        "parquet_file": null,
+        "data_dir": null,
+        "feature_type": null,
+        "fs_method": "filter",
+        "fs_k": 200,
+        "fs_extra": {},
+        "tune_svm": true,
+        "imbalance_strategy": null,
+        "late_fusion_members": [],
+        "concat_members": [
+          "opensmile",
+          "whisper",
+          "clap"
+        ],
+        "seed": 62
+      }
+    },
+    {
+      "combo_id": "p2_late_fusion_tune_v2",
+      "n_runs": 1,
+      "primary_metric": {
+        "mean": 0.4309974915762515,
+        "std": 0.0
+      },
+      "val_macro_f1": {
+        "mean": 0.4309974915762515,
+        "std": 0.0
+      },
+      "val_accuracy": {
+        "mean": 0.42473118279569894,
+        "std": 0.0
+      },
+      "val_balanced_accuracy": {
+        "mean": 0.42354986565512887,
+        "std": 0.0
+      },
+      "spec": {
+        "combo_id": "p2_late_fusion_tune_v2",
+        "phase": 2,
+        "extractor": "late_fusion",
+        "frame_duration": 3.0,
+        "dataset_name": "opensmile",
+        "parquet_file": null,
+        "data_dir": null,
+        "feature_type": null,
+        "fs_method": "none",
+        "fs_k": 0,
+        "fs_extra": {},
+        "tune_svm": true,
+        "imbalance_strategy": null,
+        "late_fusion_members": [
+          "opensmile",
+          "whisper",
+          "clap"
+        ],
+        "concat_members": [],
+        "seed": 42
+      }
+    },
+    {
+      "combo_id": "p2_clap_smote_tune",
+      "n_runs": 1,
+      "primary_metric": {
+        "mean": 0.39320154306080296,
+        "std": 0.0
+      },
+      "val_macro_f1": {
+        "mean": 0.39320154306080296,
+        "std": 0.0
+      },
+      "val_accuracy": {
+        "mean": 0.3924731182795699,
+        "std": 0.0
+      },
+      "val_balanced_accuracy": {
+        "mean": 0.3928481112691639,
+        "std": 0.0
+      },
+      "spec": {
+        "combo_id": "p2_clap_smote_tune",
+        "phase": 2,
+        "extractor": "clap",
+        "frame_duration": 3.0,
+        "dataset_name": "opensmile",
+        "parquet_file": null,
+        "data_dir": null,
+        "feature_type": null,
+        "fs_method": "none",
+        "fs_k": 0,
+        "fs_extra": {},
+        "tune_svm": true,
+        "imbalance_strategy": "smote",
+        "late_fusion_members": [],
+        "concat_members": [],
+        "seed": 42
+      }
+    },
+    {
+      "combo_id": "p2_tune_clap_none_0",
+      "n_runs": 1,
+      "primary_metric": {
+        "mean": 0.39320154306080296,
+        "std": 0.0
+      },
+      "val_macro_f1": {
+        "mean": 0.39320154306080296,
+        "std": 0.0
+      },
+      "val_accuracy": {
+        "mean": 0.3924731182795699,
+        "std": 0.0
+      },
+      "val_balanced_accuracy": {
+        "mean": 0.3928481112691639,
+        "std": 0.0
+      },
+      "spec": {
+        "combo_id": "p2_tune_clap_none_0",
+        "phase": 2,
+        "extractor": "clap",
+        "frame_duration": 3.0,
+        "dataset_name": "opensmile",
+        "parquet_file": null,
+        "data_dir": null,
+        "feature_type": null,
+        "fs_method": "none",
+        "fs_k": 0,
+        "fs_extra": {},
+        "tune_svm": true,
+        "imbalance_strategy": null,
+        "late_fusion_members": [],
+        "concat_members": [],
+        "seed": 42
+      }
+    },
+    {
+      "combo_id": "solo_clap",
+      "n_runs": 1,
+      "primary_metric": {
+        "mean": 0.3817204301075269,
+        "std": 0.0
+      },
+      "val_macro_f1": {
+        "mean": 0.36141549426146413,
+        "std": 0.0
+      },
+      "val_accuracy": {
+        "mean": 0.3817204301075269,
+        "std": 0.0
+      },
+      "val_balanced_accuracy": {
+        "mean": 0.3801090564248459,
+        "std": 0.0
+      },
+      "spec": {
+        "combo_id": "solo_clap",
+        "phase": 1,
+        "extractor": "clap",
+        "frame_duration": 3.0,
+        "dataset_name": "opensmile",
+        "parquet_file": null,
+        "data_dir": null,
+        "feature_type": null,
+        "fs_method": "none",
+        "fs_k": 0,
+        "fs_extra": {},
+        "tune_svm": false,
+        "imbalance_strategy": null,
+        "late_fusion_members": [],
+        "concat_members": [],
+        "seed": 42
+      }
+    },
+    {
+      "combo_id": "p2_tune_opensmile_none_6373",
+      "n_runs": 1,
+      "primary_metric": {
+        "mean": 0.37059876220820814,
+        "std": 0.0
+      },
+      "val_macro_f1": {
+        "mean": 0.37059876220820814,
+        "std": 0.0
+      },
+      "val_accuracy": {
+        "mean": 0.3548387096774194,
+        "std": 0.0
+      },
+      "val_balanced_accuracy": {
+        "mean": 0.35529476845266317,
+        "std": 0.0
+      },
+      "spec": {
+        "combo_id": "p2_tune_opensmile_none_6373",
+        "phase": 2,
+        "extractor": "opensmile",
+        "frame_duration": 3.0,
+        "dataset_name": "opensmile",
+        "parquet_file": null,
+        "data_dir": null,
+        "feature_type": null,
+        "fs_method": "none",
+        "fs_k": 6373,
+        "fs_extra": {
+          "redundancy_weight": 0.1
+        },
+        "tune_svm": true,
+        "imbalance_strategy": null,
+        "late_fusion_members": [],
+        "concat_members": [],
+        "seed": 42
+      }
+    },
+    {
+      "combo_id": "p1__opensmile__none__6373__{'redundancy_weight':_0.1}__b53e8ca4ed__seed42__93f0d7bb4b",
+      "n_runs": 1,
+      "primary_metric": {
+        "mean": 0.3548387096774194,
+        "std": 0.0
+      },
+      "val_macro_f1": {
+        "mean": 0.3529256483713749,
+        "std": 0.0
+      },
+      "val_accuracy": {
+        "mean": 0.3548387096774194,
+        "std": 0.0
+      },
+      "val_balanced_accuracy": {
+        "mean": 0.354417575470207,
+        "std": 0.0
+      },
+      "spec": {
+        "combo_id": "p1__opensmile__none__6373__{'redundancy_weight':_0.1}__b53e8ca4ed__seed42__93f0d7bb4b",
+        "phase": 1,
+        "extractor": "opensmile",
+        "frame_duration": 3.0,
+        "dataset_name": "opensmile",
+        "parquet_file": null,
+        "data_dir": null,
+        "feature_type": null,
+        "fs_method": "none",
+        "fs_k": 6373,
+        "fs_extra": {
+          "redundancy_weight": 0.1
+        },
+        "tune_svm": false,
+        "imbalance_strategy": null,
+        "late_fusion_members": [],
+        "concat_members": [],
+        "seed": 42
+      }
+    },
+    {
+      "combo_id": "p1__opensmile__none__6373__{}__261b9345f3__seed42__a175d5d1b2",
+      "n_runs": 1,
+      "primary_metric": {
+        "mean": 0.3548387096774194,
+        "std": 0.0
+      },
+      "val_macro_f1": {
+        "mean": 0.3529256483713749,
+        "std": 0.0
+      },
+      "val_accuracy": {
+        "mean": 0.3548387096774194,
+        "std": 0.0
+      },
+      "val_balanced_accuracy": {
+        "mean": 0.354417575470207,
+        "std": 0.0
+      },
+      "spec": {
+        "combo_id": "p1__opensmile__none__6373__{}__261b9345f3__seed42__a175d5d1b2",
+        "phase": 1,
+        "extractor": "opensmile",
+        "frame_duration": 3.0,
+        "dataset_name": "opensmile",
+        "parquet_file": null,
+        "data_dir": null,
+        "feature_type": null,
+        "fs_method": "none",
+        "fs_k": 6373,
+        "fs_extra": {},
+        "tune_svm": false,
+        "imbalance_strategy": null,
+        "late_fusion_members": [],
+        "concat_members": [],
+        "seed": 42
+      }
+    },
+    {
+      "combo_id": "p1__opensmile__none__6373__{'redundancy_weight':_0.05}__afda094f29__seed42__b47842a1d6",
+      "n_runs": 1,
+      "primary_metric": {
+        "mean": 0.3548387096774194,
+        "std": 0.0
+      },
+      "val_macro_f1": {
+        "mean": 0.3529256483713749,
+        "std": 0.0
+      },
+      "val_accuracy": {
+        "mean": 0.3548387096774194,
+        "std": 0.0
+      },
+      "val_balanced_accuracy": {
+        "mean": 0.354417575470207,
+        "std": 0.0
+      },
+      "spec": {
+        "combo_id": "p1__opensmile__none__6373__{'redundancy_weight':_0.05}__afda094f29__seed42__b47842a1d6",
+        "phase": 1,
+        "extractor": "opensmile",
+        "frame_duration": 3.0,
+        "dataset_name": "opensmile",
+        "parquet_file": null,
+        "data_dir": null,
+        "feature_type": null,
+        "fs_method": "none",
+        "fs_k": 6373,
+        "fs_extra": {
+          "redundancy_weight": 0.05
+        },
+        "tune_svm": false,
+        "imbalance_strategy": null,
+        "late_fusion_members": [],
+        "concat_members": [],
+        "seed": 42
+      }
+    },
+    {
+      "combo_id": "p1__opensmile__none__6373__{'redundancy_weight':_0.2}__57847a819e__seed42__8ab0bd0adb",
+      "n_runs": 1,
+      "primary_metric": {
+        "mean": 0.3548387096774194,
+        "std": 0.0
+      },
+      "val_macro_f1": {
+        "mean": 0.3529256483713749,
+        "std": 0.0
+      },
+      "val_accuracy": {
+        "mean": 0.3548387096774194,
+        "std": 0.0
+      },
+      "val_balanced_accuracy": {
+        "mean": 0.354417575470207,
+        "std": 0.0
+      },
+      "spec": {
+        "combo_id": "p1__opensmile__none__6373__{'redundancy_weight':_0.2}__57847a819e__seed42__8ab0bd0adb",
+        "phase": 1,
+        "extractor": "opensmile",
+        "frame_duration": 3.0,
+        "dataset_name": "opensmile",
+        "parquet_file": null,
+        "data_dir": null,
+        "feature_type": null,
+        "fs_method": "none",
+        "fs_k": 6373,
+        "fs_extra": {
+          "redundancy_weight": 0.2
+        },
+        "tune_svm": false,
+        "imbalance_strategy": null,
+        "late_fusion_members": [],
+        "concat_members": [],
+        "seed": 42
+      }
+    },
+    {
+      "combo_id": "p1__opensmile__none__6373__{'redundancy_weight':_0.0}__a5dafa9406__seed42__dbe9d1a328",
+      "n_runs": 1,
+      "primary_metric": {
+        "mean": 0.3548387096774194,
+        "std": 0.0
+      },
+      "val_macro_f1": {
+        "mean": 0.3529256483713749,
+        "std": 0.0
+      },
+      "val_accuracy": {
+        "mean": 0.3548387096774194,
+        "std": 0.0
+      },
+      "val_balanced_accuracy": {
+        "mean": 0.354417575470207,
+        "std": 0.0
+      },
+      "spec": {
+        "combo_id": "p1__opensmile__none__6373__{'redundancy_weight':_0.0}__a5dafa9406__seed42__dbe9d1a328",
+        "phase": 1,
+        "extractor": "opensmile",
+        "frame_duration": 3.0,
+        "dataset_name": "opensmile",
+        "parquet_file": null,
+        "data_dir": null,
+        "feature_type": null,
+        "fs_method": "none",
+        "fs_k": 6373,
+        "fs_extra": {
+          "redundancy_weight": 0.0
+        },
+        "tune_svm": false,
+        "imbalance_strategy": null,
+        "late_fusion_members": [],
+        "concat_members": [],
+        "seed": 42
+      }
+    },
+    {
+      "combo_id": "solo_cleaned_agg_gfs200",
+      "n_runs": 1,
+      "primary_metric": {
+        "mean": 0.35294117647058826,
+        "std": 0.0
+      },
+      "val_macro_f1": {
+        "mean": 0.35256687497581835,
+        "std": 0.0
+      },
+      "val_accuracy": {
+        "mean": 0.35294117647058826,
+        "std": 0.0
+      },
+      "val_balanced_accuracy": {
+        "mean": 0.34978345280764633,
+        "std": 0.0
+      },
+      "spec": {
+        "combo_id": "solo_cleaned_agg_gfs200",
+        "phase": 1,
+        "extractor": "opensmile_cleaned_aggressive",
+        "frame_duration": 3.0,
+        "dataset_name": "opensmile",
+        "parquet_file": null,
+        "data_dir": null,
+        "feature_type": null,
+        "fs_method": "generalized_fisher",
+        "fs_k": 200,
+        "fs_extra": {},
+        "tune_svm": false,
+        "imbalance_strategy": null,
+        "late_fusion_members": [],
+        "concat_members": [],
+        "seed": 42
+      }
+    },
+    {
+      "combo_id": "solo_whisper",
+      "n_runs": 1,
+      "primary_metric": {
+        "mean": 0.3412769180181062,
+        "std": 0.0
+      },
+      "val_macro_f1": {
+        "mean": 0.3412769180181062,
+        "std": 0.0
+      },
+      "val_accuracy": {
+        "mean": 0.3387096774193548,
+        "std": 0.0
+      },
+      "val_balanced_accuracy": {
+        "mean": 0.34023233760075866,
+        "std": 0.0
+      },
+      "spec": {
+        "combo_id": "solo_whisper",
+        "phase": 1,
+        "extractor": "whisper",
+        "frame_duration": 3.0,
+        "dataset_name": "opensmile",
+        "parquet_file": null,
+        "data_dir": null,
+        "feature_type": null,
+        "fs_method": "none",
+        "fs_k": 0,
+        "fs_extra": {},
+        "tune_svm": false,
+        "imbalance_strategy": null,
+        "late_fusion_members": [],
+        "concat_members": [],
+        "seed": 42
+      }
+    },
+    {
+      "combo_id": "p1__opensmile__generalized_fisher__50__{'redundancy_weight':_0.05}__4b7642c9f7____94054ce556",
+      "n_runs": 1,
+      "primary_metric": {
+        "mean": 0.3368816184605658,
+        "std": 0.0
+      },
+      "val_macro_f1": {
+        "mean": 0.32148956840093323,
+        "std": 0.0
+      },
+      "val_accuracy": {
+        "mean": 0.3333333333333333,
+        "std": 0.0
+      },
+      "val_balanced_accuracy": {
+        "mean": 0.3368816184605658,
+        "std": 0.0
+      },
+      "spec": {
+        "combo_id": "p1__opensmile__generalized_fisher__50__{'redundancy_weight':_0.05}__4b7642c9f7____94054ce556",
+        "phase": 1,
+        "extractor": "opensmile",
+        "frame_duration": 3.0,
+        "dataset_name": "opensmile",
+        "parquet_file": null,
+        "data_dir": null,
+        "feature_type": null,
+        "fs_method": "generalized_fisher",
+        "fs_k": 50,
+        "fs_extra": {
+          "redundancy_weight": 0.05
+        },
+        "tune_svm": false,
+        "imbalance_strategy": null,
+        "late_fusion_members": [],
+        "concat_members": [],
+        "seed": 42
+      }
+    },
+    {
+      "combo_id": "p1__opensmile__generalized_fisher__50__{'redundancy_weight':_0.1}__c6b847376d__s__3aa99688aa",
+      "n_runs": 1,
+      "primary_metric": {
+        "mean": 0.3368816184605658,
+        "std": 0.0
+      },
+      "val_macro_f1": {
+        "mean": 0.32148956840093323,
+        "std": 0.0
+      },
+      "val_accuracy": {
+        "mean": 0.3333333333333333,
+        "std": 0.0
+      },
+      "val_balanced_accuracy": {
+        "mean": 0.3368816184605658,
+        "std": 0.0
+      },
+      "spec": {
+        "combo_id": "p1__opensmile__generalized_fisher__50__{'redundancy_weight':_0.1}__c6b847376d__s__3aa99688aa",
+        "phase": 1,
+        "extractor": "opensmile",
+        "frame_duration": 3.0,
+        "dataset_name": "opensmile",
+        "parquet_file": null,
+        "data_dir": null,
+        "feature_type": null,
+        "fs_method": "generalized_fisher",
+        "fs_k": 50,
+        "fs_extra": {
+          "redundancy_weight": 0.1
+        },
+        "tune_svm": false,
+        "imbalance_strategy": null,
+        "late_fusion_members": [],
+        "concat_members": [],
+        "seed": 42
+      }
+    },
+    {
+      "combo_id": "p1__opensmile__filter__500__{}__f9b96432d2__seed42__0f7602d86a",
+      "n_runs": 1,
+      "primary_metric": {
+        "mean": 0.3251857120278173,
+        "std": 0.0
+      },
+      "val_macro_f1": {
+        "mean": 0.3154529550051938,
+        "std": 0.0
+      },
+      "val_accuracy": {
+        "mean": 0.3225806451612903,
+        "std": 0.0
+      },
+      "val_balanced_accuracy": {
+        "mean": 0.3251857120278173,
+        "std": 0.0
+      },
+      "spec": {
+        "combo_id": "p1__opensmile__filter__500__{}__f9b96432d2__seed42__0f7602d86a",
+        "phase": 1,
+        "extractor": "opensmile",
+        "frame_duration": 3.0,
+        "dataset_name": "opensmile",
+        "parquet_file": null,
+        "data_dir": null,
+        "feature_type": null,
+        "fs_method": "filter",
+        "fs_k": 500,
+        "fs_extra": {},
+        "tune_svm": false,
+        "imbalance_strategy": null,
+        "late_fusion_members": [],
+        "concat_members": [],
+        "seed": 42
+      }
+    },
+    {
+      "combo_id": "p1__opensmile__generalized_fisher__50__{'redundancy_weight':_0.0}__f2c8bc39c0__s__3611ccf165",
+      "n_runs": 1,
+      "primary_metric": {
+        "mean": 0.32167694009799275,
+        "std": 0.0
+      },
+      "val_macro_f1": {
+        "mean": 0.28966250435625235,
+        "std": 0.0
+      },
+      "val_accuracy": {
+        "mean": 0.3172043010752688,
+        "std": 0.0
+      },
+      "val_balanced_accuracy": {
+        "mean": 0.32167694009799275,
+        "std": 0.0
+      },
+      "spec": {
+        "combo_id": "p1__opensmile__generalized_fisher__50__{'redundancy_weight':_0.0}__f2c8bc39c0__s__3611ccf165",
+        "phase": 1,
+        "extractor": "opensmile",
+        "frame_duration": 3.0,
+        "dataset_name": "opensmile",
+        "parquet_file": null,
+        "data_dir": null,
+        "feature_type": null,
+        "fs_method": "generalized_fisher",
+        "fs_k": 50,
+        "fs_extra": {
+          "redundancy_weight": 0.0
+        },
+        "tune_svm": false,
+        "imbalance_strategy": null,
+        "late_fusion_members": [],
+        "concat_members": [],
+        "seed": 42
+      }
+    },
+    {
+      "combo_id": "p1__opensmile__filter__50__{}__9773acd66c__seed42__42d612d37f",
+      "n_runs": 1,
+      "primary_metric": {
+        "mean": 0.32167694009799275,
+        "std": 0.0
+      },
+      "val_macro_f1": {
+        "mean": 0.28966250435625235,
+        "std": 0.0
+      },
+      "val_accuracy": {
+        "mean": 0.3172043010752688,
+        "std": 0.0
+      },
+      "val_balanced_accuracy": {
+        "mean": 0.32167694009799275,
+        "std": 0.0
+      },
+      "spec": {
+        "combo_id": "p1__opensmile__filter__50__{}__9773acd66c__seed42__42d612d37f",
+        "phase": 1,
+        "extractor": "opensmile",
+        "frame_duration": 3.0,
+        "dataset_name": "opensmile",
+        "parquet_file": null,
+        "data_dir": null,
+        "feature_type": null,
+        "fs_method": "filter",
+        "fs_k": 50,
+        "fs_extra": {},
+        "tune_svm": false,
+        "imbalance_strategy": null,
+        "late_fusion_members": [],
+        "concat_members": [],
+        "seed": 42
+      }
+    },
+    {
+      "combo_id": "p1__opensmile__filter__200__{}__f0fac13813__seed42__1c3d08643d",
+      "n_runs": 1,
+      "primary_metric": {
+        "mean": 0.3194879089615932,
+        "std": 0.0
+      },
+      "val_macro_f1": {
+        "mean": 0.31018261766949345,
+        "std": 0.0
+      },
+      "val_accuracy": {
+        "mean": 0.3172043010752688,
+        "std": 0.0
+      },
+      "val_balanced_accuracy": {
+        "mean": 0.3194879089615932,
+        "std": 0.0
+      },
+      "spec": {
+        "combo_id": "p1__opensmile__filter__200__{}__f0fac13813__seed42__1c3d08643d",
+        "phase": 1,
+        "extractor": "opensmile",
+        "frame_duration": 3.0,
+        "dataset_name": "opensmile",
+        "parquet_file": null,
+        "data_dir": null,
+        "feature_type": null,
+        "fs_method": "filter",
+        "fs_k": 200,
+        "fs_extra": {},
+        "tune_svm": false,
+        "imbalance_strategy": null,
+        "late_fusion_members": [],
+        "concat_members": [],
+        "seed": 42
+      }
+    },
+    {
+      "combo_id": "p1__opensmile__generalized_fisher__200__{'redundancy_weight':_0.2}__1d655dd363____ae784498a9",
+      "n_runs": 1,
+      "primary_metric": {
+        "mean": 0.3183341235972815,
+        "std": 0.0
+      },
+      "val_macro_f1": {
+        "mean": 0.31718802353477277,
+        "std": 0.0
+      },
+      "val_accuracy": {
+        "mean": 0.3172043010752688,
+        "std": 0.0
+      },
+      "val_balanced_accuracy": {
+        "mean": 0.3183341235972815,
+        "std": 0.0
+      },
+      "spec": {
+        "combo_id": "p1__opensmile__generalized_fisher__200__{'redundancy_weight':_0.2}__1d655dd363____ae784498a9",
+        "phase": 1,
+        "extractor": "opensmile",
+        "frame_duration": 3.0,
+        "dataset_name": "opensmile",
+        "parquet_file": null,
+        "data_dir": null,
+        "feature_type": null,
+        "fs_method": "generalized_fisher",
+        "fs_k": 200,
+        "fs_extra": {
+          "redundancy_weight": 0.2
+        },
+        "tune_svm": false,
+        "imbalance_strategy": null,
+        "late_fusion_members": [],
+        "concat_members": [],
+        "seed": 42
+      }
+    },
+    {
+      "combo_id": "p1__opensmile__generalized_fisher__100__{'redundancy_weight':_0.2}__93f4a0695b____55341dd34f",
+      "n_runs": 1,
+      "primary_metric": {
+        "mean": 0.3183341235972815,
+        "std": 0.0
+      },
+      "val_macro_f1": {
+        "mean": 0.31718802353477277,
+        "std": 0.0
+      },
+      "val_accuracy": {
+        "mean": 0.3172043010752688,
+        "std": 0.0
+      },
+      "val_balanced_accuracy": {
+        "mean": 0.3183341235972815,
+        "std": 0.0
+      },
+      "spec": {
+        "combo_id": "p1__opensmile__generalized_fisher__100__{'redundancy_weight':_0.2}__93f4a0695b____55341dd34f",
+        "phase": 1,
+        "extractor": "opensmile",
+        "frame_duration": 3.0,
+        "dataset_name": "opensmile",
+        "parquet_file": null,
+        "data_dir": null,
+        "feature_type": null,
+        "fs_method": "generalized_fisher",
+        "fs_k": 100,
+        "fs_extra": {
+          "redundancy_weight": 0.2
+        },
+        "tune_svm": false,
+        "imbalance_strategy": null,
+        "late_fusion_members": [],
+        "concat_members": [],
+        "seed": 42
+      }
+    },
+    {
+      "combo_id": "p1__opensmile__generalized_fisher__500__{'redundancy_weight':_0.2}__258e23e72a____d84d8c5b02",
+      "n_runs": 1,
+      "primary_metric": {
+        "mean": 0.3183341235972815,
+        "std": 0.0
+      },
+      "val_macro_f1": {
+        "mean": 0.31718802353477277,
+        "std": 0.0
+      },
+      "val_accuracy": {
+        "mean": 0.3172043010752688,
+        "std": 0.0
+      },
+      "val_balanced_accuracy": {
+        "mean": 0.3183341235972815,
+        "std": 0.0
+      },
+      "spec": {
+        "combo_id": "p1__opensmile__generalized_fisher__500__{'redundancy_weight':_0.2}__258e23e72a____d84d8c5b02",
+        "phase": 1,
+        "extractor": "opensmile",
+        "frame_duration": 3.0,
+        "dataset_name": "opensmile",
+        "parquet_file": null,
+        "data_dir": null,
+        "feature_type": null,
+        "fs_method": "generalized_fisher",
+        "fs_k": 500,
+        "fs_extra": {
+          "redundancy_weight": 0.2
+        },
+        "tune_svm": false,
+        "imbalance_strategy": null,
+        "late_fusion_members": [],
+        "concat_members": [],
+        "seed": 42
+      }
+    },
+    {
+      "combo_id": "p1__opensmile__generalized_fisher__50__{'redundancy_weight':_0.2}__21eede4705__s__89e2682fa8",
+      "n_runs": 1,
+      "primary_metric": {
+        "mean": 0.298585427532796,
+        "std": 0.0
+      },
+      "val_macro_f1": {
+        "mean": 0.2865195416898203,
+        "std": 0.0
+      },
+      "val_accuracy": {
+        "mean": 0.2956989247311828,
+        "std": 0.0
+      },
+      "val_balanced_accuracy": {
+        "mean": 0.298585427532796,
+        "std": 0.0
+      },
+      "spec": {
+        "combo_id": "p1__opensmile__generalized_fisher__50__{'redundancy_weight':_0.2}__21eede4705__s__89e2682fa8",
+        "phase": 1,
+        "extractor": "opensmile",
+        "frame_duration": 3.0,
+        "dataset_name": "opensmile",
+        "parquet_file": null,
+        "data_dir": null,
+        "feature_type": null,
+        "fs_method": "generalized_fisher",
+        "fs_k": 50,
+        "fs_extra": {
+          "redundancy_weight": 0.2
+        },
+        "tune_svm": false,
+        "imbalance_strategy": null,
+        "late_fusion_members": [],
+        "concat_members": [],
+        "seed": 42
+      }
+    },
+    {
+      "combo_id": "p1__opensmile__generalized_fisher__200__{'redundancy_weight':_0.1}__5d86599845____3c8e02353b",
+      "n_runs": 1,
+      "primary_metric": {
+        "mean": 0.29771613718982143,
+        "std": 0.0
+      },
+      "val_macro_f1": {
+        "mean": 0.28855621949900756,
+        "std": 0.0
+      },
+      "val_accuracy": {
+        "mean": 0.2956989247311828,
+        "std": 0.0
+      },
+      "val_balanced_accuracy": {
+        "mean": 0.29771613718982143,
+        "std": 0.0
+      },
+      "spec": {
+        "combo_id": "p1__opensmile__generalized_fisher__200__{'redundancy_weight':_0.1}__5d86599845____3c8e02353b",
+        "phase": 1,
+        "extractor": "opensmile",
+        "frame_duration": 3.0,
+        "dataset_name": "opensmile",
+        "parquet_file": null,
+        "data_dir": null,
+        "feature_type": null,
+        "fs_method": "generalized_fisher",
+        "fs_k": 200,
+        "fs_extra": {
+          "redundancy_weight": 0.1
+        },
+        "tune_svm": false,
+        "imbalance_strategy": null,
+        "late_fusion_members": [],
+        "concat_members": [],
+        "seed": 42
+      }
+    },
+    {
+      "combo_id": "p1__opensmile__generalized_fisher__100__{'redundancy_weight':_0.1}__9b522a220f____9235b0a8f0",
+      "n_runs": 1,
+      "primary_metric": {
+        "mean": 0.29771613718982143,
+        "std": 0.0
+      },
+      "val_macro_f1": {
+        "mean": 0.28855621949900756,
+        "std": 0.0
+      },
+      "val_accuracy": {
+        "mean": 0.2956989247311828,
+        "std": 0.0
+      },
+      "val_balanced_accuracy": {
+        "mean": 0.29771613718982143,
+        "std": 0.0
+      },
+      "spec": {
+        "combo_id": "p1__opensmile__generalized_fisher__100__{'redundancy_weight':_0.1}__9b522a220f____9235b0a8f0",
+        "phase": 1,
+        "extractor": "opensmile",
+        "frame_duration": 3.0,
+        "dataset_name": "opensmile",
+        "parquet_file": null,
+        "data_dir": null,
+        "feature_type": null,
+        "fs_method": "generalized_fisher",
+        "fs_k": 100,
+        "fs_extra": {
+          "redundancy_weight": 0.1
+        },
+        "tune_svm": false,
+        "imbalance_strategy": null,
+        "late_fusion_members": [],
+        "concat_members": [],
+        "seed": 42
+      }
+    },
+    {
+      "combo_id": "p1__opensmile__generalized_fisher__500__{'redundancy_weight':_0.1}__9738e8a6a5____11877cef80",
+      "n_runs": 1,
+      "primary_metric": {
+        "mean": 0.29771613718982143,
+        "std": 0.0
+      },
+      "val_macro_f1": {
+        "mean": 0.28855621949900756,
+        "std": 0.0
+      },
+      "val_accuracy": {
+        "mean": 0.2956989247311828,
+        "std": 0.0
+      },
+      "val_balanced_accuracy": {
+        "mean": 0.29771613718982143,
+        "std": 0.0
+      },
+      "spec": {
+        "combo_id": "p1__opensmile__generalized_fisher__500__{'redundancy_weight':_0.1}__9738e8a6a5____11877cef80",
+        "phase": 1,
+        "extractor": "opensmile",
+        "frame_duration": 3.0,
+        "dataset_name": "opensmile",
+        "parquet_file": null,
+        "data_dir": null,
+        "feature_type": null,
+        "fs_method": "generalized_fisher",
+        "fs_k": 500,
+        "fs_extra": {
+          "redundancy_weight": 0.1
+        },
+        "tune_svm": false,
+        "imbalance_strategy": null,
+        "late_fusion_members": [],
+        "concat_members": [],
+        "seed": 42
+      }
+    },
+    {
+      "combo_id": "solo_cleaned_gfs200",
+      "n_runs": 1,
+      "primary_metric": {
+        "mean": 0.29771613718982143,
+        "std": 0.0
+      },
+      "val_macro_f1": {
+        "mean": 0.28875825362155105,
+        "std": 0.0
+      },
+      "val_accuracy": {
+        "mean": 0.2956989247311828,
+        "std": 0.0
+      },
+      "val_balanced_accuracy": {
+        "mean": 0.29771613718982143,
+        "std": 0.0
+      },
+      "spec": {
+        "combo_id": "solo_cleaned_gfs200",
+        "phase": 1,
+        "extractor": "opensmile_cleaned",
+        "frame_duration": 3.0,
+        "dataset_name": "opensmile",
+        "parquet_file": null,
+        "data_dir": null,
+        "feature_type": null,
+        "fs_method": "generalized_fisher",
+        "fs_k": 200,
+        "fs_extra": {},
+        "tune_svm": false,
+        "imbalance_strategy": null,
+        "late_fusion_members": [],
+        "concat_members": [],
+        "seed": 42
+      }
+    },
+    {
+      "combo_id": "p1__opensmile__generalized_fisher__200__{'redundancy_weight':_0.0}__1badc834c4____b525ce3ba2",
+      "n_runs": 1,
+      "primary_metric": {
+        "mean": 0.28718982140034777,
+        "std": 0.0
+      },
+      "val_macro_f1": {
+        "mean": 0.2789833168033907,
+        "std": 0.0
+      },
+      "val_accuracy": {
+        "mean": 0.2849462365591398,
+        "std": 0.0
+      },
+      "val_balanced_accuracy": {
+        "mean": 0.28718982140034777,
+        "std": 0.0
+      },
+      "spec": {
+        "combo_id": "p1__opensmile__generalized_fisher__200__{'redundancy_weight':_0.0}__1badc834c4____b525ce3ba2",
+        "phase": 1,
+        "extractor": "opensmile",
+        "frame_duration": 3.0,
+        "dataset_name": "opensmile",
+        "parquet_file": null,
+        "data_dir": null,
+        "feature_type": null,
+        "fs_method": "generalized_fisher",
+        "fs_k": 200,
+        "fs_extra": {
+          "redundancy_weight": 0.0
+        },
+        "tune_svm": false,
+        "imbalance_strategy": null,
+        "late_fusion_members": [],
+        "concat_members": [],
+        "seed": 42
+      }
+    },
+    {
+      "combo_id": "p1__opensmile__generalized_fisher__100__{'redundancy_weight':_0.0}__62b48b6e41____d30412b05f",
+      "n_runs": 1,
+      "primary_metric": {
+        "mean": 0.28718982140034777,
+        "std": 0.0
+      },
+      "val_macro_f1": {
+        "mean": 0.2789833168033907,
+        "std": 0.0
+      },
+      "val_accuracy": {
+        "mean": 0.2849462365591398,
+        "std": 0.0
+      },
+      "val_balanced_accuracy": {
+        "mean": 0.28718982140034777,
+        "std": 0.0
+      },
+      "spec": {
+        "combo_id": "p1__opensmile__generalized_fisher__100__{'redundancy_weight':_0.0}__62b48b6e41____d30412b05f",
+        "phase": 1,
+        "extractor": "opensmile",
+        "frame_duration": 3.0,
+        "dataset_name": "opensmile",
+        "parquet_file": null,
+        "data_dir": null,
+        "feature_type": null,
+        "fs_method": "generalized_fisher",
+        "fs_k": 100,
+        "fs_extra": {
+          "redundancy_weight": 0.0
+        },
+        "tune_svm": false,
+        "imbalance_strategy": null,
+        "late_fusion_members": [],
+        "concat_members": [],
+        "seed": 42
+      }
+    },
+    {
+      "combo_id": "p1__opensmile__filter__100__{}__48e34721d0__seed42__d5b2ed6d5c",
+      "n_runs": 1,
+      "primary_metric": {
+        "mean": 0.28718982140034777,
+        "std": 0.0
+      },
+      "val_macro_f1": {
+        "mean": 0.2789833168033907,
+        "std": 0.0
+      },
+      "val_accuracy": {
+        "mean": 0.2849462365591398,
+        "std": 0.0
+      },
+      "val_balanced_accuracy": {
+        "mean": 0.28718982140034777,
+        "std": 0.0
+      },
+      "spec": {
+        "combo_id": "p1__opensmile__filter__100__{}__48e34721d0__seed42__d5b2ed6d5c",
+        "phase": 1,
+        "extractor": "opensmile",
+        "frame_duration": 3.0,
+        "dataset_name": "opensmile",
+        "parquet_file": null,
+        "data_dir": null,
+        "feature_type": null,
+        "fs_method": "filter",
+        "fs_k": 100,
+        "fs_extra": {},
+        "tune_svm": false,
+        "imbalance_strategy": null,
+        "late_fusion_members": [],
+        "concat_members": [],
+        "seed": 42
+      }
+    },
+    {
+      "combo_id": "p1__opensmile__generalized_fisher__500__{'redundancy_weight':_0.0}__95573716d4____b52986c48d",
+      "n_runs": 1,
+      "primary_metric": {
+        "mean": 0.28718982140034777,
+        "std": 0.0
+      },
+      "val_macro_f1": {
+        "mean": 0.2789833168033907,
+        "std": 0.0
+      },
+      "val_accuracy": {
+        "mean": 0.2849462365591398,
+        "std": 0.0
+      },
+      "val_balanced_accuracy": {
+        "mean": 0.28718982140034777,
+        "std": 0.0
+      },
+      "spec": {
+        "combo_id": "p1__opensmile__generalized_fisher__500__{'redundancy_weight':_0.0}__95573716d4____b52986c48d",
+        "phase": 1,
+        "extractor": "opensmile",
+        "frame_duration": 3.0,
+        "dataset_name": "opensmile",
+        "parquet_file": null,
+        "data_dir": null,
+        "feature_type": null,
+        "fs_method": "generalized_fisher",
+        "fs_k": 500,
+        "fs_extra": {
+          "redundancy_weight": 0.0
+        },
+        "tune_svm": false,
+        "imbalance_strategy": null,
+        "late_fusion_members": [],
+        "concat_members": [],
+        "seed": 42
+      }
+    },
+    {
+      "combo_id": "p1__opensmile__generalized_fisher__500__{'redundancy_weight':_0.05}__ed8d47cafa___2a3e92e32a",
+      "n_runs": 1,
+      "primary_metric": {
+        "mean": 0.28704757388967916,
+        "std": 0.0
+      },
+      "val_macro_f1": {
+        "mean": 0.27812178589398606,
+        "std": 0.0
+      },
+      "val_accuracy": {
+        "mean": 0.2849462365591398,
+        "std": 0.0
+      },
+      "val_balanced_accuracy": {
+        "mean": 0.28704757388967916,
+        "std": 0.0
+      },
+      "spec": {
+        "combo_id": "p1__opensmile__generalized_fisher__500__{'redundancy_weight':_0.05}__ed8d47cafa___2a3e92e32a",
+        "phase": 1,
+        "extractor": "opensmile",
+        "frame_duration": 3.0,
+        "dataset_name": "opensmile",
+        "parquet_file": null,
+        "data_dir": null,
+        "feature_type": null,
+        "fs_method": "generalized_fisher",
+        "fs_k": 500,
+        "fs_extra": {
+          "redundancy_weight": 0.05
+        },
+        "tune_svm": false,
+        "imbalance_strategy": null,
+        "late_fusion_members": [],
+        "concat_members": [],
+        "seed": 42
+      }
+    },
+    {
+      "combo_id": "p1__opensmile__generalized_fisher__200__{'redundancy_weight':_0.05}__c57252be4e___9d707bde61",
+      "n_runs": 1,
+      "primary_metric": {
+        "mean": 0.28704757388967916,
+        "std": 0.0
+      },
+      "val_macro_f1": {
+        "mean": 0.27812178589398606,
+        "std": 0.0
+      },
+      "val_accuracy": {
+        "mean": 0.2849462365591398,
+        "std": 0.0
+      },
+      "val_balanced_accuracy": {
+        "mean": 0.28704757388967916,
+        "std": 0.0
+      },
+      "spec": {
+        "combo_id": "p1__opensmile__generalized_fisher__200__{'redundancy_weight':_0.05}__c57252be4e___9d707bde61",
+        "phase": 1,
+        "extractor": "opensmile",
+        "frame_duration": 3.0,
+        "dataset_name": "opensmile",
+        "parquet_file": null,
+        "data_dir": null,
+        "feature_type": null,
+        "fs_method": "generalized_fisher",
+        "fs_k": 200,
+        "fs_extra": {
+          "redundancy_weight": 0.05
+        },
+        "tune_svm": false,
+        "imbalance_strategy": null,
+        "late_fusion_members": [],
+        "concat_members": [],
+        "seed": 42
+      }
+    },
+    {
+      "combo_id": "p1__opensmile__generalized_fisher__100__{'redundancy_weight':_0.05}__37d4598986___a7cef45238",
+      "n_runs": 1,
+      "primary_metric": {
+        "mean": 0.28704757388967916,
+        "std": 0.0
+      },
+      "val_macro_f1": {
+        "mean": 0.27812178589398606,
+        "std": 0.0
+      },
+      "val_accuracy": {
+        "mean": 0.2849462365591398,
+        "std": 0.0
+      },
+      "val_balanced_accuracy": {
+        "mean": 0.28704757388967916,
+        "std": 0.0
+      },
+      "spec": {
+        "combo_id": "p1__opensmile__generalized_fisher__100__{'redundancy_weight':_0.05}__37d4598986___a7cef45238",
+        "phase": 1,
+        "extractor": "opensmile",
+        "frame_duration": 3.0,
+        "dataset_name": "opensmile",
+        "parquet_file": null,
+        "data_dir": null,
+        "feature_type": null,
+        "fs_method": "generalized_fisher",
+        "fs_k": 100,
+        "fs_extra": {
+          "redundancy_weight": 0.05
+        },
+        "tune_svm": false,
+        "imbalance_strategy": null,
+        "late_fusion_members": [],
+        "concat_members": [],
+        "seed": 42
+      }
+    },
+    {
+      "combo_id": "p2_late_fusion_tune",
+      "n_runs": 0,
+      "primary_metric": {
+        "mean": 0.0,
+        "std": 0.0
+      }
+    }
+  ],
+  "best": {
+    "combo_id": "p2_concat_tune",
+    "n_runs": 1,
+    "primary_metric": {
+      "mean": 0.43217458808543013,
+      "std": 0.0
+    },
+    "val_macro_f1": {
+      "mean": 0.43217458808543013,
+      "std": 0.0
+    },
+    "val_accuracy": {
+      "mean": 0.43010752688172044,
+      "std": 0.0
+    },
+    "val_balanced_accuracy": {
+      "mean": 0.43113639955745225,
+      "std": 0.0
+    },
+    "spec": {
+      "combo_id": "p2_concat_tune",
+      "phase": 2,
+      "extractor": "concat",
+      "frame_duration": 3.0,
+      "dataset_name": "opensmile",
+      "parquet_file": null,
+      "data_dir": null,
+      "feature_type": null,
+      "fs_method": "filter",
+      "fs_k": 200,
+      "fs_extra": {},
+      "tune_svm": true,
+      "imbalance_strategy": null,
+      "late_fusion_members": [],
+      "concat_members": [
+        "opensmile",
+        "whisper",
+        "clap"
+      ],
+      "seed": 42
+    }
+  }
+}

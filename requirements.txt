@@ -13,3 +13,4 @@ soundfile
 msclap
 pyyaml
 pyarrow
+imbalanced-learn

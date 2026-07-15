@@ -1,0 +1,42 @@
+{
+  "combo_id": "p2_concat_tune",
+  "n_runs": 1,
+  "primary_metric": {
+    "mean": 0.43217458808543013,
+    "std": 0.0
+  },
+  "val_macro_f1": {
+    "mean": 0.43217458808543013,
+    "std": 0.0
+  },
+  "val_accuracy": {
+    "mean": 0.43010752688172044,
+    "std": 0.0
+  },
+  "val_balanced_accuracy": {
+    "mean": 0.43113639955745225,
+    "std": 0.0
+  },
+  "spec": {
+    "combo_id": "p2_concat_tune",
+    "phase": 2,
+    "extractor": "concat",
+    "frame_duration": 3.0,
+    "dataset_name": "opensmile",
+    "parquet_file": null,
+    "data_dir": null,
+    "feature_type": null,
+    "fs_method": "filter",
+    "fs_k": 200,
+    "fs_extra": {},
+    "tune_svm": true,
+    "imbalance_strategy": null,
+    "late_fusion_members": [],
+    "concat_members": [
+      "opensmile",
+      "whisper",
+      "clap"
+    ],
+    "seed": 42
+  }
+}
