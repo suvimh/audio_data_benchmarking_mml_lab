@@ -1,0 +1,19 @@
+{
+  "dataset": "openSMILE 0.5s",
+  "feature_method": "ANOVA K=1250",
+  "selected_features": 1250,
+  "features_removed": 5123,
+  "feature_reduction_percent": 80.38600345206339,
+  "model": "RF Regularized",
+  "parameters": {
+    "n_estimators": 500,
+    "criterion": "gini",
+    "max_features": "sqrt",
+    "min_samples_leaf": 2,
+    "class_weight": "balanced_subsample",
+    "max_samples": null
+  },
+  "test_accuracy": 0.3804328699630477,
+  "test_balanced_accuracy": 0.38539712782146257,
+  "test_macro_f1": 0.3742002298142575
+}

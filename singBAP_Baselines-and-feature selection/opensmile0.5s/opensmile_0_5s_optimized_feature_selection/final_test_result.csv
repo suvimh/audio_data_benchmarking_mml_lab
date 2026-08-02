@@ -1,0 +1,2 @@
+Embedding,Feature Method,Selected Features,Features Removed,Feature Reduction (%),Model,Test Accuracy,Accuracy Change,Test Balanced Accuracy,Balanced Accuracy Change,Test Macro F1,Macro F1 Change,Final Train/Test Time (s)
+openSMILE 0.5s,ANOVA K=1250,1250,5123,80.38600345206339,RF Regularized,0.3804328699630477,0.0513328699630477,0.38539712782146257,0.041697127821462565,0.3742002298142575,0.0500002298142575,85.39318513870239

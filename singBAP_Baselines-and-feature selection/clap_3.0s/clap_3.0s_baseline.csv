@@ -1,0 +1,5 @@
+Embedding,Model,Accuracy,Balanced Accuracy,Macro F1,Train/Eval Time (s),Samples,Features
+CLAP 3.0s,MLP,0.5247,0.5204,0.5301,3.5,3438,1024
+CLAP 3.0s,Linear SVM,0.4695,0.4707,0.4714,17.61,3438,1024
+CLAP 3.0s,Random Forest,0.4564,0.4631,0.4586,2.14,3438,1024
+CLAP 3.0s,KNN,0.3154,0.3139,0.3186,0.19,3438,1024

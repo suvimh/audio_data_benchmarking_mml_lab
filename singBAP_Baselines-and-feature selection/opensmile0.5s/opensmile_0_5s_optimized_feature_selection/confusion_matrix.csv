@@ -1,0 +1,8 @@
+,Predicted: correct,Predicted: arched_back,Predicted: hunched_back,Predicted: sideways,Predicted: chest_breathing,Predicted: over_articulation,Predicted: under_articulation
+True: correct,457,84,147,62,98,42,138
+True: arched_back,170,168,84,52,62,52,83
+True: hunched_back,201,62,359,71,61,61,92
+True: sideways,174,71,139,227,74,74,99
+True: chest_breathing,165,73,133,94,177,75,135
+True: over_articulation,93,35,60,45,49,328,82
+True: under_articulation,80,10,41,37,47,14,446

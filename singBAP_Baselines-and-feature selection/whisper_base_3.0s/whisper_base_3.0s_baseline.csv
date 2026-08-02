@@ -1,0 +1,5 @@
+Embedding,Model,Accuracy,Balanced Accuracy,Macro F1,Train/Eval Time (s),Samples,Features
+Whisper Base 3.0s,MLP,0.4927,0.5031,0.5001,1.87,3438,512
+Whisper Base 3.0s,Linear SVM,0.4375,0.4481,0.4453,4.29,3438,512
+Whisper Base 3.0s,Random Forest,0.4172,0.4292,0.4205,1.45,3438,512
+Whisper Base 3.0s,KNN,0.3241,0.3244,0.3301,0.11,3438,512

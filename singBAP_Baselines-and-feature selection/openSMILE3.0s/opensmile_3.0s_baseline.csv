@@ -1,0 +1,5 @@
+Embedding,Model,Accuracy,Balanced Accuracy,Macro F1,Train/Eval Time (s),Samples,Features
+openSMILE 3.0s,MLP,0.468,0.4742,0.4763,41.23,3438,6373
+openSMILE 3.0s,Random Forest,0.4738,0.488,0.476,12.77,3438,6373
+openSMILE 3.0s,Linear SVM,0.3663,0.3688,0.373,36.64,3438,6373
+openSMILE 3.0s,KNN,0.3169,0.314,0.3127,1.53,3438,6373
