@@ -9,7 +9,6 @@ from scripts.config.benchmark_config import BenchmarkConfig
 from scripts.config.dataset_config import DatasetConfig
 from scripts.evaluation.metrics import (
     compute_metrics,
-    print_metrics_summary,
     save_metrics_csv,
 )
 from scripts.evaluation.visualization import plot_training_history
@@ -148,10 +147,8 @@ def run(
     val_metrics["accuracy"] = float(val_acc)
     val_metrics["loss"] = float(val_loss)
 
-    print_metrics_summary(train_metrics, "CNN (train)")
-    print_metrics_summary(val_metrics, "CNN (validation)")
 
-    metrics_path = output_dir / "metrics.csv"
+    metrics_path = Path(dataset_config.metrics_path or output_dir / "metrics.csv")
     save_metrics_csv(val_metrics, metrics_path, "cnn", {"split": "validation"})
     save_metrics_csv(train_metrics, metrics_path, "cnn", {"split": "train"})
 

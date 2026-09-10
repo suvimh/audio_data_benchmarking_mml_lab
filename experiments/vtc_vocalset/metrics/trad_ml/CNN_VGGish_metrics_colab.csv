@@ -1,6 +1,0 @@
-Model,Train Accuracy,Train Balanced Accuracy,Val Accuracy,Val Balanced Accuracy,Val F1,Val Top-2,Val Top-3,T1 Accuracy,T1 b-acc,T1 f1,T1 top2,T1 top3,T2 Accuracy,T2 b-acc,T2 f2,T2 top2,T2 top3
-vocalset_10_3sec_VGGish_dataframes_mixed,0.9227,0.9026,0.6429,0.5946,0.6099,0.762,0.8258,,,,,,,,,,
-pitch_3sec_VGGish_dataframes_female,0.9991,0.9978,0.8462,0.7042,0.7158,0.959,0.9949,,,,,,,,,,
-pitch_3sec_VGGish_dataframes_male,0.7846,0.4818,0.5502,0.3359,0.2963,0.79,0.9312,,,,,,,,,,
-timbre_3sec_VGGish_dataframes_female,1.0,1.0,0.8259,0.8735,0.8116,0.919,0.9879,,,,,,,,,,
-timbre_3sec_VGGish_dataframes_male,0.2874,0.32,0.247,0.3345,0.1506,0.2831,0.4608,,,,,,,,,,

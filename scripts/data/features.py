@@ -186,43 +186,61 @@ def load_features_data(config: DatasetConfig) -> FeaturesData:
             df = _add_singer_column(df, config)
             train_df, val_df = _split_by_singer(df, config)
 
-        label_cols = _auto_detect_label_columns(pd.concat([train_df, val_df] if not val_df.empty else [train_df], ignore_index=True), config)
-        if config.label_column not in df.columns and config.label_column in ("Features", "Class"):
-            config.label_column = label_cols[0]
+        # Apply label filtering BEFORE extracting embeddings
+        train_df = _apply_label_filter(train_df, config)
+        if not val_df.empty:
+            val_df = _apply_label_filter(val_df, config)
 
         embeddings_train = _parse_parquet_embeddings(train_df)
         embeddings_val = _parse_parquet_embeddings(val_df) if not val_df.empty else []
+
     else:
-        if config.train_data_paths and config.val_data_paths and not (config.train_data_path and config.val_data_path):
+        if (
+            config.train_data_paths
+            and config.val_data_paths
+            and not (config.train_data_path and config.val_data_path)
+        ):
             gender = config.gender_split or "mixed"
+
             if gender == "mixed":
                 train_dfs, val_dfs = [], []
+
                 for g in ["female", "male"]:
                     tp = config.train_data_paths.get(g)
                     vp = config.val_data_paths.get(g)
+
                     if tp and vp:
                         train_dfs.append(pd.read_pickle(tp))
                         val_dfs.append(pd.read_pickle(vp))
+
                 train_df = pd.concat(train_dfs, ignore_index=True)
                 val_df = pd.concat(val_dfs, ignore_index=True)
+
             else:
                 train_df = pd.read_pickle(config.train_data_paths[gender])
                 val_df = pd.read_pickle(config.val_data_paths[gender])
+
         else:
             train_df = pd.read_pickle(train_path)
             val_df = pd.read_pickle(val_path) if val_path else pd.DataFrame()
 
+        # Apply label filtering BEFORE extracting embeddings
+        train_df = _apply_label_filter(train_df, config)
+        if not val_df.empty:
+            val_df = _apply_label_filter(val_df, config)
+
         embeddings_train = train_df[config.feature_column].tolist()
-        embeddings_val = val_df[config.feature_column].tolist() if not val_df.empty else []
+        embeddings_val = (
+            val_df[config.feature_column].tolist() if not val_df.empty else []
+        )
 
-    train_df = _apply_label_filter(train_df, config)
-    if not val_df.empty:
-        val_df = _apply_label_filter(val_df, config)
-
+    # Build labels from the SAME filtered data
     classes, class_map = _build_class_mapping(train_df, config)
 
     y_train = _encode_labels(train_df, class_map, config)
-    y_val = _encode_labels(val_df, class_map, config) if not val_df.empty else np.array([])
+    y_val = (
+        _encode_labels(val_df, class_map, config) if not val_df.empty else np.array([])
+    )
 
     if not embeddings_train:
         raise ValueError("No training data after filtering")
@@ -231,14 +249,24 @@ def load_features_data(config: DatasetConfig) -> FeaturesData:
 
     if config.pad_sequences:
         X_train, n_timesteps = _flatten_pad_sequences(embeddings_train)
-        X_val, _ = _flatten_pad_sequences(embeddings_val) if embeddings_val else (np.array([]), None)
+
+        X_val, _ = (
+            _flatten_pad_sequences(embeddings_val)
+            if embeddings_val
+            else (np.array([]), None)
+        )
+
         if config.add_channel_dim:
             X_train = X_train[..., np.newaxis]
+
             if X_val.size:
                 X_val = X_val[..., np.newaxis]
+
     else:
         X_train = _flatten_concat(embeddings_train)
+
         X_val = _flatten_concat(embeddings_val) if embeddings_val else np.array([])
+
         n_timesteps = None
 
     return FeaturesData(

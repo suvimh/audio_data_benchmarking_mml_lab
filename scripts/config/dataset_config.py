@@ -46,6 +46,7 @@ class DatasetConfig:
     gender_split: Optional[str] = None
     train_singer_ids: Optional[List[str]] = None
     val_singer_ids: Optional[List[str]] = None
+    metrics_path: Optional[str] = None
 
     pad_sequences: bool = False
     max_sequence_length: Optional[int] = None

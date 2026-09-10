@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import time
 from pathlib import Path
 from typing import Any, Dict
 
@@ -10,7 +11,6 @@ from scripts.config.dataset_config import DatasetConfig
 from scripts.data.features import FeaturesData
 from scripts.evaluation.metrics import (
     compute_metrics,
-    print_metrics_summary,
     save_metrics_csv,
 )
 from scripts.utils import ensure_dir, save_pickle
@@ -37,11 +37,16 @@ def run(
     from scripts.data.features import load_features_data
 
     output_dir = ensure_dir(output_dir)
+    start_time = time.perf_counter()
     data = load_features_data(dataset_config)
 
     params = bench_config.get_model_params("knn")
     default_params = MODEL_METADATA["default_params"].copy()
     default_params.update(params)
+
+    from scripts.evaluation.metrics_utils import ResourceTracker
+    resource_tracker = ResourceTracker()
+    resource_tracker.start()
 
     model = train(data, default_params)
 
@@ -55,15 +60,31 @@ def run(
         y_train_prob = None
         y_val_prob = None
 
+    resource_stats = resource_tracker.stop()
+
     train_metrics = compute_metrics(data.y_train, y_train_pred, y_train_prob, data.class_names)
     val_metrics = compute_metrics(data.y_val, y_val_pred, y_val_prob, data.class_names)
 
-    print_metrics_summary(train_metrics, "KNN (train)")
-    print_metrics_summary(val_metrics, "KNN (validation)")
 
-    metrics_path = output_dir / "metrics.csv"
-    save_metrics_csv(val_metrics, metrics_path, "knn", {"split": "validation"})
-    save_metrics_csv(train_metrics, metrics_path, "knn", {"split": "train"})
+    metrics_path = Path(dataset_config.metrics_path or output_dir / "metrics.csv")
+    elapsed = time.perf_counter() - start_time
+    n_features = data.X_train.shape[1]
+    save_metrics_csv(
+        metrics_path,
+        "knn",
+        dataset_config.name,
+        train_metrics,
+        val_metrics,
+        extra={
+            "Epochs": "-",
+            "Batch Size": "-",
+            "Train+Eval Time (s)": round(elapsed, 4),
+            "Key Parameters": f"k={default_params['n_neighbors']}, Euclidean distance",
+            "Input Features": n_features,
+            "Input Feature Type": dataset_config.feature_type or dataset_config.name,
+            **resource_stats,
+        },
+    )
 
     model_path = output_dir / "model.pkl"
     save_pickle(model, model_path)

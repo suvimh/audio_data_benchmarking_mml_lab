@@ -46,7 +46,7 @@ Experiments use four config types, each with a single responsibility:
 
 ### 1. DatasetConfig — data definition only
 
-Describes *where the data lives* and *what columns to use*, with no partitioning or filtering baked in:
+Describes _where the data lives_ and _what columns to use_, with no partitioning or filtering baked in:
 
 ```python
 opensmile = DatasetConfig(
@@ -122,7 +122,7 @@ The orchestrator **resolves** each block by merging the dataset definition + par
 # List available models
 python -m scripts list-models
 
-# Run a full experiment (new recommended way)
+# Run a full experiment (recommended way)
 python -m scripts run --experiment experiments/vtc_vocalset/vocalset_full_experiment.py
 
 # Validate an experiment config
@@ -162,16 +162,16 @@ This is useful for interactive exploration, custom pre/post-processing, or chain
 
 ## Models and Data Type Compatibility
 
-| Model      | Features | Raw Audio | Images |
-|------------|----------|-----------|--------|
-| KNN        | yes      |           |        |
-| SVM        | yes      |           |        |
-| RF         | yes      |           |        |
-| MLP        | yes      |           |        |
-| CNN        | yes      |           |        |
-| ImageNet   |          |           | yes    |
-| Whisper    |          | yes       |        |
-| CLAP       |          | yes       |        |
+| Model    | Features | Raw Audio | Images |
+| -------- | -------- | --------- | ------ |
+| KNN      | yes      |           |        |
+| SVM      | yes      |           |        |
+| RF       | yes      |           |        |
+| MLP      | yes      |           |        |
+| CNN      | yes      |           |        |
+| ImageNet |          |           | yes    |
+| Whisper  |          | yes       |        |
+| CLAP     |          | yes       |        |
 
 ## Designing an Experiment
 
@@ -182,9 +182,10 @@ This is useful for interactive exploration, custom pre/post-processing, or chain
 
 Audio-level settings (`frame_duration`, `overlap`) are specified on each `ExperimentBlock` — this ensures every model in a block uses the same framing, making results comparable. These values are recorded in the metrics CSV outputs for traceability.
 
-Filters control label subsets (e.g. VOCALSET\_10, PMT, TMT), gender filtering, and data reshaping. Filtering is applied **separately to train and test data** with no leakage.
+Filters control label subsets (e.g. VOCALSET_10, PMT, TMT), gender filtering, and data reshaping. Filtering is applied **separately to train and test data** with no leakage.
 
 Example VocalSet experiment:
+
 ```bash
 python -m scripts run --experiment experiments/vtc_vocalset/vocalset_full_experiment.py
 ```
@@ -199,7 +200,7 @@ https://drive.google.com/drive/folders/1o9jL03t5q60fptKuO95Gaw18gPoM1sun
 ## Adding a New Model
 
 1. Create `scripts/models/your_model.py`
-2. Export `MODEL_METADATA` (name, supported\_data\_types, default\_params)
+2. Export `MODEL_METADATA` (name, supported_data_types, default_params)
 3. Export `run(dataset_config, benchmark_config, output_dir)` returning a metrics dict
 4. The registry auto-registers it on import
 

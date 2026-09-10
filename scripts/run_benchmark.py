@@ -2,7 +2,9 @@ from __future__ import annotations
 
 import sys
 from pathlib import Path
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Tuple
+
+import numpy as np
 
 from scripts.config.benchmark_config import BenchmarkConfig
 from scripts.config.dataset_config import DatasetConfig
@@ -12,6 +14,11 @@ from scripts.config.experiment_config import (
     ExperimentFilters,
 )
 from scripts.config.partition_config import PartitionConfig
+from scripts.evaluation.metrics import (
+    _get_report_f1,
+    log_environment_snapshot,
+    save_metrics_csv,
+)
 from scripts.registry import get_model, list_models
 from scripts.utils import ensure_dir, set_seed, save_json
 from scripts.validate_config import validate
@@ -88,12 +95,13 @@ def resolve_dataset(
         "image_size": dataset.image_size,
         "level_names": dataset.level_names,
         "label_level": dataset.label_level,
+        "metrics_path": dataset.metrics_path,
         "pad_sequences": dataset.pad_sequences,
         "add_channel_dim": dataset.add_channel_dim,
     }
     _override_if_set(merged, "train_singer_ids", partition.train_singer_ids)
     _override_if_set(merged, "val_singer_ids", partition.test_singer_ids)
-    _override_if_set(merged, "singer_column", partition.singer_column, "singer")
+    _override_if_set(merged, "singer_column", partition.singer_column)
     _override_if_set(merged, "gender_split", filters.gender)
     _override_if_set(merged, "include_labels", filters.include_labels)
     _override_if_set(merged, "exclude_labels", filters.exclude_labels)
@@ -111,7 +119,7 @@ def _override_if_set(target: dict, key: str, value, skip_value=None):
 
 
 # ---------------------------------------------------------------------------
-# Old-style run: single dataset + single benchmark
+# Single dataset + single benchmark
 # ---------------------------------------------------------------------------
 
 def run_benchmark(
@@ -178,11 +186,195 @@ def run_benchmark(
 
 
 # ---------------------------------------------------------------------------
-# New-style run: experiment config with blocks
+# Repeated-run aggregation
+# ---------------------------------------------------------------------------
+
+def _mean_std_metrics(metric_dicts: List[Dict]) -> Tuple[Dict, Dict]:
+    """Average a list of compute_metrics()-style dicts into (mean, std).
+
+    Only the metric fields that change across runs are averaged (accuracy,
+    balanced_accuracy, F1, top-2, top-3, per-class accuracy). n_samples is
+    constant per run so it is read from the first sample.
+    """
+    numeric_keys = ("accuracy", "balanced_accuracy", "top2_accuracy", "top3_accuracy")
+    mean: Dict[str, Any] = {}
+    std: Dict[str, Any] = {}
+
+    for key in numeric_keys:
+        values = [m.get(key) for m in metric_dicts if m.get(key) is not None]
+        if values:
+            mean[key] = float(np.mean(values))
+            std[key] = float(np.std(values)) if len(values) > 1 else 0.0
+
+    f1s = []
+    for m in metric_dicts:
+        f1 = _get_report_f1(m.get("classification_report", {}))
+        if isinstance(f1, float):
+            f1s.append(f1)
+    if f1s:
+        mean_f1 = float(np.mean(f1s))
+        mean["classification_report"] = {"macro avg": {"f1-score": mean_f1}}
+        std["f1"] = float(np.std(f1s)) if len(f1s) > 1 else 0.0
+
+    per_class = {}
+    for m in metric_dicts:
+        for cls, acc in (m.get("per_class_accuracy") or {}).items():
+            per_class.setdefault(cls, []).append(acc)
+    if per_class:
+        mean["per_class_accuracy"] = {}
+        std["per_class_accuracy"] = {}
+        mean["class_names"] = metric_dicts[0].get("class_names")
+        for cls, accs in per_class.items():
+            mean["per_class_accuracy"][cls] = float(np.mean(accs))
+            std["per_class_accuracy"][cls] = float(np.std(accs)) if len(accs) > 1 else 0.0
+
+    if metric_dicts:
+        mean["n_samples"] = metric_dicts[0].get("n_samples")
+
+    return mean, std
+
+
+_METRIC_COLUMNS = {
+    "accuracy": "Accuracy",
+    "balanced_accuracy": "Balanced Accuracy",
+    "f1": "F1",
+    "top2_accuracy": "Top-2",
+    "top3_accuracy": "Top-3",
+}
+
+
+def _std_extra(split: str, std_metrics: Dict) -> Dict[str, Any]:
+    """Maps a std dict (keyed by metric) to extra CSV columns like
+    'Val Accuracy Std' or 'Train Top-2 Std'."""
+    extra = {}
+    for key, col in _METRIC_COLUMNS.items():
+        if key in std_metrics:
+            extra[f"{split} {col} Std"] = round(float(std_metrics[key]), 4)
+    for cls, acc in (std_metrics.get("per_class_accuracy") or {}).items():
+        extra[f"{split} {cls} Accuracy Std"] = round(float(acc), 4)
+    return extra
+
+
+def _aggregate_repeated_run(
+    run_results: List[Dict],
+    dataset_config: DatasetConfig,
+    block_metrics_path: Path,
+    input_data: str,
+) -> Dict[str, Any]:
+    """Combines N repeated runs into a single mean (with ±std columns) CSV row."""
+    n_runs = len(run_results)
+    mean_train, std_train = _mean_std_metrics(
+        [r["train_metrics"] for r in run_results]
+    )
+    mean_val, std_val = _mean_std_metrics([r["val_metrics"] for r in run_results])
+
+    last = run_results[-1]
+    extra = {
+        "Epochs": round(float(np.mean([r["actual_epochs"] for r in run_results])), 2),
+        "Max Epochs": last.get("max_epochs", ""),
+        "Batch Size": last.get("batch_size", ""),
+        "Train+Eval Time (s)": round(
+            float(np.sum([r.get("train_time_s", 0.0) for r in run_results])), 4
+        ),
+        "frame_duration": dataset_config.frame_duration,
+        "overlap": dataset_config.overlap,
+        "n_runs": n_runs,
+        **last.get("resource_stats", {}),
+    }
+    extra.update(_std_extra("Train", std_train))
+    extra.update(_std_extra("Val", std_val))
+
+    save_metrics_csv(
+        block_metrics_path,
+        last["model_name"],
+        input_data,
+        mean_train,
+        mean_val,
+        extra=extra,
+        complexity=last.get("complexity"),
+    )
+
+    return {
+        "model_name": last["model_name"],
+        "train_metrics": mean_train,
+        "val_metrics": mean_val,
+        "history": None,
+        "n_runs": n_runs,
+        "run_results": run_results,
+    }
+
+
+# ---------------------------------------------------------------------------
+# Consolidated experiment outline
+# ---------------------------------------------------------------------------
+
+def _round_metric_value(value, decimals: int = 3):
+    """Rounds a single metric value to `decimals` places, leaving
+    non-numeric strings (e.g. '-', model names) untouched."""
+    if isinstance(value, (int, float, np.integer, np.floating)):
+        if isinstance(value, float) and np.isnan(value):
+            return value
+        return round(float(value), decimals)
+    if isinstance(value, str):
+        try:
+            return round(float(value), decimals)
+        except ValueError:
+            return value
+    return value
+
+
+def _consolidate_metrics_table(
+    metrics_paths: List[str | Path],
+    output_path: str | Path,
+    decimals: int = 3,
+) -> Optional[pd.DataFrame]:
+    """Merges all per-block metrics CSVs into a single rounded table.
+
+    Each block (trad ML, frozen finetune) writes its own metrics.csv; the
+    repeated full-finetune blocks add their mean row (plus std columns) to
+    their shared metrics.csv. This collects every row across those files so
+    the final outline has the deterministic single runs AND the N-run
+    averaged full-finetune rows, all rounded to `decimals` places.
+    """
+    import pandas as pd
+
+    frames = []
+    seen = set()
+    for p in metrics_paths:
+        p = Path(p)
+        if not p.exists() or p.resolve() in seen:
+            continue
+        seen.add(p.resolve())
+        df = pd.read_csv(p)
+        for col in df.columns:
+            df[col] = df[col].apply(
+                lambda v: _round_metric_value(v, decimals)
+            )
+        frames.append(df)
+
+    if not frames:
+        print("  No metrics CSVs found to consolidate.")
+        return None
+
+    merged = pd.concat(frames, ignore_index=True, sort=False)
+    preferred = [c for c in ("Model", "Input Data") if c in merged.columns]
+    other = [c for c in merged.columns if c not in preferred]
+    merged = merged[preferred + other]
+    merged.to_csv(output_path, index=False)
+    print(f"\nExperiment metrics outline saved to {output_path}")
+    return merged
+
+
+# ---------------------------------------------------------------------------
+# Experiment config with blocks
 # ---------------------------------------------------------------------------
 
 def run_experiment(experiment_config_path: str | Path) -> Dict[str, Any]:
     experiment = load_experiment_config(experiment_config_path)
+    experiment_out = ensure_dir(Path(experiment.output_dir) / experiment.name)
+    environment_path = experiment_out / "environment.txt"
+    log_environment_snapshot(environment_path)
+    print(f"Environment snapshot saved to {environment_path}")
 
     print(f"\n{'=' * 60}")
     print(f"Experiment: {experiment.name}")
@@ -190,6 +382,7 @@ def run_experiment(experiment_config_path: str | Path) -> Dict[str, Any]:
     print(f"{'=' * 60}\n")
 
     all_results = {}
+    metrics_paths: List[Path] = []
 
     for block_idx, block in enumerate(experiment.blocks):
         print(f"\n{'─' * 60}")
@@ -205,6 +398,15 @@ def run_experiment(experiment_config_path: str | Path) -> Dict[str, Any]:
         print(f"{'─' * 60}\n")
 
         set_seed(block.benchmark_config.seed)
+
+        block_out = ensure_dir(
+            Path(experiment.output_dir)
+            / experiment.name
+            / block.benchmark_config.name
+            / f"block_{block_idx + 1}"
+        )
+        block_metrics_path = Path(block.metrics_path) if block.metrics_path else block_out / "metrics.csv"
+        metrics_paths.append(block_metrics_path)
 
         for dataset in block.datasets:
             resolved = resolve_dataset(
@@ -225,23 +427,38 @@ def run_experiment(experiment_config_path: str | Path) -> Dict[str, Any]:
                 print("  Skipping due to errors.")
                 continue
 
-            block_out = ensure_dir(
-                Path(experiment.output_dir)
-                / experiment.name
-                / block.benchmark_config.name
-                / dataset.name
-            )
+            n_repeats = max(1, int(getattr(block, "n_repeats", 1) or 1))
 
             for model_name in block.benchmark_config.models:
-                print(f"\n  {'=' * 50}")
                 print(f"  Model: {model_name}")
-                print(f"  {'=' * 50}")
 
-                model_out = ensure_dir(block_out / model_name)
                 model_info = get_model(model_name)
-                result = model_info["run"](
-                    resolved, block.benchmark_config, str(model_out)
-                )
+                model_out = ensure_dir(block_out / dataset.name / model_name)
+
+                if n_repeats == 1:
+                    resolved.metrics_path = str(block_metrics_path)
+                    result = model_info["run"](
+                        resolved, block.benchmark_config, str(model_out)
+                    )
+                else:
+                    run_results = []
+                    base_seed = block.benchmark_config.seed
+                    for run_idx in range(1, n_repeats + 1):
+                        print(f"    Repetition {run_idx}/{n_repeats}")
+                        set_seed(base_seed + run_idx)
+                        run_out = ensure_dir(model_out / f"run_{run_idx}")
+                        resolved.metrics_path = str(run_out / "metrics.csv")
+                        run_result = model_info["run"](
+                            resolved, block.benchmark_config, str(run_out)
+                        )
+                        run_results.append(run_result)
+
+                    result = _aggregate_repeated_run(
+                        run_results,
+                        resolved,
+                        block_metrics_path,
+                        dataset.name,
+                    )
 
                 key = f"{block.benchmark_config.name}/{dataset.name}/{model_name}"
                 all_results[key] = result
@@ -261,5 +478,8 @@ def run_experiment(experiment_config_path: str | Path) -> Dict[str, Any]:
     }
     save_json(summary, summary_path)
     print(f"\nSummary saved to {summary_path}")
+
+    outline_path = Path(experiment.output_dir) / f"{experiment.name}_full_metrics_outline.csv"
+    _consolidate_metrics_table(metrics_paths, outline_path)
 
     return all_results

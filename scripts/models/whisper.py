@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import os
+import time
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
@@ -14,7 +15,6 @@ from scripts.config.benchmark_config import BenchmarkConfig
 from scripts.config.dataset_config import DatasetConfig
 from scripts.evaluation.metrics import (
     compute_metrics,
-    print_metrics_summary,
     save_metrics_csv,
 )
 from scripts.utils import ensure_dir, set_seed, load_pickle, save_pickle
@@ -58,7 +58,24 @@ class WhisperClassifier(nn.Module):
         return self.classifier(pooled)
 
 
+def _make_windows(audio: np.ndarray, frame_len: int, hop_len: int) -> list[np.ndarray]:
+    if len(audio) < frame_len:
+        return [np.pad(audio, (0, frame_len - len(audio)))]
+    starts = list(range(0, len(audio) - frame_len + 1, hop_len))
+    last_full_start = len(audio) - frame_len
+    if not starts or starts[-1] != last_full_start:
+        starts.append(last_full_start)
+    return [audio[s : s + frame_len] for s in starts]
+
+
 class WhisperDataset(Dataset):
+    """Splits each raw audio source file into overlapping frame_duration-second
+    windows and produces one training sample per window.
+
+    All windows and their labels are precomputed in __init__ so that each
+    __getitem__ returns a fixed-length feature tensor for a single window.
+    """
+
     def __init__(
         self,
         filepaths: List[str],
@@ -68,50 +85,45 @@ class WhisperDataset(Dataset):
         sample_rate: int = 16000,
         frame_duration: float = 3.0,
         overlap: float = 0.25,
-        cache_dir: Optional[str] = None,
     ):
-        self.filepaths = filepaths
-        self.labels = labels
-        self.n_classes = n_classes
         self.sample_rate = sample_rate
         self.frame_duration = frame_duration
         self.overlap = overlap
-        self.cache_dir = Path(cache_dir) if cache_dir else None
 
         from transformers import WhisperFeatureExtractor
         self.feature_extractor = WhisperFeatureExtractor.from_pretrained(model_name)
 
-        self._cache = {}
+        self._items = []
+        for filepath, label in zip(filepaths, labels):
+            self._items.extend(self._windows_for_file(filepath, label))
 
-    def __len__(self):
-        return len(self.filepaths)
-
-    def __getitem__(self, idx):
-        if idx in self._cache:
-            return self._cache[idx]
-
+    def _windows_for_file(self, filepath: str, label: int) -> List[tuple]:
         import librosa
 
-        filepath = self.filepaths[idx]
         audio, _ = librosa.load(filepath, sr=self.sample_rate, mono=True)
+        audio = np.asarray(audio, dtype=np.float32)
 
         frame_len = int(self.sample_rate * self.frame_duration)
-        hop_len = int(frame_len * (1 - self.overlap))
+        hop_len = max(1, int(frame_len * (1 - self.overlap)))
+        windows = _make_windows(audio, frame_len, hop_len)
 
-        if len(audio) < frame_len:
-            audio = np.pad(audio, (0, frame_len - len(audio)))
+        items = []
+        for window in windows:
+            inputs = self.feature_extractor(
+                window,
+                sampling_rate=self.sample_rate,
+                return_tensors="pt",
+            )
+            input_features = inputs.input_features.squeeze(0)
+            items.append((input_features, label))
+        return items
 
-        inputs = self.feature_extractor(
-            audio,
-            sampling_rate=self.sample_rate,
-            return_tensors="pt",
-        )
-        input_features = inputs.input_features.squeeze(0)
+    def __len__(self):
+        return len(self._items)
 
-        label = self.labels[idx]
-        result = (input_features, label)
-        self._cache[idx] = result
-        return result
+    def __getitem__(self, idx):
+        input_features, label = self._items[idx]
+        return input_features, label
 
 
 def train_epoch(model, dataloader, optimizer, device):
@@ -132,7 +144,7 @@ def train_epoch(model, dataloader, optimizer, device):
 
 def validate(model, dataloader, device):
     model.eval()
-    all_preds, all_labels = [], []
+    all_preds, all_labels, all_probs = [], [], []
     total_loss = 0
     with torch.no_grad():
         for input_features, labels in dataloader:
@@ -143,10 +155,17 @@ def validate(model, dataloader, device):
             loss = nn.CrossEntropyLoss()(outputs, labels)
             total_loss += loss.item()
 
+            probs = torch.softmax(outputs, dim=1)
             preds = torch.argmax(outputs, dim=1)
             all_preds.extend(preds.cpu().numpy())
             all_labels.extend(labels.cpu().numpy())
-    return total_loss / len(dataloader), np.array(all_preds), np.array(all_labels)
+            all_probs.append(probs.cpu().numpy())
+    return (
+        total_loss / len(dataloader),
+        np.array(all_preds),
+        np.array(all_labels),
+        np.concatenate(all_probs, axis=0) if all_probs else None,
+    )
 
 
 def run(
@@ -155,6 +174,7 @@ def run(
     output_dir: str | Path,
 ) -> Dict[str, Any]:
     output_dir = ensure_dir(output_dir)
+    start_time = time.perf_counter()
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
     params = MODEL_METADATA["default_params"].copy()
@@ -162,6 +182,7 @@ def run(
 
     params["frame_duration"] = dataset_config.frame_duration
     params["overlap"] = dataset_config.overlap
+    params["sample_rate"] = dataset_config.sample_rate
 
     freeze_encoder = params.get("freeze_encoder", True)
 
@@ -175,6 +196,8 @@ def run(
         gender_filter=dataset_config.gender_split,
         include_labels=dataset_config.include_labels,
         exclude_labels=dataset_config.exclude_labels,
+        level_names=dataset_config.level_names,
+        label_level=dataset_config.label_level,
     )
 
     classes = _resolve_classes(file_df, dataset_config)
@@ -193,7 +216,6 @@ def run(
         sample_rate=params["sample_rate"],
         frame_duration=params["frame_duration"],
         overlap=params["overlap"],
-        cache_dir=str(output_dir / "cache"),
     )
 
     val_dataset = WhisperDataset(
@@ -204,7 +226,6 @@ def run(
         sample_rate=params["sample_rate"],
         frame_duration=params["frame_duration"],
         overlap=params["overlap"],
-        cache_dir=str(output_dir / "cache"),
     )
 
     train_loader = DataLoader(
@@ -241,10 +262,16 @@ def run(
     patience_counter = 0
     history = {"loss": [], "val_loss": [], "val_accuracy": []}
 
+    from scripts.evaluation.metrics_utils import ResourceTracker
+    resource_tracker = ResourceTracker()
+    resource_tracker.start()
+
+    actual_epochs = 0
     for epoch in range(params["epochs"]):
         train_loss = train_epoch(model, train_loader, optimizer, device)
-        val_loss, val_preds, val_labels = validate(model, val_loader, device)
+        val_loss, val_preds, val_labels, _ = validate(model, val_loader, device)
         val_acc = (val_preds == val_labels).mean()
+        actual_epochs = epoch + 1
 
         history["loss"].append(train_loss)
         history["val_loss"].append(val_loss)
@@ -263,33 +290,59 @@ def run(
                 print(f"Early stopping at epoch {epoch + 1}")
                 break
 
+    resource_stats = resource_tracker.stop()
+
     model.load_state_dict(torch.load(str(output_dir / "best_model.pt")))
     model.eval()
 
-    _, train_preds, train_labels = validate(model, train_loader, device)
-    _, val_preds, val_labels = validate(model, val_loader, device)
+    _, train_preds, train_labels, train_probs = validate(model, train_loader, device)
+    _, val_preds, val_labels, val_probs = validate(model, val_loader, device)
 
-    train_metrics = compute_metrics(train_labels, train_preds, None, classes)
-    val_metrics = compute_metrics(val_labels, val_preds, None, classes)
+    train_metrics = compute_metrics(train_labels, train_preds, train_probs, classes)
+    val_metrics = compute_metrics(val_labels, val_preds, val_probs, classes)
 
-    print_metrics_summary(train_metrics, "Whisper (train)")
-    print_metrics_summary(val_metrics, "Whisper (validation)")
+    total_params = sum(p.numel() for p in model.parameters())
+    trainable_params = sum(p.numel() for p in model.parameters() if p.requires_grad)
+    non_trainable_params = total_params - trainable_params
+    complexity = {
+        "Backbone": f"Whisper ({params['model_name']})",
+        "Classifier Head": f"Linear({model.whisper.config.hidden_size}, {len(classes)})",
+        "Total Params": total_params,
+        "Trainable Params": trainable_params,
+        "Non-trainable Params": non_trainable_params,
+        "Encoder Frozen": freeze_encoder,
+    }
 
-    metrics_path = output_dir / "metrics.csv"
-    save_metrics_csv(val_metrics, metrics_path, "whisper",
-                     {"split": "validation",
-                      "frame_duration": dataset_config.frame_duration,
-                      "overlap": dataset_config.overlap})
-    save_metrics_csv(train_metrics, metrics_path, "whisper",
-                     {"split": "train",
-                      "frame_duration": dataset_config.frame_duration,
-                      "overlap": dataset_config.overlap})
+    metrics_path = Path(dataset_config.metrics_path or output_dir / "metrics.csv")
+    save_metrics_csv(
+        metrics_path,
+        "whisper_full" if not freeze_encoder else "whisper_head_only",
+        dataset_config.name,
+        train_metrics,
+        val_metrics,
+        extra={
+            "Epochs": actual_epochs,
+            "Max Epochs": params.get("epochs", bench_config.epochs),
+            "Batch Size": params.get("batch_size", bench_config.batch_size),
+            "Train+Eval Time (s)": round(time.perf_counter() - start_time, 4),
+            "frame_duration": dataset_config.frame_duration,
+            "overlap": dataset_config.overlap,
+            **resource_stats,
+        },
+        complexity=complexity,
+    )
 
     return {
-        "model_name": "whisper",
+        "model_name": "whisper_full" if not freeze_encoder else "whisper_head_only",
         "train_metrics": train_metrics,
         "val_metrics": val_metrics,
         "history": history,
+        "complexity": complexity,
+        "resource_stats": resource_stats,
+        "actual_epochs": actual_epochs,
+        "max_epochs": params.get("epochs", bench_config.epochs),
+        "batch_size": params.get("batch_size", bench_config.batch_size),
+        "train_time_s": round(time.perf_counter() - start_time, 4),
     }
 
 

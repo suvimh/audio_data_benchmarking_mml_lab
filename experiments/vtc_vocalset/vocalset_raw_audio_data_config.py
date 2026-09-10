@@ -10,7 +10,11 @@ def make_whisper_audio_config(audio_dir=RAW_AUDIO_DATA_DIR):
         sample_rate=16000,
         frame_duration=3.0,
         overlap=0.25,
-        level_names=["singer_id", "technique", "exercise"],
+        level_names=[
+            "singer",
+            "exercise",
+            "technique"
+        ],
         label_level="technique",
     )
 
@@ -20,9 +24,9 @@ def make_clap_audio_config(audio_dir=RAW_AUDIO_DATA_DIR):
         name="clap_audio",
         data_type="raw_audio",
         audio_dir=audio_dir,
-        sample_rate=44100,
+        sample_rate=48000,
         frame_duration=3.0,
         overlap=0.25,
-        level_names=["singer_id", "technique", "exercise"],
+        level_names=["singer", "exercise", "technique"],
         label_level="technique",
     )

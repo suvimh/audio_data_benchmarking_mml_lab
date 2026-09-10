@@ -29,6 +29,8 @@ class ExperimentBlock:
     filters: ExperimentFilters = field(default_factory=ExperimentFilters)
     frame_duration: float = 3.0
     overlap: float = 0.25
+    metrics_path: Optional[str] = None
+    n_repeats: int = 1
 
 
 @dataclass

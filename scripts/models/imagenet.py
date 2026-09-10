@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import time
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
@@ -9,7 +10,6 @@ from scripts.config.benchmark_config import BenchmarkConfig
 from scripts.config.dataset_config import DatasetConfig
 from scripts.evaluation.metrics import (
     compute_metrics,
-    print_metrics_summary,
     save_metrics_csv,
 )
 from scripts.evaluation.visualization import plot_training_history
@@ -92,6 +92,7 @@ def run(
     import tensorflow as tf
 
     output_dir = ensure_dir(output_dir)
+    start_time = time.perf_counter()
     data = load_image_data(dataset_config)
 
     params = MODEL_METADATA["default_params"].copy()
@@ -116,12 +117,21 @@ def run(
     train_metrics = _evaluate_dataset(model, data.train_ds, data.class_names, "train")
     val_metrics = _evaluate_dataset(model, data.val_ds, data.class_names, "validation")
 
-    print_metrics_summary(train_metrics, f"{backbone} (train)")
-    print_metrics_summary(val_metrics, f"{backbone} (validation)")
 
-    metrics_path = output_dir / "metrics.csv"
-    save_metrics_csv(val_metrics, metrics_path, f"imagenet_{backbone}", {"split": "validation"})
-    save_metrics_csv(train_metrics, metrics_path, f"imagenet_{backbone}", {"split": "train"})
+    metrics_path = Path(dataset_config.metrics_path or output_dir / "metrics.csv")
+    elapsed = time.perf_counter() - start_time
+    save_metrics_csv(
+        metrics_path,
+        f"imagenet_{backbone}",
+        dataset_config.name,
+        train_metrics,
+        val_metrics,
+        extra={
+            "Epochs": params.get("epochs", bench_config.epochs),
+            "Batch Size": params.get("batch_size", bench_config.batch_size),
+            "Train+Eval Time (s)": round(elapsed, 4),
+        },
+    )
 
     hist_dict = history.history if history else {}
     plot_training_history(

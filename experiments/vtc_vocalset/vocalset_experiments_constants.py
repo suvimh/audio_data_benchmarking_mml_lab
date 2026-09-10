@@ -13,8 +13,24 @@ VOCALSET_10 = [
 PMT = ["vibrato", "straight", "trill", "trillo"]
 TMT = ["vocal_fry", "belt", "breathy", "inhaled", "spoken"]
 
-TRAIN_SINGERS = [f"f{i}" for i in range(1, 10)] + [f"m{i}" for i in range(1, 7)]
-VAL_SINGERS = ["f10", "f11", "m7", "m8", "m9"]
+TRAIN_SINGERS = [
+    "female1",
+    "female3",
+    "female4",
+    "female5",
+    "female6",
+    "female7",
+    "female9",
+    "male1",
+    "male11",
+    "male2",
+    "male4",
+    "male6",
+    "male7",
+    "male8",
+    "male9",
+]
+VAL_SINGERS = ["female2", "female8", "male3", "male5", "male10"]
 
 GENDERS = ["female", "male"]
 

@@ -28,32 +28,50 @@ def scan_audio_files(
     gender_filter: Optional[str] = None,
     include_labels: Optional[List[str]] = None,
     exclude_labels: Optional[List[str]] = None,
+    level_names: Optional[List[str]] = None,
+    label_level: Optional[str] = None,
 ) -> Dict[str, pd.DataFrame]:
     audio_dir = Path(audio_dir)
+    level_names = level_names or ["singer", "technique", "exercise"]
+    label_level = label_level or "technique"
+
+    if "singer" not in level_names:
+        raise ValueError("level_names must include 'singer'")
+    if label_level not in level_names:
+        raise ValueError(
+            f"label_level {label_level!r} must be present in level_names"
+        )
+
     all_files = list(audio_dir.rglob(f"*{extension}"))
 
     records = []
     for fp in all_files:
         rel = fp.relative_to(audio_dir)
         parts = list(rel.parts)
-        singer_id = parts[0]
-        technique = parts[1] if len(parts) > 1 else "unknown"
+        levels = dict(zip(level_names, parts))
+        singer_id = levels["singer"]
+        label = levels.get(label_level, "unknown")
+        technique = levels.get("technique", label)
+        exercise = levels.get("exercise")
         gender = "female" if singer_id.startswith("f") else "male" if singer_id.startswith("m") else "unknown"
 
         if gender_filter and gender_filter != "mixed" and gender != gender_filter:
             continue
-        if include_labels and technique not in include_labels:
+        if include_labels and label not in include_labels:
             continue
-        if exclude_labels and technique in exclude_labels:
+        if exclude_labels and label in exclude_labels:
             continue
 
-        records.append({
+        record = {
             "filepath": str(fp),
             "singer_id": singer_id,
             "gender": gender,
             "technique": technique,
-            "label": technique,
-        })
+            "label": label,
+        }
+        if exercise is not None:
+            record["exercise"] = exercise
+        records.append(record)
 
     df = pd.DataFrame(records)
 

@@ -5,7 +5,7 @@ benchmark = BenchmarkConfig(
     models=["knn", "svm", "rf", "mlp", "cnn"],
     model_params={
         "knn": {"n_neighbors": 5},
-        "svm": {"kernel": "rbf", "C": 1.0, "class_weight": "balanced"},
+        "svm": {"kernel": "rbf", "C": 1.0},
         "rf": {"n_estimators": 100, "random_state": 42},
         "mlp": {"hidden_layer_sizes": (12,), "max_iter": 500, "random_state": 42},
         "cnn": {"filters": [32, 64, 128], "epochs": 100, "patience": 10},
