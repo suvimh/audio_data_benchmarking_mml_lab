@@ -1,0 +1,15 @@
+name: vtc_features
+models:
+  - knn
+  - rf
+model_params:
+  knn:
+    n_neighbors: 5
+  rf:
+    n_estimators: 100
+    random_state: 42
+  mlp:
+    hidden_layer_sizes: [12]
+    max_iter: 500
+output_dir: ./results
+seed: 42
