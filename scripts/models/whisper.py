@@ -188,16 +188,15 @@ def run(
 
     from scripts.data.raw_audio import scan_audio_files
 
-    singer_map = _get_singer_map(dataset_config)
+    singer_map = _get_split_args(dataset_config)
     file_df = scan_audio_files(
         audio_dir=dataset_config.audio_dir or dataset_config.data_dir,
-        train_singers=singer_map["train"],
-        val_singers=singer_map["val"],
         gender_filter=dataset_config.gender_split,
         include_labels=dataset_config.include_labels,
         exclude_labels=dataset_config.exclude_labels,
         level_names=dataset_config.level_names,
         label_level=dataset_config.label_level,
+        **singer_map,
     )
 
     classes = _resolve_classes(file_df, dataset_config)
@@ -346,13 +345,24 @@ def run(
     }
 
 
-def _get_singer_map(dataset_config: DatasetConfig) -> Dict[str, List[str]]:
-    if dataset_config.train_singer_ids and dataset_config.val_singer_ids:
+def _get_split_args(dataset_config: DatasetConfig) -> Dict[str, Any]:
+    """Maps the partition ids onto the ``scan_audio_files`` split arguments.
+
+    When the partition's column is ``filename`` the split is per file (test
+    set = the listed files, train set = everything left over); otherwise it
+    falls back to the singer ids.
+    """
+    if not dataset_config.test_data_ids:
+        return {}
+    if dataset_config.data_column_label == "filename":
         return {
-            "train": dataset_config.train_singer_ids,
-            "val": dataset_config.val_singer_ids,
+            "train_files": dataset_config.train_data_ids,
+            "val_files": dataset_config.test_data_ids,
         }
-    return {"train": None, "val": None}
+    return {
+        "train_singers": dataset_config.train_data_ids,
+        "val_singers": dataset_config.test_data_ids,
+    }
 
 
 def _resolve_classes(file_df, dataset_config):

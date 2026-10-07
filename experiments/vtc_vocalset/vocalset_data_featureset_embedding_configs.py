@@ -7,7 +7,7 @@ def make_data_config_for_vtc_embeddings(
         feature_type="opensmile-compare-2016",
         data_dir=EMBEDDINGS_DATA_DIR,
         parquet_file="vocalset_dataset_opensmile-compare-2016_3.0s.parquet",
-        singer_column="singer",
+        data_column_label="singer",
     ):
     return DatasetConfig(
         name=name,
@@ -17,7 +17,7 @@ def make_data_config_for_vtc_embeddings(
         label_column="vocal_technique",
         data_dir=data_dir,
         parquet_file=parquet_file,
-        singer_column=singer_column,
+        data_column_label=data_column_label,
     )
 
 

@@ -100,21 +100,44 @@ def _auto_detect_label_columns(df: pd.DataFrame, config: DatasetConfig) -> List[
     return [config.label_column]
 
 
-def _add_singer_column(df: pd.DataFrame, config: DatasetConfig) -> pd.DataFrame:
-    if config.singer_column and config.singer_column in df.columns:
+def _normalise_id(value: Any) -> str:
+    """Case-insensitive, extension-insensitive key for a data identifier.
+
+    The reference test-file lists are not consistent about casing or about
+    carrying the ``.wav`` extension, so both sides are lower-cased and the
+    extension is dropped before comparison.
+    """
+    text = str(value).strip().lower()
+    if "." in text:
+        text = text.rsplit(".", 1)[0]
+    return text
+
+
+def _add_data_column_label(df: pd.DataFrame, config: DatasetConfig) -> pd.DataFrame:
+    if config.data_column_label and config.data_column_label in df.columns:
         return df
     if "singer" in df.columns:
-        config.singer_column = "singer"
+        config.data_column_label = "singer"
+    elif "singer_id" in df.columns:
+        config.data_column_label = "singer_id"
     elif "filepath" in df.columns:
-        config.singer_column = "filepath"
+        config.data_column_label = "filepath"
     return df
 
 
 def _split_by_singer(df: pd.DataFrame, config: DatasetConfig) -> Tuple[pd.DataFrame, pd.DataFrame]:
-    singer_col = config.singer_column
-    if singer_col and config.train_singer_ids and config.val_singer_ids:
-        train_df = df[df[singer_col].isin(config.train_singer_ids)]
-        val_df = df[df[singer_col].isin(config.val_singer_ids)]
+    singer_col = config.data_column_label
+    if singer_col and singer_col in df.columns and config.test_data_ids:
+        col_keys = df[singer_col].map(_normalise_id)
+        test_keys = {_normalise_id(i) for i in config.test_data_ids}
+        val_df = df[col_keys.isin(test_keys)]
+
+        if config.train_data_ids:
+            train_keys = {_normalise_id(i) for i in config.train_data_ids}
+            train_df = df[col_keys.isin(train_keys)]
+        else:
+            train_df = df[~col_keys.isin(test_keys)]
+
         return train_df, val_df
 
     if config.train_data_path and config.val_data_path:
@@ -183,7 +206,7 @@ def load_features_data(config: DatasetConfig) -> FeaturesData:
             val_df = _load_parquet(val_path)
         else:
             df = _load_parquet(train_path)
-            df = _add_singer_column(df, config)
+            df = _add_data_column_label(df, config)
             train_df, val_df = _split_by_singer(df, config)
 
         # Apply label filtering BEFORE extracting embeddings
@@ -244,6 +267,14 @@ def load_features_data(config: DatasetConfig) -> FeaturesData:
 
     if not embeddings_train:
         raise ValueError("No training data after filtering")
+
+    if not embeddings_val:
+        raise ValueError(
+            "No test data after filtering. Check that the partition's "
+            "test_data_ids match the values in column "
+            f"{config.data_column_label!r} of the dataset (comparison is "
+            "case- and extension-insensitive)."
+        )
 
     input_dim = embeddings_train[0].shape[-1] if embeddings_train[0].ndim > 0 else 1
 

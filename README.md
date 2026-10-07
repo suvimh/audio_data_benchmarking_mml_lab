@@ -64,9 +64,9 @@ Defines which singers/participants go into training vs testing. This is **shared
 ```python
 partition = PartitionConfig(
     name="singer_independent",
-    train_singer_ids=[f"f{i}" for i in range(1,10)] + [f"m{i}" for i in range(1,7)],
-    test_singer_ids=["f10","f11","m7","m8","m9"],
-    singer_column="singer",
+    train_data_ids=[f"f{i}" for i in range(1,10)] + [f"m{i}" for i in range(1,7)],
+    test_data_ids=["f10","f11","m7","m8","m9"],
+    data_column_label="singer",
 )
 ```
 

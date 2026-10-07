@@ -3,15 +3,15 @@ from __future__ import annotations
 import json
 from dataclasses import dataclass, asdict
 from pathlib import Path
-from typing import List
+from typing import List, Optional
 
 
 @dataclass
 class PartitionConfig:
     name: str
-    train_singer_ids: List[str]
-    test_singer_ids: List[str]
-    singer_column: str = "singer"
+    test_data_ids: List[str]
+    train_data_ids: Optional[List[str]] = None
+    data_column_label: str = "singer"
 
     def to_dict(self) -> dict:
         return asdict(self)

@@ -20,6 +20,33 @@ class AudioMetadata:
     exercise: Optional[str] = None
 
 
+def _normalise_id(value: Any) -> str:
+    """Case-insensitive, extension-insensitive key for a data identifier."""
+    text = str(value).strip().lower()
+    if "." in text:
+        text = text.rsplit(".", 1)[0]
+    return text
+
+
+def _split_ids(
+    df: pd.DataFrame,
+    id_column: str,
+    train_ids: Optional[List[str]],
+    val_ids: List[str],
+) -> Dict[str, pd.DataFrame]:
+    """Split ``df`` on ``id_column``; train is the complement of val when no
+    explicit train list is given."""
+    keys = df[id_column].map(_normalise_id)
+    val_keys = {_normalise_id(i) for i in val_ids}
+    val_df = df[keys.isin(val_keys)]
+    if train_ids:
+        train_keys = {_normalise_id(i) for i in train_ids}
+        train_df = df[keys.isin(train_keys)]
+    else:
+        train_df = df[~keys.isin(val_keys)]
+    return {"train": train_df, "val": val_df}
+
+
 def scan_audio_files(
     audio_dir: str | Path,
     extension: str = ".wav",
@@ -30,6 +57,8 @@ def scan_audio_files(
     exclude_labels: Optional[List[str]] = None,
     level_names: Optional[List[str]] = None,
     label_level: Optional[str] = None,
+    train_files: Optional[List[str]] = None,
+    val_files: Optional[List[str]] = None,
 ) -> Dict[str, pd.DataFrame]:
     audio_dir = Path(audio_dir)
     level_names = level_names or ["singer", "technique", "exercise"]
@@ -64,6 +93,7 @@ def scan_audio_files(
 
         record = {
             "filepath": str(fp),
+            "filename": fp.name,
             "singer_id": singer_id,
             "gender": gender,
             "technique": technique,
@@ -75,25 +105,18 @@ def scan_audio_files(
 
     df = pd.DataFrame(records)
 
-    result = {}
+    if val_files:
+        return _split_ids(df, "filename", train_files, val_files)
 
     if train_singers is not None and val_singers is not None:
-        train_df = df[df["singer_id"].isin(train_singers)]
-        val_df = df[df["singer_id"].isin(val_singers)]
-        result["train"] = train_df
-        result["val"] = val_df
-    else:
-        from sklearn.model_selection import train_test_split
-        singers = df["singer_id"].unique()
-        train_ids, val_ids = train_test_split(
-            singers, test_size=0.25, random_state=42
-        )
-        train_df = df[df["singer_id"].isin(train_ids)]
-        val_df = df[df["singer_id"].isin(val_ids)]
-        result["train"] = train_df
-        result["val"] = val_df
+        return _split_ids(df, "singer_id", train_singers, val_singers)
 
-    return result
+    from sklearn.model_selection import train_test_split
+    singers = df["singer_id"].unique()
+    train_ids, val_ids = train_test_split(
+        singers, test_size=0.25, random_state=42
+    )
+    return _split_ids(df, "singer_id", list(train_ids), list(val_ids))
 
 
 def load_audio_file(path: str | Path, target_sr: int = 16000) -> np.ndarray:

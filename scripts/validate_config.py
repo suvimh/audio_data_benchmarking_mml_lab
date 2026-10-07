@@ -39,12 +39,12 @@ def validate(
             ))
         if dataset_config.feature_type is None:
             warnings.append(("warning", "Features dataset: no feature_type specified"))
-        if has_parquet and dataset_config.singer_column is None:
-            if dataset_config.train_singer_ids or dataset_config.val_singer_ids:
+        if has_parquet and dataset_config.data_column_label is None:
+            if dataset_config.train_data_ids or dataset_config.test_data_ids:
                 warnings.append((
                     "warning",
-                    "Parquet: singer_column not set but train/val_singer_ids provided. "
-                    "Set singer_column so the train/val split can be applied.",
+                    "Parquet: data_column_label not set but train/test_data_ids provided. "
+                    "Set data_column_label so the train/test split can be applied.",
                 ))
 
     if dataset_config.data_type == "raw_audio":

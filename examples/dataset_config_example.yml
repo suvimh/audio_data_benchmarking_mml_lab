@@ -29,8 +29,8 @@ data_dir: output/parquet
 parquet_file: vggish_window_3.0s.parquet
 feature_column: embedding
 label_column: vocal_technique
-singer_column: singer
-train_singer_ids:
+data_column_label: singer
+train_data_ids:
   - f1
   - f2
   - f3
@@ -46,7 +46,7 @@ train_singer_ids:
   - m4
   - m5
   - m6
-val_singer_ids:
+test_data_ids:
   - f10
   - f11
   - m7

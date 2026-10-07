@@ -29,8 +29,11 @@ build/
 **/trad_ml/**/vggish
 **/trad_ml/**/whisper
 
-experiments/tuni_emotion/metrics/tuni_emotion/3sec_data
-experiments/tuni_emotion/metrics/tuni_emotion_feature_selection_3sec
-experiments/tuni_emotion/metrics/tuni_emotion_feature_selection_500ms
+**/tuni_emotion/3sec_data
+
+**/*feature_selection_3sec
+**/*feature_selection_500ms
+
+**/anonymise_tuni_parquet_filenames.py
 
 

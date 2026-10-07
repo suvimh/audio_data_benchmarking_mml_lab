@@ -34,9 +34,9 @@ from experiments.vtc_vocalset.vocalset_benchmark_configs import (
 
 partition = PartitionConfig(
     name="vocalset_singer_independent",
-    train_singer_ids=TRAIN_SINGERS,
-    test_singer_ids=VAL_SINGERS,
-    singer_column="singer",
+    train_data_ids=TRAIN_SINGERS,
+    test_data_ids=VAL_SINGERS,
+    data_column_label="singer",
 )
 
 # --- Datasets ---

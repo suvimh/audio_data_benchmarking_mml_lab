@@ -25,7 +25,7 @@ class DatasetConfig:
 
     feature_column: str = "Features"
     label_column: str = "Class"
-    singer_column: Optional[str] = None
+    data_column_label: Optional[str] = None
 
     parquet_file: Optional[str] = None
 
@@ -44,8 +44,8 @@ class DatasetConfig:
     exclude_labels: Optional[List[str]] = None
 
     gender_split: Optional[str] = None
-    train_singer_ids: Optional[List[str]] = None
-    val_singer_ids: Optional[List[str]] = None
+    train_data_ids: Optional[List[str]] = None
+    test_data_ids: Optional[List[str]] = None
     metrics_path: Optional[str] = None
 
     pad_sequences: bool = False

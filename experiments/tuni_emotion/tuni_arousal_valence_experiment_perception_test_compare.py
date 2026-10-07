@@ -7,8 +7,7 @@ from scripts.config.experiment_config import (
 from experiments.tuni_emotion.tuni_experiments_constants import (
     AROUSAL,
     VALENCE,
-    TRAIN_SINGERS,
-    VAL_SINGERS,
+    PERCEPTION_TEST_TEST_FILES,
     VALENCE_AROUSAL_EMBEDDINGS_DATA_DIR,
 )
 from experiments.tuni_emotion.tuni_data_featureset_embedding_configs import (
@@ -16,25 +15,17 @@ from experiments.tuni_emotion.tuni_data_featureset_embedding_configs import (
     make_whisper_embedding_config,
     make_clap_embedding_config,
 )
-from experiments.tuni_emotion.tuni_raw_audio_data_config import (
-    make_whisper_audio_config,
-    make_clap_audio_config,
-)
+
 from experiments.tuni_emotion.tuni_benchmark_configs import (
     trad_ml_benchmark,
-    whisper_finetuning_benchmark,
-    clap_finetuning_benchmark,
-    full_whisper_finetuning_benchmark,
-    full_clap_finetuning_benchmark,
 )
 
 # --- Singer-independent partition (shared across all blocks) ---
 
 partition = PartitionConfig(
-    name="tuni_emotion_singer_independent",
-    train_data_ids=TRAIN_SINGERS,
-    test_data_ids=VAL_SINGERS,
-    data_column_label="singer",
+    name="tuni_emotion_preception_test_compare",
+    test_data_ids=PERCEPTION_TEST_TEST_FILES,
+    data_column_label="filename",
 )
 
 # --- Datasets ---
@@ -76,17 +67,10 @@ clap_emb_valence = make_clap_embedding_config(
 
 feature_datasets_valence = [opensmile_valence, whisper_emb_valence, clap_emb_valence]
 
-# whisper_audio = make_whisper_audio_config()
-# clap_audio = make_clap_audio_config()
-
-FINETUNING_METRICS_PATH = (
-    "./metrics/tuni_emotion/arousal_valence/fine_tuning/metrics.csv"
-)
-
 # --- Experiment ---
 arousal_valence_experiment = ExperimentConfig(
-    name="tuni_emotion",
-    output_dir="./metrics/tuni_emotion/arousal_valence",
+    name="tuni_emotion_perception_test_comparison_arousal_valence",
+    output_dir="./metrics/perception_test_comparison/arousal_valence",
     blocks=[
         # 1. Trad ML Arousal
         ExperimentBlock(

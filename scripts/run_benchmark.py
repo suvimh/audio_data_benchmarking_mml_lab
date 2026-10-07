@@ -86,6 +86,7 @@ def resolve_dataset(
         "val_data_paths": dataset.val_data_paths,
         "feature_column": dataset.feature_column,
         "label_column": dataset.label_column,
+        "data_column_label": dataset.data_column_label,
         "parquet_file": dataset.parquet_file,
         "audio_dir": dataset.audio_dir,
         "sample_rate": dataset.sample_rate,
@@ -99,9 +100,9 @@ def resolve_dataset(
         "pad_sequences": dataset.pad_sequences,
         "add_channel_dim": dataset.add_channel_dim,
     }
-    _override_if_set(merged, "train_singer_ids", partition.train_singer_ids)
-    _override_if_set(merged, "val_singer_ids", partition.test_singer_ids)
-    _override_if_set(merged, "singer_column", partition.singer_column)
+    _override_if_set(merged, "train_data_ids", partition.train_data_ids)
+    _override_if_set(merged, "test_data_ids", partition.test_data_ids)
+    _override_if_set(merged, "data_column_label", partition.data_column_label)
     _override_if_set(merged, "gender_split", filters.gender)
     _override_if_set(merged, "include_labels", filters.include_labels)
     _override_if_set(merged, "exclude_labels", filters.exclude_labels)

@@ -37,9 +37,9 @@ from experiments.tuni_emotion.tuni_data_featureset_embedding_configs import (
 
 partition = PartitionConfig(
     name="tuni_emotion_singer_independent",
-    train_singer_ids=TRAIN_SINGERS,
-    test_singer_ids=VAL_SINGERS,
-    singer_column="singer",
+    train_data_ids=TRAIN_SINGERS,
+    test_data_ids=VAL_SINGERS,
+    data_column_label="singer",
 )
 
 # --- Embeddings ---
